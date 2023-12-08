@@ -7,6 +7,10 @@ import Login from './components/pages/Login'
 import Sign from './components/pages/Sign'
 import ChangeWorld from './components/pages/ChangeWorld'
 import Reviews from './components/pages/Reviews'
+import Profile from './components/pages/Profile'
+import Chat from './components/pages/Chat'
+import MainList from './components/pages/MainList'
+
 
 
 function App() {
@@ -19,7 +23,10 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Sign />} />
             <Route path='/changeWorld' element={<ChangeWorld />} />
-            <Route path='/reviews' element={<Reviews.jsx />} />
+            <Route path='/reviews' element={<Reviews />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/chat' element={<Chat />} />
+            <Route path='/mainList' element={<MainList />} />
         </Routes>
       </div>
       
