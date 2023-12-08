@@ -2,7 +2,11 @@ import React from 'react'
 
 function Home() {
   return (
-    <div>Home</div>
+    <div>
+      <section id='about'></section>
+      <section id='howuse'></section>
+      <section id='about'></section>
+    </div>
   )
 }
 

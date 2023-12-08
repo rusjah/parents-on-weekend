@@ -11,11 +11,11 @@ function Nav() {
             </figure>
             <div className="flex-none ">
                 <ul className="menu menu-horizontal px-1 text-green-950 font-bold">
-               <Link><li><p >Home</p></li></Link>
-                <li><p>About Us</p></li>
-                <li><p>Help</p></li>
-                <li><p>Log in</p></li>
-                <li><p>Sign up</p></li>
+                    <Link to={'/'}><li><p >Home</p></li></Link>
+                    <Link to={{pathname: '/', hash: '#about'}}><li><p>About Us</p></li></Link>
+                    <Link to={'/changeWorld'}><li><p>Help</p></li></Link>
+                    <Link to={'/login'}><li><p>Log in</p></li></Link>
+                    <Link to={'/signup'}><li><p>Sign up</p></li></Link>
                 {/* <li>
                     <details>
                     <summary>
