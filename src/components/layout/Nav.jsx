@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Notification from '../components/Notification';
 
 
@@ -30,6 +30,20 @@ function Nav() {
         setShowSubMenu(i => true)
     }
 
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.hash) {
+        const element = document.getElementById(location.hash.substring(1));
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+        } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, [location]);
+
+
   return (
     <div className='h-[7vh] lg:h-[10vh] bg-[#D4A373] text-lime-950 font-bold  sticky top-0 z-50 '>
         <div className="navbar  h-full flex items-start md:items-center">
@@ -55,7 +69,7 @@ function Nav() {
                         </div>
                         <ul onClick={hiddenMenu} tabIndex={0} className={showSubMenu ? `menu menu-sm dropdown-content mt-12 z-[1] p-2 shadow bg-base-100 rounded-box w-52 right-1`: 'hidden'}>
                             <Link to={'/'}><li><p >Home</p></li></Link>
-                            <Link to={{pathname: '/', hash: '#about'}}><li><p>About Us</p></li></Link>
+                            <Link to={'/#about'}><li><p>About Us</p></li></Link>
                             <Link to={'/changeWorld'}><li><p>Help</p></li></Link>
                             {!validation && <>
                                 <Link to={'/login'}><li><p>Log in</p></li></Link> 
@@ -72,7 +86,7 @@ function Nav() {
 
                 <ul className="hidden md:flex menu menu-horizontal px-1 text-green-950 font-bold">
                     <Link to={'/'}><li><p >Home</p></li></Link>
-                    <Link to={{pathname: '/', hash: '#about'}}><li><p>About Us</p></li></Link>
+                    <Link to={'/#about'}><li><p>About Us</p></li></Link>
                     <Link to={'/changeWorld'}><li><p>Help</p></li></Link>
                     {!validation && <>
                         <Link to={'/login'}><li><p>Log in</p></li></Link> 

@@ -11,7 +11,7 @@ function RatingStars({rating}) {
 
   return (
     <div className="rating">
-       {starsList.map((el, id) => <p className='mask mask-star-2 bg-orange-400 w-6 h-6'></p>)}
+       {starsList.map((el, id) => <p key={id} className='mask mask-star-2 bg-orange-400 w-6 h-6'></p>)}
     </div>
   )
 }
