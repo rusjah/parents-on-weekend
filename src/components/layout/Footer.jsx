@@ -20,7 +20,7 @@ function Footer() {
         <nav>
             <header className="footer-title  text-green-950">Company</header> 
             <Link to={{pathname: '/', hash: '#about'}}><li><p className='link link-hover'>About Us</p></li></Link>
-            <Link to={'/reviws'}><li><p className='link link-hover'>Reviews</p></li></Link>
+            <Link to={'/reviews'}><li><p className='link link-hover'>Reviews</p></li></Link>
             <Link to={{pathname: '/', hash: '#howuse'}}><li><p className='link link-hover'>How to use</p></li></Link>
             <Link to={'/changeWorld'}><li><p className='link link-hover'>Change world together</p></li></Link>
         </nav> 

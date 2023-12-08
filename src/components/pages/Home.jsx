@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import LetGoBtn from '../components/LetGoBtn'
+import OneStepUsing from '../components/OneStepUsing'
 
 function Home() {
     const bgUrl = 'https://pivotalmist.backendless.app/api/files/photos/main-bg.jpg'
   return (
     <div>
-      <section id='about'>
+      <section id='main'>
         <div className="hero min-h-[93vh] md:min-h-[90vh]" style={{backgroundImage: `url(${bgUrl})`}}>
             <div className="hero-overlay bg-opacity-60"></div>
             <div className="hero-content text-center text-neutral-content">
@@ -18,7 +19,7 @@ function Home() {
             </div>
         </div>
       </section>
-      <section id='howuse' className='flex flex-col justify-center items-center py-4 bg-[#ffe8d6]'>
+      <section id='about' className='flex flex-col justify-center items-center py-4 bg-[#ffe8d6]'>
        <h2 className='font-bold text-[2.5rem] text-green-900'>About Us</h2>
       <div className='w-[90%] text-[1.3rem] font-roboto text-justify py-10'>
           <p>In a world hurtling forward at breakneck speed, the constant race to keep pace demands honing skills and abilities. Amidst this frenzy, our overwhelming busyness often robs us of the time and capacity to tend to our children or beloved pets. Simultaneously, many elders traverse their years in solitary isolation. </p>
@@ -28,7 +29,22 @@ function Home() {
        </div>
        <LetGoBtn />
       </section>
-      <section id='about'></section>
+      <section id='howuse'  className='flex flex-col justify-center items-center py-4 bg-[#fff1e6]'>
+          <h2 className='font-bold text-[2.5rem] text-green-900'>How to use</h2>
+          <div className='py-10 flex flex-col md:flex-row justify-center gap-48'>
+            <OneStepUsing num={1} content={'Loign'} />
+            <OneStepUsing num={2} content={'Find a right person'} />
+            <OneStepUsing num={3} content={'Contact and meet'} />
+          </div>
+          <LetGoBtn />
+      </section>
+      <section id='reviews' className='flex flex-col justify-center items-center py-4 bg-[#fff1e6]'>
+          <h2 className='font-bold text-[2.5rem] text-green-900'>Reviews</h2>
+          <div className='py-10'>
+           
+          </div>
+          <LetGoBtn />
+      </section>
     </div>
   )
 }
