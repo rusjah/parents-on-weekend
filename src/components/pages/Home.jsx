@@ -17,7 +17,9 @@ function Home() {
             </div>
         </div>
       </section>
-      <section id='howuse'></section>
+      <section id='howuse'>
+       <p className='text-red-800 font-bold text-3em'> how use <ion-icon name="alert-outline"></ion-icon></p>
+      </section>
       <section id='about'></section>
     </div>
   )

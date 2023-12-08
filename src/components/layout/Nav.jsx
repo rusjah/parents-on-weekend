@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Notification from '../components/Notification';
 
 
 function Nav() {
     const navigate = useNavigate();
     //some variable for cheking if user log in
     let validation = true
+
+    //is true when user bekome new msg
+    let notification = false
 
     const [showSubMenu, setShowSubMenu] = useState(false)
 
@@ -36,7 +40,12 @@ function Nav() {
             <div className="md:flex flex-none ">
 
                 <div className="dropdown dropdown-endh-full mt-[-12px] list-none flex md:hidden ">
-                    <Link to={'/chat'}><li><p className='text-[1.5em] mt-2'><ion-icon name="chatbubble-outline"></ion-icon></p></li></Link>
+                    <Link to={'/chat'}>
+                        <li className='relative'>
+                            <Notification notification={notification}/>
+                            <p className='text-[1.5em] mt-2'><ion-icon name="chatbubble-outline"></ion-icon></p>
+                        </li>
+                    </Link>
                     <>
                         <div onClick={showMenu} tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar h-full ">
                             <div className="w-8 h-full rounded-full  mt-3">
@@ -70,7 +79,10 @@ function Nav() {
                         <Link to={'/signup'}><li><p>Sign up</p></li></Link>
                     </>}
                     {validation && <>
-                        <Link to={'/chat'}><li><p className='text-[1.5em]'><ion-icon name="chatbubble-outline"></ion-icon></p></li></Link>
+                        <Link to={'/chat'}><li className='relative'>
+                            <Notification notification={notification}/>
+                            <p className='text-[1.5em]'><ion-icon name="chatbubble-outline"></ion-icon></p>
+                        </li></Link>
                         <Link to={'/profile'}><li><p className='text-[1.5em]'><ion-icon name="person-outline"></ion-icon></p></li></Link>
                         <li onClick={logout}><p>Log out</p></li>
 
