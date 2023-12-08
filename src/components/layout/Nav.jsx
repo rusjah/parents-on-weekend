@@ -31,7 +31,7 @@ function Nav() {
     }
 
   return (
-    <div className='h-[7vh] lg:h-[10vh] bg-[#D4A373] text-lime-950 font-bold'>
+    <div className='h-[7vh] lg:h-[10vh] bg-[#D4A373] text-lime-950 font-bold  sticky top-0 z-50 '>
         <div className="navbar  h-full flex items-start md:items-center">
             <figure className="flex-1 rounded-full">
                 <Link to={'/'} className='rounded-full h-full' ><img src={imgUrl} alt="Logo" className='rounded-[100%] w-8 md:w-16 h-full' /></Link>
