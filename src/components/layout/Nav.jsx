@@ -20,7 +20,6 @@ function Nav() {
 
     function hiddenMenu() {
         setShowSubMenu(i => false)
-        console.log('hier', showSubMenu);
     }
 
     function showMenu() {

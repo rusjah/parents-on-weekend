@@ -13,9 +13,9 @@ function Footer() {
         <nav>
             <header className="footer-title text-green-950">You can here</header> 
             <a className="link link-hover">Find Grandparents</a>
-            <a className="link link-hover">Find pats</a>
-            <a className="link link-hover">Find children</a>
-            <a className="link link-hover">Make fun memories</a>
+            <a className="link link-hover">Find Godparents of pets</a>
+            <a className="link link-hover">Find Grandchildren</a>
+            <a className="link link-hover">Bring warm in this world</a>
         </nav> 
         <nav>
             <header className="footer-title  text-green-950">Company</header> 
