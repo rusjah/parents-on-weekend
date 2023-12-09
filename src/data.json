@@ -1,9 +1,11 @@
-{"msgList": [
+{
+    "myId": "1",
+    "msgList": [
     {
       "msgId": "124",
       "senderId": "1",
       "recieverId": "2",
-      "date": "new Date()",
+      "date": "Mar 12 2012 10:00:00 AM",
       "chatId": "999",
       "msg": "'Hi, my name is Mark and I have 2 pets and I would be happy, if you could help me with them on Sunday'"
     },
@@ -11,7 +13,7 @@
       "msgId": "123",
       "senderId": "2",
       "recieverId": "1",
-      "date": "new Date()",
+      "date": "Mar 12 2012 11:00:00 AM",
       "chatId": "999",
       "msg": "'Hi, I glad hear you. But this weekend I have some stuff, that I must finished'"
     },
@@ -19,7 +21,7 @@
       "msgId": "134",
       "senderId": "1",
       "recieverId": "8",
-      "date": "new Date()",
+      "date": "Mar 12 2012 10:00:00 AM",
       "chatId": "888",
       "msg": "'Some Ice Creem?'"
     },
@@ -27,7 +29,7 @@
       "msgId": "133",
       "senderId": "8",
       "recieverId": "1",
-      "date": "new Date()",
+      "date": "Mar 13 2012 10:00:00 AM",
       "chatId": "888",
       "msg": "'No...'"
     },
@@ -35,7 +37,7 @@
       "msgId": "125",
       "senderId": "2",
       "recieverId": "1",
-      "date":" new Date()",
+      "date":"Mar 11 2012 11:29:00 AM",
       "chatId": "999",
       "msg": "'I hope meet you next week...'"
     },
@@ -43,9 +45,46 @@
       "msgId": "125",
       "senderId": "5",
       "recieverId": "6",
-      "date": "new Date()",
+      "date": "Mar 13 2012 10:00:00 AM",
       "chatId": "988",
       "msg": "'Hi, I am Anna. And I need your help'"
+    }
+  ],
+  "users":  [
+    {
+        "userId": "1",
+        "fname": "'Edward'",
+        "lname": "Ksija",
+        "photo": "https://pivotalmist.backendless.app/api/files/photos/users/father.jpg"
+    },
+    {
+        "userId": "2",
+        "fname": "'Ella'",
+        "lname": "Mark",
+        "photo": "https://pivotalmist.backendless.app/api/files/photos/users/father.jpg"
+    },
+    {
+        "userId": "8",
+        "fname": "'Olha'",
+        "lname": "Mak",
+        "photo": "https://pivotalmist.backendless.app/api/files/photos/users/father.jpg"
+    }
+    ],
+  "reviws": [
+    {
+        "userId": "1",
+        "review": "I had a fantastic experience using \"Grandparents on weekend\". The interface is user-friendly, offering a wide range of services/products. Excellent customer service and a smooth transaction process. Highly recommended!",
+        "rating": "5"
+    },
+    {
+        "userId": "2",
+        "review": "I had a fantastic experience using \"Grandparents on weekend\". The interface is user-friendly, offering a wide range of services/products. Excellent customer service and a smooth transaction process. Highly recommended!",
+        "rating": "3"
+    },
+    {
+        "userId": "8",
+        "review": "I had a fantastic experience using \"Grandparents on weekend\". The interface is user-friendly, offering a wide range of services/products. Excellent customer service and a smooth transaction process. Highly recommended!",
+        "rating": "1"
     }
   ]
 }

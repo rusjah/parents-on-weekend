@@ -8,6 +8,7 @@ function MsgForm({setChatsList}) {
         chatName: 'Innes Markus',
         chatMsg: e.target.newMsg.value
       }
+
       console.log(newMsg);
     }
     
