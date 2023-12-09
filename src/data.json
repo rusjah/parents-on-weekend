@@ -1,0 +1,51 @@
+{"msgList": [
+    {
+      "msgId": "124",
+      "senderId": "1",
+      "recieverId": "2",
+      "date": "new Date()",
+      "chatId": "999",
+      "msg": "'Hi, my name is Mark and I have 2 pets and I would be happy, if you could help me with them on Sunday'"
+    },
+    {
+      "msgId": "123",
+      "senderId": "2",
+      "recieverId": "1",
+      "date": "new Date()",
+      "chatId": "999",
+      "msg": "'Hi, I glad hear you. But this weekend I have some stuff, that I must finished'"
+    },
+    {
+      "msgId": "134",
+      "senderId": "1",
+      "recieverId": "8",
+      "date": "new Date()",
+      "chatId": "888",
+      "msg": "'Some Ice Creem?'"
+    },
+    {
+      "msgId": "133",
+      "senderId": "8",
+      "recieverId": "1",
+      "date": "new Date()",
+      "chatId": "888",
+      "msg": "'No...'"
+    },
+    {
+      "msgId": "125",
+      "senderId": "2",
+      "recieverId": "1",
+      "date":" new Date()",
+      "chatId": "999",
+      "msg": "'I hope meet you next week...'"
+    },
+    {
+      "msgId": "125",
+      "senderId": "5",
+      "recieverId": "6",
+      "date": "new Date()",
+      "chatId": "988",
+      "msg": "'Hi, I am Anna. And I need your help'"
+    }
+  ]
+}

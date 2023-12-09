@@ -1,8 +1,14 @@
 import React from 'react'
 
-function MsgForm() {
-    function sendMsg() {
-
+function MsgForm({setChatsList}) {
+    function sendMsg(e) {
+      e.preventDefault()
+      const newMsg = {
+        chatPhoto: 'https://pivotalmist.backendless.app/api/files/photos/users/grandmother.jpg',
+        chatName: 'Innes Markus',
+        chatMsg: e.target.newMsg.value
+      }
+      console.log(newMsg);
     }
     
   return (

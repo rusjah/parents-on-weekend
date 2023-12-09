@@ -1,11 +1,7 @@
 import React from 'react'
 
-function SmallChatCard() {
-    const chat = {
-        chatPhoto: 'https://pivotalmist.backendless.app/api/files/photos/users/grandmother.jpg',
-        chatName: 'Innes Markus',
-        chatMsg: 'Hi, thank you so much for your time. My children like you so much. I really appreciate all that you do for us. Hope you are happy too'
-    }
+function SmallChatCard({chat}) {
+   
   return (
     <div>
         <div className="card-body border-2 border-yellow-100">

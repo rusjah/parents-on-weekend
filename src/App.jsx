@@ -12,7 +12,6 @@ import Chat from './components/pages/Chat'
 import MainList from './components/pages/MainList'
 
 
-
 function App() {
   return (
     <div className="App">
