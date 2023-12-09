@@ -1,22 +1,25 @@
 import React from 'react'
 
-function AddReviw() {
-    // function submitHandler(e) {
-    //     e.preventDefault()
-    //     const todo = {
-    //         todo: e.target.todo.value,
-    //         time: e.target.time.value ? String(e.target.time.value) : '',
-    //         status: 'aktive',
-    //         date_todo: e.target.date.value ? String(e.target.date.value) : '',
-    //         type: e.target.type.value 
-    //     }
-    //     e.target.todo.value = ''
-    //     addTodo(todo);
-    // }
-
-    function sendReview() {
-
+function AddReviw({setReviews}) {
+    function sendReview(e) {
+        e.preventDefault()
+        const stars = Array.from(e.target.rating).find(radio => radio.checked);  
+       
+        const review = {
+            userId: 123,
+            fname: 'Mark',
+            lname: 'Yousch', 
+            photo: 'https://pivotalmist.backendless.app/api/files/photos/users/father.jpg',
+            review: e.target.newReviwe.value,
+            rating: Number(stars.value)
+        }
+        e.target.newReviwe.value = ''
+        setReviews(i => [review, ...i])
     }
+
+
+    // send review to db and then read from db for displaying
+    // function sendReview() {}
 
   return (
     <div>
@@ -26,8 +29,16 @@ function AddReviw() {
             Add new ToDo to my task
             </div>
             <div className=" w-[60vw] collapse-content bg-yellow-100 text-black peer-checked:bg-orange-50 peer-checked:text-black"> 
+                
                 <form action="" className='w-[100%] relative' onSubmit={sendReview}>
-                    <textarea name='newMsg' className="textarea textarea-warning h-[12vh] w-[100%] " placeholder="Write message"></textarea>
+                <div className="rating">
+                    <input type="radio" name="rating" value={1} className="mask mask-star-2 bg-orange-400" defaultChecked/>
+                    <input type="radio" name="rating" value={2} className="mask mask-star-2 bg-orange-400" />
+                    <input type="radio" name="rating" value={3} className="mask mask-star-2 bg-orange-400" />
+                    <input type="radio" name="rating" value={4} className="mask mask-star-2 bg-orange-400" />
+                    <input type="radio" name="rating" value={5} className="mask mask-star-2 bg-orange-400" />
+                </div>
+                    <textarea name='newReviwe' style={{scrollbarWidth: 'none'}} className="textarea textarea-warning h-[12vh] w-[100%] " placeholder="Write message"></textarea>
                     <button type='submit'className='absolute right-1 bottom-1 text-green-800 text-[2em]' ><ion-icon name="send-outline"></ion-icon></button>
                 </form>
             </div>

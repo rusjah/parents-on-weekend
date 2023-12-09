@@ -33,7 +33,7 @@ function Home() {
       <section id='howuse'  className='flex flex-col justify-center items-center py-4 bg-[#fff1e6]'>
           <h2 className='font-bold text-[2.5rem] text-green-900'>How to use</h2>
           <div className='py-10 flex flex-col md:flex-row justify-center gap-48'>
-            <OneStepUsing num={1} content={'Loign'} />
+            <OneStepUsing num={1} content={'Log in'} />
             <OneStepUsing num={2} content={'Find a right person'} />
             <OneStepUsing num={3} content={'Contact and meet'} />
           </div>
