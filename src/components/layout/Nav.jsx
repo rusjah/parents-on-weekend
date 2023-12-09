@@ -6,7 +6,7 @@ import Notification from '../components/Notification';
 function Nav() {
     const navigate = useNavigate();
     //some variable for cheking if user log in
-    let validation = true
+    let validation = false
 
     //is true when user bekome new msg
     let notification = false
