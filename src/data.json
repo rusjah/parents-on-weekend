@@ -51,8 +51,28 @@
     }
   ],
   "users":  [
+          {
+            "id": "1",
+            "aboutMe": "Looking for stellar About Me examples to inspire you? You have found the right article. Why are so many people bad at talking about themselves? Even if you aced every college essay, you probably draw a blank when you sit down to write a short overview of your life and experience. Why is that? If you are like most website owners, the About Me page is one of the hardest pages to create. It is like being asked what you do for a living. The challenge is talking about yourself in a way that is both interesting and sincere. Let es look at this from the perspective of someone who writes About Me pages all the time: a copywriter. After all, a good About Me page is supposed to be writing that can sell you, right? Here is everything you need to know about drafting a powerful About Me page (with a few inspiring examples)",
+            "birthday": "Tue Dec 05 2023 00:00:00 GMT+0100 (Central European Standard Time)",
+            "children": "(2) ['one to three', 'seven to nine']",
+            "email": "rusjah1@gmail.com",
+            "fname": "Ruslana",
+            "gender": "male",
+            "helpType":"patsChildren",
+            "lname":"Hural",
+            "password": "11111",
+            "pets": ["dog", "cat", "fish"],
+            "phone": "+4915904896419",
+            "photo": "https://www.istockphoto.com/de/foto/eine-sch%C3%B6ne-gesch%C3%A4ftsfrau-die-mit-jemandem-auf-ihrem-handy-spricht-gm1421336313-466993488?phrase=user",
+            "postNumber": "80001",
+            "role": "grand",
+            "state": "go",
+            "videoUrl": "https://player.vimeo.com/video/869947284"
+          },
+
     {
-        "userId": "1",
+        "userId": "12",
         "fname": "Edward",
         "lname": "Ksija",
         "photo": "https://pivotalmist.backendless.app/api/files/photos/users/father.jpg"
@@ -92,7 +112,7 @@
       {
         "id": "1",
         "name": "dog",
-        "url": "https://pivotalmist.backendless.app/api/files/photos/pets/dog.jpg"
+        "url": "https://drive.google.com/file/d/1AMlJyJNZMyTwraXqoefLtaDEUJWy3cU2/view?usp=sharing"
       },
       {
         "id": "2",

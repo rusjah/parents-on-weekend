@@ -3,11 +3,11 @@ import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 
 
-function CalendarB(e) {
+function CalendarB({setBirthday}) {
     const [date, setDate] = useState(new Date())
 
     function show(e) {
-        console.log(e);
+        setBirthday(i => e)
     }
     return (
         <div>

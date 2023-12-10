@@ -11,18 +11,24 @@ import Profile from './components/pages/Profile'
 import Chat from './components/pages/Chat'
 import MainList from './components/pages/MainList'
 import Record from './components/components/video/Record';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 
 function App() {
+  //for adding new users
+  const [users, setUsers] = useState([])
+
+  //for activete login and sign
+  const [validationStaus, setvalidationStaus] = useState(true)
+
   return (
     <div className="App">
-      <Nav />
+      <Nav validationStaus={validationStaus} setvalidationStaus={setvalidationStaus}/>
       <div className='min-h-[66vh]'>
         <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/signup' element={<Sign />} />
+            <Route path='/login' element={<Login validationStaus={validationStaus} setvalidationStaus={setvalidationStaus}/>} />
+            <Route path='/signup' element={<Sign setUsers={setUsers} validationStaus={validationStaus}/>} />
             <Route path='/changeWorld' element={<ChangeWorld />} />
             <Route path='/reviews' element={<Reviews />} />
             <Route path='/profile' element={<Profile />} />
@@ -32,7 +38,7 @@ function App() {
 
         </Routes>
       </div>
-      
+      {console.log(users)}
       <Footer />
     </div>
   );

@@ -2,12 +2,13 @@ import React, { useEffect, useRef } from 'react'
 import { useReactMediaRecorder } from "react-media-recorder";
 
 
-function Record({setUrl}) {
+function Record({setSetUrl}) {
       const onRecordStop = (blobURL, blob) => {
         console.log({ blob });
-        var fileOfBlob = new File([blob], `Recorded-${Math.random() * 10}-version`);
-        console.log({ fileOfBlob });
-        //startRecording();
+        const fileOfBlob = new File([blob], `Recorded-${Math.random() * 10}-version`);
+        console.log({ blobURL });
+        setSetUrl(i => fileOfBlob)
+        // startRecording();
       };
 
       const {
@@ -48,12 +49,10 @@ function Record({setUrl}) {
     }
     const stopCurrentRecording = () => {
         stopRecording();
-        setUrl(i => mediaBlobUrl)
       };
 
     // const startNewRecording = () => {
     //     startRecording();
-    //     clearBlobUrl()
     // }
       
   return (

@@ -12,9 +12,13 @@ textarea::-webkit-scrollbar, div::-webkit-scrollbar {
       flex-direction: column;
       align-items: center;
     }
+    .react-calendar { 
+      scale: 0.1; 
+     }
+  
     
   }
 
   .react-calendar { 
-    scale: 0.9; 
+    scale: 0.8; 
    }

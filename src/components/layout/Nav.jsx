@@ -3,10 +3,10 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Notification from '../components/Notification';
 
 
-function Nav() {
+function Nav({validationStaus,setvalidationStaus}) {
     const navigate = useNavigate();
     //some variable for cheking if user log in
-    let validation = false
+    let validation = validationStaus
 
     //is true when user bekome new msg
     let notification = false
@@ -18,7 +18,7 @@ function Nav() {
     // const userImgUrl = 'https://pivotalmist.backendless.app/api/files/photos/users/mother.jpg'
 
     function logout() {
-        validation = false;
+        setvalidationStaus(false)
         navigate('/');
     }
 
