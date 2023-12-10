@@ -53,13 +53,13 @@
   "users":  [
     {
         "userId": "1",
-        "fname": "'Edward'",
+        "fname": "Edward",
         "lname": "Ksija",
         "photo": "https://pivotalmist.backendless.app/api/files/photos/users/father.jpg"
     },
     {
         "userId": "2",
-        "fname": "'Ella'",
+        "fname": "Ella",
         "lname": "Mark",
         "photo": "https://pivotalmist.backendless.app/api/files/photos/users/father.jpg"
     },
@@ -86,5 +86,76 @@
         "review": "I had a fantastic experience using \"Grandparents on weekend\". The interface is user-friendly, offering a wide range of services/products. Excellent customer service and a smooth transaction process. Highly recommended!",
         "rating": "1"
     }
-  ]
+  ],
+  "options": {
+    "patsType": [
+      {
+        "id": "1",
+        "name": "dog",
+        "url": "https://pivotalmist.backendless.app/api/files/photos/pets/dog.jpg"
+      },
+      {
+        "id": "2",
+        "name": "cat",
+        "url": "https://pivotalmist.backendless.app/api/files/photos/pets/cat.jpg"
+      },
+      {
+        "id": "3",
+        "name": "fish",
+        "url": "https://pivotalmist.backendless.app/api/files/photos/pets/fish.jpg"
+      },
+      {
+        "id": "4",
+        "name": "bird",
+        "url": "https://pivotalmist.backendless.app/api/files/photos/pets/bird.jpg"
+      },
+      {
+        "id": "5",
+        "name": "rabbit",
+        "url": "https://pivotalmist.backendless.app/api/files/photos/pets/rabbit.jpg"
+      },
+      {
+        "id": "6",
+        "name": "reptilien",
+        "url": "https://pivotalmist.backendless.app/api/files/photos/pets/reptilien.jpg"
+      },
+      {
+        "id": "7",
+        "name": "another",
+        "url": "https://pivotalmist.backendless.app/api/files/photos/pets/another.jpg"
+      },
+      {
+        "id": "8",
+        "name": "hamster",
+        "url": "https://pivotalmist.backendless.app/api/files/photos/pets/hamster.jpg"
+      }
+    ],
+    "childrenYears": [
+      {
+        "id": "1",
+        "name": "one to three",
+        "url": "https://pivotalmist.backendless.app/api/files/photos/children/baby.png"
+      },
+      {
+        "id": "2",
+        "name": "four to six",
+        "url": "https://pivotalmist.backendless.app/api/files/photos/children/five.png"
+      },
+      {
+        "id": "0",
+        "name": "seven to nine",
+        "url": "https://pivotalmist.backendless.app/api/files/photos/children/eight.png"
+      },
+      {
+        "id": "3",
+        "name": "ten to twelve",
+        "url": "https://pivotalmist.backendless.app/api/files/photos/children/eleven.png"
+      },
+      {
+        "id": "4",
+        "name": "twelve+",
+        "url": "https://pivotalmist.backendless.app/api/files/photos/children/mehr.png"
+      }
+    ]
+  }
 }

@@ -1,12 +1,15 @@
 import React from 'react'
 import Message from './Message'
 
-function ActivChat({content}) {
+function ActivChat({content, myId}) {
   return (
     <div>
-       <Message msgType={'start'} />
-       <Message msgType={'end'} />
-       <Message msgType={'end'} />
+        {content.map((el, ind) => {
+          if(myId === el.senderId) {
+            return <Message key={ind} msgType={'end'}/>
+          }
+          return  <Message key={ind} msgType={'start'}/>
+        })}
         
     </div>
   )

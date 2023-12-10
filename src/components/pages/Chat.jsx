@@ -11,7 +11,8 @@ function Chat() {
   const msgList = data.msgList
 
   const [chatsList, setChatsList] = useState([])
-  const [aktiveChat, setAktiveChat] = useState()
+  const [aktiveChat, setAktiveChat] = useState([])
+  const [aktiveUser, setaktiveUser] = useState({})
 
 
   function getUsersChats () {
@@ -27,17 +28,31 @@ function Chat() {
                   chatContent: [...updateChat[ind].chatContent, msg]
                 }
               }
-              // setChatsList(i => updateChat)
             } else {
               const newChat = {
                 chatId: msg.chatId,
                 chatContent: [msg]
               }
               updateChat.push(newChat)
-              // setChatsList(i => [...i, newChat])
             }
           })
       setChatsList(i => updateChat)
+      setAktiveChat(i => updateChat[0].chatContent)
+      // const actUsr =  users.find(el => el.userId === updateChat[0].chatContent.recieverId)
+      // setaktiveUser(i => actUsr)
+  }
+
+  function setActiveUser() {
+    if (aktiveChat.length > 0) {
+      const actUsr =  users.find(el => el.userId === aktiveChat[0].recieverId)
+      setaktiveUser(i => actUsr)
+    }
+  }
+
+
+  function aktiveteChatFunc(e) {
+    console.log('lala');
+    console.log(e);
   }
 
 
@@ -53,26 +68,35 @@ useEffect(() => {
   setChatsList(i => []) ;
   getUsersChats()
   sortDateChatsList()
+ 
 },[])
 
+useEffect(() => {
+  setActiveUser()
+},[aktiveUser])
+
+
   return (
-    <div onClick={getUsersChats} className='min-h-[66vh] bg-yellow-50 py-20 flex justify-center'>
+    <div className='min-h-[66vh] bg-yellow-50 py-20 flex justify-center'>
       <div className='flex flex-col w-[80%] h-[60vh] border-orange-900 border-4 rounded-[20px]'>
-        <header className='bg-yellow-900 h-[5vh] text-yellow-400 pl-6 font-bold text-[1.5rem]'><p>Chat</p></header>
+
+        <header className='bg-yellow-900 h-[5vh] text-yellow-400 pl-6 font-bold text-[1.5rem] flex gap-4'>
+          <img className='w-8 h-8 rounded-full' src={aktiveUser.photo} alt="" />
+          <p>{aktiveUser.fname}</p>
+        </header>
         <div className='flex w-full h-full'>
           <div className='w-[25%] h-[90%] bg-[#fffcf7] p-4 overflow-auto flex flex-col gap-4'>
-            {console.log(chatsList)}
             {chatsList.map((chatElem, ind) =>  
-                <SmallChatCard key={ind} msgId={chatElem.chatContent[0].msgId} />
+                <SmallChatCard key={ind} aktiveteChatFunc={aktiveteChatFunc} msgId={chatElem.chatContent[0].msgId} />
             )}
           </div>
           
-          <div className='w-[75%] bg-[#e4f0d0] p-2 relative overflow-auto'>
-            
-            <ActivChat content={chatsList.chatContent}/>
-          {/*    <div className='absolute bottom-2 w-[98%]'>
+          <div className='w-[75%] bg-[#e4f0d0] p-2 relative overflow-auto'> 
+            {console.log(aktiveChat)}
+            {aktiveChat.length > 0}<ActivChat myId={myId} content={aktiveChat}/>
+             <div className='absolute bottom-2 w-[98%]'>
               <MsgForm setChatsList={setChatsList} />
-            </div>*/}
+            </div>
           </div> 
 
         </div>
