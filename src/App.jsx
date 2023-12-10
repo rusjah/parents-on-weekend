@@ -10,6 +10,8 @@ import Reviews from './components/pages/Reviews'
 import Profile from './components/pages/Profile'
 import Chat from './components/pages/Chat'
 import MainList from './components/pages/MainList'
+import Record from './components/components/video/Record';
+import { useEffect } from 'react';
 
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
             <Route path='/profile' element={<Profile />} />
             <Route path='/chat' element={<Chat />} />
             <Route path='/mainList' element={<MainList />} />
+            <Route path='/video' element={<Record />} />
+
         </Routes>
       </div>
       

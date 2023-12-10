@@ -1,19 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Calendar from 'react-calendar'
 import CalendarB from '../components/CalendarB'
 import PetsChekBox from '../components/PetsChekBox'
 import data from '../../data.json'
+import Video from '../components/video/Video'
 
 function Sign() {
   const pets = data.options.patsType;
   const children = data.options.childrenYears;
+  const [setUrl, setSetUrl] = useState('')
   function signup(){
+
+  }
+
+  function createUser(e) {
+    e.preventDefault();
 
   }
   return (
     <div className='py-[10vh] w-full min-h-[66vh] flex flex-col items-center  bg-[#f0efeb]'>
      <h2 className='font-bold text-[2.5rem] text-green-900 pb-12'>Sign Up</h2>
-    <form action="flex flex-col gap-6 w-64 font-roboto">
+    <form className='flex flex-col' onSubmit={createUser}>
       <div className='flex flex-col md:flex-row justify-center gap-6 border-orange-100 border-2 p-4'>
         <div className=' rating gap-1 flex flex-col gap-4'>
           <h2 className='font-bold text-[1.5em] text-brawn-950'>My role</h2>
@@ -107,11 +114,11 @@ function Sign() {
             </label>
             <h2 className='font-bold text-[1.5em] text-brawn-950'>I can</h2>
             <label className='font-bold  bg-lime-50 w-64 h-12 flex gap-2 items-center pl-2'>
-              <input type="radio" name="role"  value="grand" className="mask mask-heart bg-lime-400" />
+              <input type="radio" name="go"  value="grand" className="mask mask-heart bg-lime-400" />
               <span>Go to you</span>
             </label>
-            <label className='font-bold  bg-lime-50 w-64 h-12 flex gap-2 items-center pl-2'>
-              <input type="radio" name="role"  value="parent" className="mask mask-heart bg-lime-400" />
+            <label className='font-bold bg-lime-50 w-64 h-12 flex gap-2 items-center pl-2'>
+              <input type="radio" name="home"  value="parent" className="mask mask-heart bg-lime-400" />
               <span>Care at my home</span>
             </label>
         </div> 
@@ -162,6 +169,16 @@ function Sign() {
         </div>
       </div> 
       
+      <div className='flex flex-col gap-4 border-orange-100 border-2 p-4'>
+        <h2 className='font-bold text-[1.5em] text-brawn-950'>Recourd Video</h2>
+        <label className='font-bold  bg-lime-50 mx-2 flex gap-1 items-center justify-center pl-2 flex-col p-4'>       
+          <Video setUrl={setUrl}/>
+        </label>
+      </div>
+
+      <div className='flex justify-center gap-4 border-orange-100 border-2 p-4'>
+        <button type='submit' className='btn bg-yellow-900 text-yellow-200 text-[1.2em]'>Sign up</button>
+      </div>
     </form>
    </div>
   )
