@@ -4,9 +4,13 @@ function MsgForm({setChatsList}) {
     function sendMsg(e) {
       e.preventDefault()
       const newMsg = {
-        chatPhoto: 'https://images.pexels.com/photos/18221948/pexels-photo-18221948/free-photo-of-beautiful-brunette-woman-in-white-off-the-shoulder-dress-standing-on-a-beach.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load',
-        chatName: 'Innes Markus',
-        chatMsg: e.target.newMsg.value
+        sgId: "220",
+        senderId: "1",
+        recieverId: "2",
+        date: "Mar 12 2012 10:00:00 AM",
+        chatId: "999",
+        msg: "New message in this chat"                       
+        
       }
 
       console.log(newMsg);

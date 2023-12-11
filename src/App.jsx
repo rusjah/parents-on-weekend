@@ -12,6 +12,7 @@ import Chat from './components/pages/Chat'
 import MainList from './components/pages/MainList'
 import Record from './components/components/video/Record';
 import { useEffect, useState } from 'react';
+import ChatTwo from './components/pages/ChatTwo'
 
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
             <Route path='/changeWorld' element={<ChangeWorld />} />
             <Route path='/reviews' element={<Reviews />} />
             <Route path='/profile' element={<Profile />} />
-            <Route path='/chat' element={<Chat />} />
+            <Route path='/chat' element={<ChatTwo />} />
             <Route path='/mainList' element={<MainList />} />
             <Route path='/video' element={<Record />} />
 

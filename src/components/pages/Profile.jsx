@@ -7,7 +7,12 @@ function Profile() {
   const user = data.users[0]
   const photo = user.photo;
 
-  // const age = 
+  const getAge = (date) => {
+    const subDate =  new Date() -  new Date(date);
+    const years = 365 * 24 * 60 * 60 * 1000;
+    return Math.floor(subDate / years)
+  }
+  const age = getAge(user.birthday)
   
   return (
     <div className='flex flex-col items-center bg-amber-50 w-[full] min-h-full p-6 bg-gradient-to-r from-green-50 to-orange-50 relative'>
@@ -19,7 +24,7 @@ function Profile() {
           </figure>
           <figcaption className='w-96 h-64 text-[1.3em] font-bold text-yellow-900 mt-[-4vh]'>
             <h2 className='font-bold text-[1.5em] text-lime-900'>{user.fname} {user.lname}</h2>
-            <p><span className='text-green-950 decoration-solid'>Age:</span> {22}, {user.gender}</p>
+            <p><span className='text-green-950 decoration-solid'>Age:</span> {age}, {user.gender}</p>
             <p><span className='text-green-950 decoration-solid'>Email:</span> {user.email}</p>
             <p><span className='text-green-950 decoration-solid'>Post number:</span> {user.postNumber}</p>
             <p><span className='text-green-950 decoration-solid'>Role:</span> {user.role === 'grand' ? 'grandparent' : 'parent'}</p>
@@ -51,8 +56,8 @@ function Profile() {
                 </>)}
               </div>
             </div>
-                  <img className='w-32 h-32 absolute right-[60%]' src="https://i.pinimg.com/originals/97/d4/78/97d4788ebe3bada2f1718ee78dcc73f0.png" alt="" />
-                  <img className='w-32 h-32 absolute right-[40%] rotate-45 ' src="https://i.pinimg.com/originals/97/d4/78/97d4788ebe3bada2f1718ee78dcc73f0.png" alt="" />
+                  <img className='w-32 h-32 absolute right-[-20vw] md:right-[60%]' src="https://i.pinimg.com/originals/97/d4/78/97d4788ebe3bada2f1718ee78dcc73f0.png" alt="" />
+                  <img className='w-32 h-32 absolute top-10 md:top-0 right-0 md:right-[40%] rotate-45 ' src="https://i.pinimg.com/originals/97/d4/78/97d4788ebe3bada2f1718ee78dcc73f0.png" alt="" />
             <div>
               <p className='text-[1.5rem] text-lime-800 flex flex-around pb-4' >Children:</p>
               <div>

@@ -13,7 +13,6 @@ function Sign({setUsers, validationStaus, setvalidationStaus}) {
   const children = data.options.childrenYears;
   const [setUrl, setSetUrl] = useState()
   const [birthday, setBirthday] = useState(new Date())
- 
 
   function createUser(e) {
     e.preventDefault();

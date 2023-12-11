@@ -4,11 +4,8 @@ import { useReactMediaRecorder } from "react-media-recorder";
 
 function Record({setSetUrl}) {
       const onRecordStop = (blobURL, blob) => {
-        console.log({ blob });
         const fileOfBlob = new File([blob], `Recorded-${Math.random() * 10}-version`);
-        console.log({ blobURL });
         setSetUrl(i => fileOfBlob)
-        // startRecording();
       };
 
       const {

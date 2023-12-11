@@ -3,6 +3,7 @@
     "msgList": [
     {
       "msgId": "124",
+      "status": "seen",
       "senderId": "1",
       "recieverId": "2",
       "date": "Mar 12 2012 10:00:00 AM",
@@ -11,6 +12,7 @@
     },
     {
       "msgId": "123",
+      "status": "seen",
       "senderId": "2",
       "recieverId": "1",
       "date": "Mar 12 2012 11:00:00 AM",
@@ -19,6 +21,7 @@
     },
     {
       "msgId": "134",
+      "status": "seen",
       "senderId": "1",
       "recieverId": "8",
       "date": "Mar 12 2012 10:00:00 AM",
@@ -27,6 +30,7 @@
     },
     {
       "msgId": "133",
+      "status": "seen",
       "senderId": "8",
       "recieverId": "1",
       "date": "Mar 13 2012 10:00:00 AM",
@@ -35,6 +39,7 @@
     },
     {
       "msgId": "125",
+      "status": "seen",
       "senderId": "2",
       "recieverId": "1",
       "date":"Mar 11 2012 11:29:00 AM",
@@ -43,6 +48,7 @@
     },
     {
       "msgId": "125",
+      "status": "seen",
       "senderId": "5",
       "recieverId": "6",
       "date": "Mar 13 2012 10:00:00 AM",
@@ -54,7 +60,7 @@
           {
             "id": "1",
             "aboutMe": "Looking for stellar About Me examples to inspire you? You ve found the right article. Why are so many people bad at talking about themselves? Even if you aced every college essay, you probably draw a blank when you sit down to write a short overview of your life and experience. Why is that? If you are like most website owners, the About Me page is one of the hardest pages to create. It is like being asked what you do for a living. The challenge is talking about yourself in a way that is both interesting and sincere. Let es look at this from the perspective of someone who writes About Me pages all the time: a copywriter. After all, a good About Me page is supposed to be writing that can sell you, right? Here is everything you need to know about drafting a powerful About Me page (with a few inspiring examples)",
-            "birthday": "Tue Dec 05 2023 00:00:00 GMT+0100 (Central European Standard Time)",
+            "birthday": "Tue Dec 05 1976 00:00:00 GMT+0100 (Central European Standard Time)",
             "children": ["one to three", "seven to nine"],
             "email": "rusjah1@gmail.com",
             "fname": "Ruslana",
