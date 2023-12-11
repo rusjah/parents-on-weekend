@@ -78,20 +78,20 @@ useEffect(() => {
 
   return (
     <div className='min-h-[66vh] bg-yellow-50 py-20 flex justify-center'>
-      <div className='flex flex-col w-[80%] h-[60vh] border-orange-900 border-4 rounded-[20px]'>
+      <div className='flex flex-col w-[80%] h-[66vh] border-orange-900 border-4 rounded-[20px]'>
 
-        <header className='bg-yellow-900 h-[5vh] text-yellow-400 pl-6 font-bold text-[1.5rem] flex gap-4'>
+        <header className='bg-yellow-900 h-[10%] text-yellow-400 pl-6 font-bold text-[1.5rem] flex gap-4'>
           <img className='w-8 h-8 rounded-full' src={aktiveUser.photo} alt="" />
           <p>{aktiveUser.fname}</p>
         </header>
-        <div className='flex w-full h-full'>
-          <div className='w-[25%] h-[90%] bg-[#fffcf7] p-4 overflow-auto flex flex-col gap-4'>
+        <div className='flex w-full h-[90%] flex flex-col md:flex-row items-center'>
+          <div className='w-full md:w-[20%] h-full bg-[#fffcf7] p-4 overflow-auto flex flex-col gap-4'>
             {chatsList.map((chatElem, ind) =>  
                 <SmallChatCard key={ind} aktiveteChatFunc={aktiveteChatFunc} msgId={chatElem.chatContent[0].msgId} />
             )}
           </div>
           
-          <div className='w-[75%] bg-[#e4f0d0] p-2 relative'> 
+          <div className='w-full md:w-[80%] h-[80%] md:h-full bg-[#e4f0d0] p-2 relative'> 
             {aktiveChat.length > 0}<ActivChat myId={myId} content={aktiveChat}/>
              <div className='absolute bottom-2 w-[98%]'>
               <MsgForm setChatsList={setChatsList} />
