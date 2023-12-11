@@ -16,7 +16,7 @@ function Chat() {
 
   const [chatsList, setChatsList] = useState([])
   const [aktiveChat, setAktiveChat] = useState()
-  const [aktiveUser, setaktiveUser] = useState({})
+  // const [aktiveUser, setaktiveUser] = useState({})
 
   function sortMsgList() {
     msgList.sort((a, b) => {
@@ -47,12 +47,12 @@ function Chat() {
       // setaktiveUser(i => actUsr)
   }
 
-  function setActiveUser() {
-    if (aktiveChat) {
-      const actUsr =  users.find(el => el.userId === aktiveChat[0].recieverId)
-      setaktiveUser(i => actUsr)
-    }
-  }
+  // function setActiveUser() {
+  //   if (aktiveChat) {
+  //     const actUsr =  users.find(el => el.userId === aktiveChat[0].recieverId)
+  //     setaktiveUser(i => actUsr)
+  //   }
+  // }
 
     useEffect(() => {
       sortMsgList()
@@ -61,9 +61,9 @@ function Chat() {
 
     },[])
 
-useEffect(() => {
-  setActiveUser()
-},[aktiveUser])
+// useEffect(() => {
+//   setActiveUser()
+// },[aktiveUser])
 
 
   return (
@@ -72,8 +72,9 @@ useEffect(() => {
       <div className='flex flex-col w-[80%] h-[66vh] border-orange-900 border-4 rounded-[20px]'>
 
         <header className='bg-yellow-900 h-[10%] text-yellow-400 pl-6 font-bold text-[1.5rem] flex gap-4'>
-          <img className='w-8 h-8 rounded-full' src={aktiveUser.photo} alt="" />
-          <p>{aktiveUser.fname}</p>
+          {/* <img className='w-8 h-8 rounded-full' src={aktiveUser.photo} alt="" />
+          <p>{aktiveUser.fname}</p> */}
+          Chat
         </header>
         <div className='flex w-full h-[90%] flex flex-col md:flex-row items-center'>
           <div className='w-full md:w-[20%] h-[25%] md:h-full bg-[#fffcf7] p-4 overflow-auto flex flex-col gap-4'>
@@ -86,7 +87,7 @@ useEffect(() => {
             {aktiveChat && <AktiveChatTwo myId={myId} aktiveChat={aktiveChat}/>}
             {/* {aktiveChat.length > 0}<ActivChat myId={myId} content={aktiveChat}/> */}
              <div className='absolute bottom-2 w-[98%]'>
-              <MsgForm setChatsList={setChatsList} />
+              <MsgForm setMsgList={setMsgList} aktiveChat={aktiveChat}/>
             </div>
           </div> 
 

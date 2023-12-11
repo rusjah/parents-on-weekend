@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Notification from '../components/Notification';
+import logo from '../../images/logo2.1-min.png'
 
 
 function Nav({validationStaus,setvalidationStaus}) {
@@ -12,10 +13,6 @@ function Nav({validationStaus,setvalidationStaus}) {
     let notification = false
 
     const [showSubMenu, setShowSubMenu] = useState(false)
-
-    //url for logo img
-    const imgUrl = 'https://pivotalmist.backendless.app/api/files/photos/logo2.1.png'
-    // const userImgUrl = 'https://pivotalmist.backendless.app/api/files/photos/users/mother.jpg'
 
     function logout() {
         setvalidationStaus(false)
@@ -48,7 +45,7 @@ function Nav({validationStaus,setvalidationStaus}) {
     <div className='h-[7vh] lg:h-[10vh] bg-[#D4A373] text-lime-950 font-bold  sticky top-0 z-50 '>
         <div className="navbar  h-full flex items-start md:items-center">
             <figure className="flex-1 rounded-full">
-                <Link to={'/'} className='rounded-full h-full' ><img src={imgUrl} alt="Logo" className='rounded-[100%] w-8 md:w-16 h-full' /></Link>
+                <Link to={'/'} className='rounded-full h-full' ><img src={logo} alt="Logo" className='rounded-[100%] w-8 md:w-16 h-full' /></Link>
             </figure>
 
             <div className="md:flex flex-none ">

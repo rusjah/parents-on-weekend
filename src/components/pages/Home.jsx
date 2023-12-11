@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom'
 import LetGoBtn from '../components/LetGoBtn'
 import OneStepUsing from '../components/OneStepUsing'
 import ReviewCard from '../components/ReviewCard'
+import bg from '../../images/main-bg.jpg'
 
 function Home() {
-    const bgUrl = 'https://pivotalmist.backendless.app/api/files/photos/main-bg.jpg'
   return (
     <div>
       <section id='main'>
-        <div className="hero min-h-[93vh] md:min-h-[90vh]" style={{backgroundImage: `url(${bgUrl})`}}>
+        <div className="hero min-h-[93vh] md:min-h-[90vh]" style={{backgroundImage: `url(${bg})`}}>
             <div className="hero-overlay bg-opacity-60"></div>
             <div className="hero-content text-center text-neutral-content">
                 <div className="max-w-md">
