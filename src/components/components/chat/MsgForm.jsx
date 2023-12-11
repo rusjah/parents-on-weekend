@@ -4,7 +4,7 @@ function MsgForm({setChatsList}) {
     function sendMsg(e) {
       e.preventDefault()
       const newMsg = {
-        chatPhoto: 'https://pivotalmist.backendless.app/api/files/photos/users/grandmother.jpg',
+        chatPhoto: 'https://images.pexels.com/photos/18221948/pexels-photo-18221948/free-photo-of-beautiful-brunette-woman-in-white-off-the-shoulder-dress-standing-on-a-beach.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load',
         chatName: 'Innes Markus',
         chatMsg: e.target.newMsg.value
       }

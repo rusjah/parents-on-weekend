@@ -91,8 +91,7 @@ useEffect(() => {
             )}
           </div>
           
-          <div className='w-[75%] bg-[#e4f0d0] p-2 relative overflow-auto'> 
-            {console.log(aktiveChat)}
+          <div className='w-[75%] bg-[#e4f0d0] p-2 relative'> 
             {aktiveChat.length > 0}<ActivChat myId={myId} content={aktiveChat}/>
              <div className='absolute bottom-2 w-[98%]'>
               <MsgForm setChatsList={setChatsList} />
