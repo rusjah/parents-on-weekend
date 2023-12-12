@@ -24,15 +24,19 @@ function Filter() {
      }
   )
 
-  function filterHandler(filterProp, checking) {
+  function filterHandlerPets(filterProp, checking) {
     setfiltersProperty({...filtersProperty, pets: {...filtersProperty.pets, [`${filterProp}`]: checking}})
   }
+  function filterHandlerChild(filterProp, checking) {
+    setfiltersProperty({...filtersProperty, child: {...filtersProperty.child, [`${filterProp}`]: checking}})
+  }
+
 
   return (
-      <div className="collapse bg-base-200 w-[80%]">
+      <div className="collapse bg-base-200 w-[80%] md:w-[70%]">
         <input type="checkbox" className="peer" /> 
         <div className="collapse-title bg-lime-59  peer-checked:bg-[white] ">
-        <h1 className='font-bold text-green-900 pb-4'>Add some filters:</h1>
+        <h1 className='font-bold text-green-900 pb-4 text-[1.5em]'>Add some filters:</h1>
         </div>
         <div className="collapse-content bg-lime-100 flex flex-col md:flex-row flex-wrap w-full justify-around  p-4 peer-checked:bg-[whilte] p"> 
 
@@ -42,7 +46,7 @@ function Filter() {
             {Object.keys(filtersProperty.pets).map((key) => (
               <div key={key} className=''>
                   {console.log(key)}
-                <OneFilterOption type={'pets'} valueName={`${key}`} filterHandler={filterHandler}/>
+                <OneFilterOption type={'pets'} valueName={`${key}`} filterHandler={filterHandlerPets}/>
               </div>
             ))}
           </div>
@@ -55,7 +59,7 @@ function Filter() {
               {console.log(filtersProperty)}
               {Object.keys(filtersProperty.child).map((key) => (
                 <div key={key} className=''>
-                  <OneFilterOption type={'pets'} valueName={`${key}`  }/>
+                  <OneFilterOption type={'child'} valueName={`${key}`} filterHandler={filterHandlerChild}/>
                 </div>
               ))}
             </div>

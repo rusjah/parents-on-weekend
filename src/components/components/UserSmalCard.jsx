@@ -7,10 +7,11 @@ function UserSmalCard({user}) {
 
     //send as parametr user id
     function navigateToProfile() {
+       
         navigate('/profile')
     }
   return (
-    <div className='w-[80%]  bg-white-100 border-amber-900 border-2 rounded-[20px] p-6 flex flex-col'>
+    <div className='w-[80%] md:w-[70%]  bg-white-100 border-amber-900 border-2 rounded-[20px] p-6 flex flex-col'>
         <div className='flex gap-4'>
             <img className='w-12 h-12 rounded-full border-2 border-[white]' src={user.photo} alt="" />
             <div className='flex flex-col font-bold '>

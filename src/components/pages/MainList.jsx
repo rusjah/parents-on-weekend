@@ -8,9 +8,9 @@ function MainList() {
   
   return (
     <div className='flex flex-col gap-4 items-center p-10'>
-        <h1 className='font-marhey font-bold text-green-900 text-[2em]'>Find your best partner</h1>
+        <h1 className='font-marhey font-bold text-green-900 text-[1.5em] md:text-[3em] pb-4  md:pb-20'>Find your best partner</h1>
         <Filter />
-        <div className='flex flex-col gap-4 items-center py-20'>
+        <div className='flex flex-col gap-4 items-center py-4 md:py-20'>
            {users.map((el, id) => <UserSmalCard key={id} user={el}/>)}
         </div>
         
