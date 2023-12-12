@@ -29,7 +29,7 @@ function App() {
         <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login validationStaus={validationStaus} setvalidationStaus={setvalidationStaus}/>} />
-            <Route path='/signup' element={<Sign setUsers={setUsers} validationStaus={validationStaus}/>} />
+            <Route path='/signup' element={<Sign setUsers={setUsers} validationStaus={validationStaus} setvalidationStaus={setvalidationStaus}/>} />
             <Route path='/changeWorld' element={<ChangeWorld />} />
             <Route path='/reviews' element={<Reviews />} />
             <Route path='/profile' element={<Profile />} />
