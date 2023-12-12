@@ -3,7 +3,11 @@ import data from '../../data.json'
 import { useNavigate } from 'react-router-dom';
 import Modal from '../components/signForm/Modal';
 
-function Profile({}) {
+
+function Profile() {
+ 
+
+
   const navigate = useNavigate()
   const [modalStatus, setModalStatus] = useState(false)
   const [modalContent, setModalContent] = useState('')
@@ -31,7 +35,9 @@ function Profile({}) {
   
   return (
     <div className='flex flex-col items-center bg-amber-50 w-[full] min-h-full p-6 bg-gradient-to-r from-green-50 to-orange-50 relative'>
+    
         <div className=''><h1 className='font-bold text-[2em] text-green-700 font-marhey'>My Profile</h1></div>
+        
         <div className='relative w-full md:w-[60%]  flex flex-col md:flex-row gap-4 md:gap-20 justify-center items-center p-10 bg-white border-4 border-gradient-to-r from-[#181818] via-[#eee] to-[#181818 '>
           <p onClick={() => editProfile('main')} className='absolute top-3 right-3 md:right-10 font-bold text-green-900 text-[2em]'><ion-icon name="create-outline"></ion-icon></p>
           {/* <p onClick={() => editProfile('main')} className='absolute top-3 right-3 md:right-10 font-bold text-green-900 text-[2em]'><ion-icon name="create-outline"></ion-icon></p> */}

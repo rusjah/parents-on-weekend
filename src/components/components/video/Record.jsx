@@ -1,11 +1,18 @@
 import React, { useEffect, useRef } from 'react'
-import { useReactMediaRecorder } from "react-media-recorder";
+import { useReactMediaRecorder } from 'react-media-recorder-2';
+// import { useReactMediaRecorder } from "react-media-recorder";
+
 
 
 function Record({setSetUrl}) {
       const onRecordStop = (blobURL, blob) => {
+        console.log('blogurl', blobURL)
         const fileOfBlob = new File([blob], `Recorded-${Math.random() * 10}-version`);
-        setSetUrl(i => fileOfBlob)
+        console.log('blogb', fileOfBlob)
+        setSetUrl(i=> fileOfBlob)
+        blobURL = ''
+        blob = null
+
       };
 
       const {
@@ -23,6 +30,7 @@ function Record({setSetUrl}) {
         blobOptions: { type: "video/webm" },
         mediaStreamConstraints: { audio: true, video: true }
       });
+
 
       function LiveStreamPreview({ stream }) {
         let videoPreviewRef = useRef();
@@ -45,18 +53,19 @@ function Record({setSetUrl}) {
         return <video ref={videoPreviewRef} width={520} height={480} autoPlay />;
     }
     const stopCurrentRecording = () => {
-        stopRecording();
+        stopRecording()
       };
 
-    // const startNewRecording = () => {
-    //     startRecording();
-    // }
-      
+    const startNewRecording = () => {
+        startRecording();
+    }
+
+    
   return (
     <div className='flex flex-col items-center w-[30vw] h-96'>
         <h5 className='font-bold text-green-900'>Status: {status}</h5>
         <div className={`flex gap-4`}>
-            <button className={`font-bold ${status === 'recording' ? 'text-green-800' : 'text-yellow-800'} `} onClick={startRecording} disabled={status === "recording"}>Start</button>
+            <button className={`font-bold ${status === 'recording' ? 'text-green-800' : 'text-yellow-800'} `} type='button' onClick={startNewRecording} disabled={status === "recording"}>Start</button>
             <button className='font-bold'  onClick={stopCurrentRecording} disabled={status !== "recording"}>Stop</button>
         </div>
        <div className={'flex gap-2'}>
@@ -70,7 +79,7 @@ function Record({setSetUrl}) {
             </div>
             <div className={`flex-col w-96 h-96  ${status === 'stopped' ? 'flex' : 'hidden'}`}>
                 <h3 className='font-bold italic'>Preview:</h3>
-                <div className='w-full h-full'> {mediaBlobUrl && <video src={mediaBlobUrl} controls loop />}</div>
+                <div className='w-full h-full'> {mediaBlobUrl && <video src={mediaBlobUrl} controls />}</div>
             </div>
        </div>
     </div>

@@ -11,6 +11,8 @@ import PersonalData from '../components/signForm/PersonalData'
 import AdditionalData from '../components/signForm/AdditionalData'
 import AboutMe from '../components/signForm/AboutMe'
 
+import dog from '../../images/dog.jpg'
+
 
 function Sign({setUsers, validationStaus, setvalidationStaus}) {
   const navigate = useNavigate()
@@ -84,8 +86,8 @@ function Sign({setUsers, validationStaus, setvalidationStaus}) {
 
     e.target.reset();
 
-    // setvalidationStaus(true)
-    // navigate('/profile')
+    setvalidationStaus(true)
+    navigate('/profile')
 
   }
 
@@ -109,7 +111,8 @@ function Sign({setUsers, validationStaus, setvalidationStaus}) {
         <div className='flex flex-col gap-4'>
             <h2 className='font-bold text-[1.5em] text-brawn-950'>I have/like pats</h2>
             <div className='flex'>
-              <PetsChekBox pet={pets[0]} type={'pets'}  setPetsData={setPetsData} />
+              {console.log(dog)}
+              <PetsChekBox pet={`${dog}`} type={'pets'}  setPetsData={setPetsData} />
               <PetsChekBox pet={pets[1]} type={'pets'} />
             </div>
             <div className='flex'>
@@ -145,15 +148,16 @@ function Sign({setUsers, validationStaus, setvalidationStaus}) {
       <div className='flex flex-col gap-4 border-orange-100 border-2 p-4'>
         <h2 className='font-bold text-[1.5em] text-brawn-950'>Recourd Video</h2>
         <label className='font-bold  bg-lime-50 mx-2 flex gap-1 items-center justify-center pl-2 flex-col p-4'>       
-          <Video setSetUrl={setSetUrl}/>
+          <Video  setSetUrl={setSetUrl}/>
+          {console.log(setUrl)}
         </label>
       </div>
+
 
       <div className='flex justify-center gap-4 border-orange-100 border-2 p-4'>
         <button type='submit' className='btn bg-yellow-900 text-yellow-200 text-[1.2em]'>Sign up</button>
       </div>
     </form>
-    {console.log(petsData)}
    </div>
   )
 }

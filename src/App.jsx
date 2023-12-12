@@ -10,9 +10,11 @@ import Reviews from './components/pages/Reviews'
 import Profile from './components/pages/Profile'
 import Chat from './components/pages/Chat'
 import MainList from './components/pages/MainList'
-import Record from './components/components/video/Record';
 import { useEffect, useState } from 'react';
 import ChatTwo from './components/pages/ChatTwo'
+import { useAppContext } from './context/AppContext';
+import Test from './components/Test';
+
 
 
 function App() {
@@ -29,13 +31,13 @@ function App() {
         <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login validationStaus={validationStaus} setvalidationStaus={setvalidationStaus}/>} />
-            <Route path='/signup' element={<Sign setUsers={setUsers} validationStaus={validationStaus} setvalidationStaus={setvalidationStaus}/>} />
+            <Route path='/signup' element={<Sign  setUsers={setUsers} validationStaus={validationStaus} setvalidationStaus={setvalidationStaus}/>} />
             <Route path='/changeWorld' element={<ChangeWorld />} />
             <Route path='/reviews' element={<Reviews />} />
-            <Route path='/profile' element={<Profile />} />
+            <Route path='/profile' element={<Profile  />} />
             <Route path='/chat' element={<ChatTwo />} />
             <Route path='/mainList' element={<MainList />} />
-            <Route path='/video' element={<Record />} />
+            <Route path='/test' element={<Test />} />
 
         </Routes>
       </div>

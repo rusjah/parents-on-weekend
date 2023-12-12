@@ -10,8 +10,9 @@ function Video({setSetUrl}) {
              <p className='text-[10px]'>Turn your camera on</p>
         </div>
         <div className="flex justify-center collapse-content bg-yellow-100 text-black peer-checked:bg-orange-50 peer-checked:text-black"> 
-            <Record setSetUrl={setSetUrl}/>
+            <Record  setSetUrl={setSetUrl}/>
             {/* <RecordTwo /> */}
+            
         </div>
     </div>
   )

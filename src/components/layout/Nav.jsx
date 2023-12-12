@@ -74,6 +74,7 @@ function Nav({validationStaus,setvalidationStaus}) {
                             </>}
                             {validation && <>
                                 <Link to={'/mainList'}><li><p >People</p></li></Link>
+                                <Link to={'/reviews'}><li><p >Reviws</p></li></Link>
                                 <Link to={'/profile'}><li><p >Profile</p></li></Link>
                                 <li onClick={logout}><p>Log out</p></li>
 
@@ -92,6 +93,7 @@ function Nav({validationStaus,setvalidationStaus}) {
                     </>}
                     {validation && <>
                         <Link to={'/mainList'}><li><p >People</p></li></Link>
+                        <Link to={'/reviews'}><li><p >Reviws</p></li></Link>
                         <Link to={'/chat'}><li className='relative'>
                             <Notification notification={notification}/>
                             <p className='text-[1.5em]'><ion-icon name="chatbubble-outline"></ion-icon></p>
