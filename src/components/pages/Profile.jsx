@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import data from '../../data.json'
 import { useNavigate } from 'react-router-dom';
+import Modal from '../components/signForm/Modal';
 
 function Profile({}) {
   const navigate = useNavigate()
+  const [modalStatus, setModalStatus] = useState(false)
+  const [modalContent, setModalContent] = useState('')
+  
   const user = data.users[0]
   const photo = user.photo;
+
 
   const getAge = (date) => {
     const subDate =  new Date() -  new Date(date);
@@ -14,8 +19,14 @@ function Profile({}) {
   }
   const age = getAge(user.birthday)
 
-  function editProfile(type) {
-    console.log('frameBorder')
+
+  function editProfile(type) {  
+    setModalContent(i => type)
+    setModalStatus(i => true)
+  }
+
+  function onClose() {
+    setModalStatus(i => false);
   }
   
   return (
@@ -23,7 +34,8 @@ function Profile({}) {
         <div className=''><h1 className='font-bold text-[2em] text-green-700 font-marhey'>My Profile</h1></div>
         <div className='relative w-full md:w-[60%]  flex flex-col md:flex-row gap-4 md:gap-20 justify-center items-center p-10 bg-white border-4 border-gradient-to-r from-[#181818] via-[#eee] to-[#181818 '>
           <p onClick={() => editProfile('main')} className='absolute top-3 right-3 md:right-10 font-bold text-green-900 text-[2em]'><ion-icon name="create-outline"></ion-icon></p>
-          
+          {/* <p onClick={() => editProfile('main')} className='absolute top-3 right-3 md:right-10 font-bold text-green-900 text-[2em]'><ion-icon name="create-outline"></ion-icon></p> */}
+          {/* {modalStatus && <Modal modalContent={modalContent} onClose={onClose} />} */}
           <figure className='w-64 md:w-96 h-48 md:h-64 pt-4 md:pt-0 relative shadow-lg shadow-black-800/40'>
             {/* <p className='bg-[white] opacity-8 w-8 h-8 flex justify-center items-center rounded-full absolute top-1 left-1'><ion-icon name="add-circle-outline"></ion-icon></p> */}
             <img className='w-full h-full' src={photo} alt="photo" />
@@ -41,8 +53,8 @@ function Profile({}) {
         </div>
         
         <div className='mt-10 flex justify-center gap-6 w-full md:w-[60%] px-2 md:px-0 pb-10 bg-white border-4 border-gradient-to-r from-[#181818] via-[#eee] to-[#181818] relative'>
-          <p onClick={() => editProfile('text')} className='absolute top-3 right-3 md:right-10 font-bold text-green-900 text-[2em]'><ion-icon name="create-outline"></ion-icon></p>
-          
+          <p className='absolute top-3 right-3 md:right-10 font-bold text-green-900 text-[2em]'><ion-icon name="create-outline"></ion-icon></p>
+      
           <div className=' w-full md:w-[60%] h-full flex flex-col gap-1 justify-center items-center pt-10  font-roboto font-[450] text-justify'>
             <h2 className='font-bold text-[1.5em] text-lime-900 self-start'>About me</h2>
             <p className='font-merhey text-[1rem]'>

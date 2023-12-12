@@ -7,7 +7,8 @@ function MainList() {
   const users = data.users;
   
   return (
-    <div className='flex flex-col gap-4 items-center'>
+    <div className='flex flex-col gap-4 items-center p-10'>
+        <h1 className='font-marhey font-bold text-green-900 text-[2em]'>Find your best partner</h1>
         <Filter />
         <div className='flex flex-col gap-4 items-center py-20'>
            {users.map((el, id) => <UserSmalCard key={id} user={el}/>)}

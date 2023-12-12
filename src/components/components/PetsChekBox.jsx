@@ -1,6 +1,6 @@
 import React from 'react'
 
-function PetsChekBox({pet, type}) {
+function PetsChekBox({pet, type, setPetsData}) {
 
   return (
     <label className={`font-bold  bg-lime-50 w-44 flex gap-3 items-center justify-between pl-2 flex-row p-2`}>

@@ -18,7 +18,7 @@ function UserSmalCard({user}) {
                 <span>{22} {user.gender}</span>
             </div>
         </div>
-         <div className='h-[7vh] overflow-hidden'>{user.aboutMe}</div>
+         <div className='h-[6vh] overflow-hidden'>{user.aboutMe}</div>
         <div className='justify-self-end self-end pr-10'>
             <button onClick={navigateToProfile} className='text-green-800 font-bold'>Mehr</button>
         </div>

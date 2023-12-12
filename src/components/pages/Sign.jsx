@@ -33,6 +33,11 @@ function Sign({setUsers, validationStaus, setvalidationStaus}) {
   const [photo, setPhoto] = useState()
   const [state, setState] = useState('')
   const [aboutMe, setAboutMe] = useState('')
+  
+
+  const [petsData, setPetsData] = useState({
+    dog: false
+  })
 
   
 
@@ -79,16 +84,16 @@ function Sign({setUsers, validationStaus, setvalidationStaus}) {
 
     e.target.reset();
 
-    setvalidationStaus(true)
-    navigate('/profile')
+    // setvalidationStaus(true)
+    // navigate('/profile')
 
   }
 
-  useEffect(() => {
-    if (setvalidationStaus) {
-      navigate('/profile')
-    }
-  },[validationStaus])
+  // useEffect(() => {
+  //   if (setvalidationStaus) {
+  //     navigate('/profile')
+  //   }
+  // },[validationStaus])
   return (
     <div className='py-[10vh] w-full min-h-[66vh] flex flex-col items-center  bg-[#f0efeb]'>
      <h2 className='font-bold text-[2.5rem] text-green-900 pb-12'>Sign Up</h2>
@@ -104,7 +109,7 @@ function Sign({setUsers, validationStaus, setvalidationStaus}) {
         <div className='flex flex-col gap-4'>
             <h2 className='font-bold text-[1.5em] text-brawn-950'>I have/like pats</h2>
             <div className='flex'>
-              <PetsChekBox pet={pets[0]} type={'pets'}  />
+              <PetsChekBox pet={pets[0]} type={'pets'}  setPetsData={setPetsData} />
               <PetsChekBox pet={pets[1]} type={'pets'} />
             </div>
             <div className='flex'>
@@ -148,6 +153,7 @@ function Sign({setUsers, validationStaus, setvalidationStaus}) {
         <button type='submit' className='btn bg-yellow-900 text-yellow-200 text-[1.2em]'>Sign up</button>
       </div>
     </form>
+    {console.log(petsData)}
    </div>
   )
 }
