@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Notification from '../components/Notification';
 import logo from '../../images/logo2.1-min.png'
+import { useAppContext } from '../../context/AppContext';
 
 
-function Nav({validationStaus,setvalidationStaus}) {
+function Nav() {
+    const {userStatus, setUserStatus} = useAppContext()
     const navigate = useNavigate();
-    //some variable for cheking if user log in
-    let validation = validationStaus
+    const location = useLocation();
+
+    
 
     //is true when user bekome new msg
     let notification = false
@@ -15,7 +18,7 @@ function Nav({validationStaus,setvalidationStaus}) {
     const [showSubMenu, setShowSubMenu] = useState(false)
 
     function logout() {
-        setvalidationStaus(false)
+        setUserStatus(i => false)
         navigate('/');
     }
 
@@ -27,7 +30,6 @@ function Nav({validationStaus,setvalidationStaus}) {
         setShowSubMenu(i => true)
     }
 
-    const location = useLocation();
 
     useEffect(() => {
         if (location.hash) {
@@ -68,11 +70,11 @@ function Nav({validationStaus,setvalidationStaus}) {
                             <Link to={'/'}><li><p >Home</p></li></Link>
                             <Link to={'/#about'}><li><p>About Us</p></li></Link>
                             <Link to={'/changeWorld'}><li><p>Help</p></li></Link>
-                            {!validation && <>
+                            {!userStatus && <>
                                 <Link to={'/login'}><li><p>Log in</p></li></Link> 
                                 <Link to={'/signup'}><li><p>Sign up</p></li></Link>
                             </>}
-                            {validation && <>
+                            {userStatus && <>
                                 <Link to={'/mainList'}><li><p >People</p></li></Link>
                                 <Link to={'/reviews'}><li><p >Reviws</p></li></Link>
                                 <Link to={'/profile'}><li><p >Profile</p></li></Link>
@@ -87,11 +89,11 @@ function Nav({validationStaus,setvalidationStaus}) {
                     <Link to={'/'}><li><p >Home</p></li></Link>
                     <Link to={'/#about'}><li><p>About Us</p></li></Link>
                     <Link to={'/changeWorld'}><li><p>Help</p></li></Link>
-                    {!validation && <>
+                    {!userStatus && <>
                         <Link to={'/login'}><li><p>Log in</p></li></Link> 
                         <Link to={'/signup'}><li><p>Sign up</p></li></Link>
                     </>}
-                    {validation && <>
+                    {userStatus && <>
                         <Link to={'/mainList'}><li><p >People</p></li></Link>
                         <Link to={'/reviews'}><li><p >Reviws</p></li></Link>
                         <Link to={'/chat'}><li className='relative'>

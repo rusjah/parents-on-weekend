@@ -4,12 +4,12 @@ import { useReactMediaRecorder } from 'react-media-recorder-2';
 
 
 
-function Record({setSetUrl}) {
+function Record({setnewUser}) {
       const onRecordStop = (blobURL, blob) => {
         console.log('blogurl', blobURL)
         const fileOfBlob = new File([blob], `Recorded-${Math.random() * 10}-version`);
         console.log('blogb', fileOfBlob)
-        setSetUrl(i=> fileOfBlob)
+        setnewUser(i => ({...i, video: fileOfBlob}))
         blobURL = ''
         blob = null
 

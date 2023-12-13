@@ -16,20 +16,23 @@ import Test from './components/Test';
 import ProtectedRoute from './components/pages/ProtectedRoute';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Backendless from 'backendless';
+
 
 
 function App() {
+  Backendless.serverURL = "https://eu-api.backendless.com"
+  Backendless.initApp( "4FFC35BA-38AF-2133-FF38-3C841423A400", "0821E1EC-0FFE-40BF-B0E7-B56560568E79" );
   //for adding new users
- const {user, setUser} = useAppContext()
+ const {userStatus} = useAppContext()
 
   //for activete login and sign
-  // const [user, setUser] = useState([])
+  const [user, setUser] = useState([])
   const [validationStaus, setvalidationStaus] = useState(true)
 
   return (
     <div className="App">
-      {user ? console.log('true') : console.log("false")}
-      <Nav validationStaus={validationStaus} setvalidationStaus={setvalidationStaus}/>
+      <Nav/>
       <div className='min-h-[66vh]'>
       <Routes>
             <Route index element={<Home />} />
@@ -38,18 +41,18 @@ function App() {
             <Route path='signup' element={<Sign  setUsers={setUser} validationStaus={validationStaus} setvalidationStaus={setvalidationStaus}/>} />
             <Route path='changeWorld' element={<ChangeWorld />} />
            
-            <Route path='reviews' element={<ProtectedRoute user={user} >
+            <Route path='reviews' element={<ProtectedRoute user={userStatus} >
                                               <Reviews />
                                            </ProtectedRoute>} />
 
-            <Route path='chat' element={<ProtectedRoute user={user} >
+            <Route path='chat' element={<ProtectedRoute user={userStatus} >
                                               <ChatTwo />
                                             </ProtectedRoute>} />
-            <Route path='profile' element={<ProtectedRoute user={user} >
+            <Route path='profile' element={<ProtectedRoute user={userStatus} >
                                               <Profile  />
                                            </ProtectedRoute>} />
 
-            <Route path='mainList' element={<ProtectedRoute user={user} >
+            <Route path='mainList' element={<ProtectedRoute user={userStatus} >
                                               <MainList  />
                                             </ProtectedRoute>} />
             

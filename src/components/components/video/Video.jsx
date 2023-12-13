@@ -1,7 +1,7 @@
 import React from 'react'
 import Record from './Record'
 
-function Video({setSetUrl}) {
+function Video({setnewUser}) {
   return (
     <div className="collapse bg-base-200">
         <input type="checkbox" className="peer" /> 
@@ -10,7 +10,7 @@ function Video({setSetUrl}) {
              <p className='text-[10px]'>Turn your camera on</p>
         </div>
         <div className="flex justify-center collapse-content bg-yellow-100 text-black peer-checked:bg-orange-50 peer-checked:text-black"> 
-            <Record  setSetUrl={setSetUrl}/>
+            <Record  setnewUser={setnewUser}/>
             {/* <RecordTwo /> */}
             
         </div>

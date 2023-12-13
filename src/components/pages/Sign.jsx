@@ -15,24 +15,13 @@ import Suggetions from '../components/signForm/Suggetions'
 
 function Sign({setUsers, validationStaus, setvalidationStaus}) {
   const navigate = useNavigate()
+
+  const {registration} = useAppContext()
   
-  const [setUrl, setSetUrl] = useState()
+  // const [setUrl, setSetUrl] = useState()
   // const [birthday, setBirthday] = useState(new Date())
 
-  const [role, setRole] = useState('')
-  const [helpType, setHelpType] = useState('')
-  const [postNumber, setPostNumber] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [phone, setPhone] = useState('')
-  const [fname, setFname] = useState('')
-  const [lname, setLname] = useState('')
-  const [gender, setGender] = useState('')
-  const [birthday, setBirthday] = useState(new Date())
-  const [photo, setPhoto] = useState()
-  const [state, setState] = useState('')
-  const [aboutMe, setAboutMe] = useState('')
-  
+  const [newUser, setnewUser] = useState({})
 
   function createUser(e) {
     e.preventDefault();
@@ -53,59 +42,36 @@ function Sign({setUsers, validationStaus, setvalidationStaus}) {
       }
     }
 
-    const newUser = {
-      id: 1,
-      fname: fname,
-      lname: lname,
-      email: email,
-      password: password,
-      phone: phone,
-      gender: gender,
-      role: role,
-      state: state,
-      helpType: helpType,
-      postNumber: postNumber,
-      aboutMe: aboutMe,
-      pets: pets,
-      children: children,
-      birthday: birthday,
-      videoUrl: setUrl,
-      photo: photo
-    }
+    // {console.log('new', newUser)}
+
+    registration(newUser)
+    setUsers(i => [...i, newUser])
+    // // setUsers(i => newUser)
     
-    // setUsers(i => [...i, newUser])
-    setUsers(i => newUser)
+   
 
     e.target.reset();
 
     console.log(newUser);
-    setvalidationStaus(true)
-    navigate('/profile')
+    // navigate('/profile')
 
   }
 
-  // useEffect(() => {
-  //   if (setvalidationStaus) {
-  //     navigate('/profile')
-  //   }
-  // },[validationStaus])
   return (
     <div className='py-[10vh] w-full min-h-[66vh] flex flex-col items-center  bg-[#f0efeb]'>
      <h2 className='font-bold text-[2.5rem] text-green-900 pb-12'>Sign Up</h2>
     <form className='flex flex-col items-center md:text-[1.1em]' onSubmit={createUser}>
 
-      <BaseData onChangeRole={setRole} onChangeHelpType={setHelpType} onChangePostNumber={setPostNumber} />
-      <LoginData onChangeEmail={setEmail} onChangePassword={setPassword} onChangePhone={setPhone}/>
-      <PersonalData onChangeFname={setFname} onChangeLname={setLname} onChangeGender={setGender} />
-      <AdditionalData onChangeBirthDay={setBirthday} onChangePhoto={setPhoto} onChangeState={setState}/>
-      <AboutMe onChangeAboutMe={setAboutMe}/>
+      <BaseData setnewUser={setnewUser} />
+      <LoginData setnewUser={setnewUser}/>
+      <PersonalData setnewUser={setnewUser} />
+      <AdditionalData setnewUser={setnewUser}/>
+      <AboutMe setnewUser={setnewUser}/>
       <Suggetions />
-      
       <div className='flex flex-col gap-4 border-orange-100 border-2 p-4'>
-        <h2 className='font-bold text-[1.5em] text-brawn-950'>Recourd Video</h2>
+        <h2 className='font-bold text-[1.5em] text-brawn-950'>Record Video</h2>
         <label className='font-bold  bg-lime-50 mx-2 flex gap-1 items-center justify-center pl-2 flex-col p-4'>       
-          <Video  setSetUrl={setSetUrl}/>
-          {console.log(setUrl)}
+          <Video  setnewUser={setnewUser}/>
         </label>
       </div>
 
