@@ -4,8 +4,64 @@ import { useContext, useState } from "react";
 const { createContext } = require("react");
 
 const AppContext = createContext();
+const photoPets = [
+     {
+        title: 'dog',
+        url: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/pets/dog.jpg"
+    },
+    {
+        title: 'dog',
+        url: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/pets/cat.jpg"
+    },
+    {
+        title: 'dog',
+        url: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/pets/fish.jpg"
+    },
+    {
+        title: 'dog',
+        url: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/pets/bird.jpg"
+    },
+    {
+        title: 'dog',
+        url: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/pets/rabbit.jpg"
+    },
+    {
+        title: 'dog',
+        url: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/pets/reptilien.jpg"
+    },
+    {
+        title: 'dog',
+        url: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/pets/another.jpg"
+    },
+]
+const childrenPhotos = [
+    { 
+        title: "baby",
+        url: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/children/baby.jpg"
+    },
+    { 
+        title: "four to six",
+        url: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/children/five.jpg"
+    },
+    { 
+        title: "seven to nine",
+        url: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/children/eight.jpg"
+    },
+    { 
+        title: "ten to twelve",
+        url: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/children/eleven.jpg"
+    },
+    { 
+        title: "twelve+",
+        url: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/children/mehr.jpg"
+    },
+    
+]
+
 
 export const AppProvider = ({children}) => {
+    const photosAvatar = {}
+   
     const [user, setUser] = useState(null)
   
     // const handleLogin = (newUser) => setUser({newUser})
@@ -20,7 +76,7 @@ export const AppProvider = ({children}) => {
     Backendless.initApp( APL_ID, API_KEY );
 
     return <AppContext.Provider value={{
-      
+        photoPets, childrenPhotos
         }}>
         {children}
     </AppContext.Provider>

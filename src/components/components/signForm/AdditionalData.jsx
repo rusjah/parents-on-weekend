@@ -5,7 +5,7 @@ import CalendarB from '../CalendarB'
 function AdditionalData({onChangeBirthDay, onChangePhoto, onChangeState}) {
   return (
     <div>
-        <div className='flex flex-col md:flex-row justify-start gap-10 border-orange-100 border-2 p-4'>
+        <div className='flex flex-col md:flex-row justify-start gap-12 border-orange-100 border-2 p-4'>
             <div className='flex flex-col gap-4'>
                 <h2 className='font-bold text-[1.5em] text-brawn-950'>Birthday</h2>
                 <label className='font-bold  bg-lime-50 w-64 md:w-96 flex gap-1 items-center pl-2 flex-col p-2'>
