@@ -10,27 +10,27 @@ const photoPets = [
         url: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/pets/dog.jpg"
     },
     {
-        title: 'dog',
+        title: 'cat',
         url: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/pets/cat.jpg"
     },
     {
-        title: 'dog',
+        title: 'fish',
         url: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/pets/fish.jpg"
     },
     {
-        title: 'dog',
+        title: 'bird',
         url: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/pets/bird.jpg"
     },
     {
-        title: 'dog',
+        title: 'rabbit',
         url: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/pets/rabbit.jpg"
     },
     {
-        title: 'dog',
+        title: 'reptilien',
         url: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/pets/reptilien.jpg"
     },
     {
-        title: 'dog',
+        title: 'another',
         url: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/pets/another.jpg"
     },
 ]
@@ -62,8 +62,12 @@ const childrenPhotos = [
 export const AppProvider = ({children}) => {
     const photosAvatar = {}
    
-    const [user, setUser] = useState(null)
+    // const [user, setUser] = useState({
+    //    name: 'ana'
+    // })
   
+    const [user, setUser] = useState(null)
+
     // const handleLogin = (newUser) => setUser({newUser})
     // const handleLogout = () => setUser(null)
 
@@ -76,7 +80,8 @@ export const AppProvider = ({children}) => {
     Backendless.initApp( APL_ID, API_KEY );
 
     return <AppContext.Provider value={{
-        photoPets, childrenPhotos
+        photoPets, childrenPhotos,
+        user, setUser
         }}>
         {children}
     </AppContext.Provider>

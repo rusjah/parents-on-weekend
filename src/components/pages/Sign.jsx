@@ -73,7 +73,8 @@ function Sign({setUsers, validationStaus, setvalidationStaus}) {
       photo: photo
     }
     
-    setUsers(i => [...i, newUser])
+    // setUsers(i => [...i, newUser])
+    setUsers(i => newUser)
 
     e.target.reset();
 
