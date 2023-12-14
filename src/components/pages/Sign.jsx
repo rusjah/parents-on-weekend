@@ -13,49 +13,34 @@ import { useAppContext } from '../../context/AppContext'
 import Suggetions from '../components/signForm/Suggetions'
 
 
-function Sign({setUsers, validationStaus, setvalidationStaus}) {
-  const navigate = useNavigate()
+function Sign() {
 
   const {registration} = useAppContext()
-  
-  // const [setUrl, setSetUrl] = useState()
-  // const [birthday, setBirthday] = useState(new Date())
 
   const [newUser, setnewUser] = useState({})
 
   function createUser(e) {
-    e.preventDefault();
+      e.preventDefault();
 
-    const pets = []
-    for(let i = 0; i < e.target.pets.length; i++) {
-      const checkedPet = e.target.pets[i];
-      if (checkedPet.checked) {
-        pets.push(checkedPet.value)
+      const pets = []
+      for(let i = 0; i < e.target.pets.length; i++) {
+        const checkedPet = e.target.pets[i];
+        if (checkedPet.checked) {
+          pets.push(checkedPet.value)
+        }
       }
-    }
     
-    const children = []
-    for(let i = 0; i < e.target.child.length; i++) {
-      const checkedCild = e.target.child[i];
-      if (checkedCild.checked) {
-        children.push(checkedCild.value)
+      const children = []
+      for(let i = 0; i < e.target.child.length; i++) {
+        const checkedCild = e.target.child[i];
+        if (checkedCild.checked) {
+          children.push(checkedCild.value)
+        }
       }
+
+      registration(newUser)
+      e.target.reset();
     }
-
-    // {console.log('new', newUser)}
-
-    registration(newUser)
-    setUsers(i => [...i, newUser])
-    // // setUsers(i => newUser)
-    
-   
-
-    e.target.reset();
-
-    console.log(newUser);
-    // navigate('/profile')
-
-  }
 
   function handleChange(key, value) {
     setnewUser(userData => ({...userData, [key]: value}))

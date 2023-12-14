@@ -57,9 +57,10 @@ export const AppProvider = ({children}) => {
     function loginUser(userData) {
         const email = userData.email
         const password = userData.password
-        Backendless.UserService.login('my@gmail.com', '11111', true )
+        Backendless.UserService.login(email, password, true )
         .then( res => {
             setUserStatus(i => true)
+            navigate('mainList')
             console.log(res);
         } )
         .catch( err => {console.log(err)} );
