@@ -1,18 +1,22 @@
 import React from 'react'
+import { useAppContext } from '../../../context/AppContext'
 
 function PersonalData({setnewUser}) {
+  const {currentUser} = useAppContext()
+  const defaultFName = currentUser.fname ? currentUser.fname : ''
+  const defaultLName = currentUser.lname ? currentUser.lname : ''
   return (
     <div>
-        <div className='flex flex-col md:flex-row justify-center gap-6 border-orange-100 border-2 p-4'>
+        <div className='flex flex-col lg:flex-row justify-center items-center lg:gap-6 border-orange-100 border-2 p-4'>
         <div className='flex flex-col gap-4'>
             <h2 className='font-bold text-[1.5em] text-brawn-950'>My Data</h2>
             <label className='font-bold  bg-lime-50 w-64 h-24 flex gap-1 items-center justify-center  pl-2 flex-col p-1'>
-              <input onChange={(e) => setnewUser(i => ({...i, fname: e.target.value}))} type="text" name='fname' placeholder="First name" className="input font-normal input-bordered input-warning w-full max-w-xs" />
+              <input onChange={(e) => setnewUser(i => ({...i, fname: e.target.value}))} type="text" name='fname' defaultValue={defaultFName} placeholder="First name" className="input font-normal input-bordered input-warning w-full max-w-xs" />
             </label>
         </div>
         <div className='flex flex-col gap-4 pt-0 md:pt-[3.3em]'>
             <label className='font-bold  bg-lime-50 w-64 h-24 flex gap-1 items-center justify-center pl-2 flex-col p-1'>
-              <input onChange={(e) => setnewUser(i => ({...i, lname: e.target.value}))} type="text" name='lname' placeholder="Last name" className="input font-normal input-bordered input-warning w-full max-w-xs" />
+              <input onChange={(e) => setnewUser(i => ({...i, lname: e.target.value}))} type="text" name='lname' defaultValue={defaultLName} placeholder="Last name" className="input font-normal input-bordered input-warning w-full max-w-xs" />
             </label>
         </div>
         <div className='flex flex-col gap-4 pt-0 md:pt-[3.3em]'>

@@ -9,22 +9,15 @@ import {AVATAR,PETS, CHILDREN} from '../../data/Data'
 function Profile({owner='me'}) {
 
   const navigate = useNavigate()
-  const {currentUser, getAge, getOptions} = useAppContext()
+  const {currentUser, getAge, getOptions, userId} = useAppContext()
 
   const [modalStatus, setModalStatus] = useState(false)
   const [modalContent, setModalContent] = useState('')
-
-  // const [options, setOptions] = useState()
-
-  
-  // console.log(user.fname);
-  // const photo = user.photo;
-
+  const [updatedUser, setUpdatedUser] = useState({})
 
   const age = getAge(currentUser.birthday)
   const pets = getOptions(currentUser.optionsId).pets
   const children = getOptions(currentUser.optionsId).children
-
 
 
   function editProfile(type) { 
@@ -111,11 +104,13 @@ function Profile({owner='me'}) {
                 </div>
               </div>
 
+
+{console.log(updatedUser)}
             </div>
           </div>
 
         
-        {modalStatus && <Modal modalContent={modalContent} onClose={onClose} onSaveChanges={onSaveChanges} />}
+        {modalStatus && <Modal modalContent={modalContent} onClose={onClose} onSaveChanges={onSaveChanges} setUpdatedUser={setUpdatedUser}/>}
           {/* <button onClick={() => navigate('/edit')} className='btn bg-yellow-900 text-yellow-200 absolute right-20 top-4 text-[4em] h-16 rounded-full'><ion-icon name="add-circle-outline"></ion-icon></button> */}
     </div>
   )

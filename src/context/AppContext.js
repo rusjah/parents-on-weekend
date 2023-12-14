@@ -13,8 +13,8 @@ export const AppProvider = ({children}) => {
     //for protecting routing
     const [userStatus, setUserStatus] = useState(true)
     const [currentUser, setCurrentUser] = useState({})
-    const [options, setOptions] = useState({})
-    let userId = '';
+    const [userId, setUserId] = useState()
+    // let userId = '';
     const navigate = useNavigate()
 
     function generateAvatar(role, gender) {
@@ -65,7 +65,8 @@ export const AppProvider = ({children}) => {
             const user = new Backendless.User(newUser);
 
             const res = await  Backendless.UserService.register(user)
-            userId = res.objectId;
+            // userId = res.objectId
+            setUserId(res.objectId)
 
             const optRes = await Backendless.Data.of('options').save(options)
             
@@ -84,9 +85,6 @@ export const AppProvider = ({children}) => {
             }
             console.log(`error - ${error.message}`)
         }
-
-        console.log(newUser.video, 'video');
-        console.log(newUser.photo, 'photo');
     }
 
     //make login
@@ -113,7 +111,6 @@ export const AppProvider = ({children}) => {
             const curr = await Backendless.Data.of("Users").find( {
                     relations: [`optionsId`]
                 })
-                // setOptions(optt)
             setCurrentUser(curr[0])
         } catch {
             console.log('err');
@@ -140,8 +137,6 @@ export const AppProvider = ({children}) => {
         return {pets: userOptPs, children: userOptCh};
     }
 
-
-
     useEffect(() => {
         findUsersData()
     }, [])
@@ -150,7 +145,7 @@ export const AppProvider = ({children}) => {
         userStatus, setUserStatus,
         registration, loginUser, logoutUser,
         findUsersData, currentUser, 
-        getAge, getOptions
+        getAge, getOptions, userId
         }}>
         {children}
     </AppContext.Provider>

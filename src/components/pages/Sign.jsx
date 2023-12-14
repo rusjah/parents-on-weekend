@@ -38,15 +38,9 @@ function Sign() {
         }
       }
 
-    
-      // console.log(addOptions(pets, children))
       registration(newUser, pets, children)
       e.target.reset();
-    }
-
-  function handleChange(key, value) {
-    setnewUser(userData => ({...userData, [key]: value}))
-  }
+   }
 
   return (
     <div className='py-[10vh] w-full min-h-[66vh] flex flex-col items-center  bg-[#f0efeb]'>
