@@ -9,7 +9,7 @@ function AddReviw({setReviews}) {
             userId: 123,
             fname: 'Mark',
             lname: 'Yousch', 
-            photo: 'https://pivotalmist.backendless.app/api/files/photos/users/father.jpg',
+            photo: 'https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/users/father.jpg',
             review: e.target.newReviwe.value,
             rating: Number(stars.value)
         }

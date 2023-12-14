@@ -6,11 +6,11 @@ function BaseData({setnewUser}) {
         <div className=' rating gap-1 flex flex-col gap-4'>
           <h2 className='font-bold text-[1.5em] text-brawn-950'>My role</h2>
           <label className='font-bold  bg-lime-50 w-64 h-12 flex gap-2 items-center pl-2'>
-            <input onChange={(e) => setnewUser(i => ({...i, role: e.target.value}))} type="radio" name="role"  value="grand" className="mask mask-heart bg-lime-400 checked:bg-yellow-400" />
+            <input required onChange={(e) => setnewUser(i => ({...i, role: e.target.value}))} type="radio" name="role"  value="grand" className="mask mask-heart bg-lime-400 checked:bg-yellow-400" />
             <span>I have time</span>
           </label>
           <label className='font-bold  bg-lime-50 w-64 h-12 flex gap-2 items-center pl-2'>
-            <input onChange={(e) => setnewUser(i => ({...i, role: e.target.value}))} type="radio" name="role"  value="parent" className="mask mask-heart bg-lime-400 checked:bg-yellow-400" />
+            <input required onChange={(e) => setnewUser(i => ({...i, role: e.target.value}))} type="radio" name="role"  value="parent" className="mask mask-heart bg-lime-400 checked:bg-yellow-400" />
             <span>I need help</span>
           </label>
         </div>

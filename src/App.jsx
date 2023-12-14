@@ -22,7 +22,7 @@ import Backendless from 'backendless';
 
 function App() {
   Backendless.serverURL = "https://eu-api.backendless.com"
-  Backendless.initApp( "4FFC35BA-38AF-2133-FF38-3C841423A400", "0821E1EC-0FFE-40BF-B0E7-B56560568E79" );
+  Backendless.initApp( "C9BF0216-F268-A538-FFB2-009C64336400", "010617C8-F52E-4210-A9A1-3BC6CE0501F6" );
   //for adding new users
  const {userStatus} = useAppContext()
 
@@ -73,7 +73,6 @@ function App() {
 
         </Routes> */}
       </div>
-      {console.log(user)}
       <Footer />
 
 

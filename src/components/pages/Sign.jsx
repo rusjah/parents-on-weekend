@@ -57,6 +57,10 @@ function Sign({setUsers, validationStaus, setvalidationStaus}) {
 
   }
 
+  function handleChange(key, value) {
+    setnewUser(userData => ({...userData, [key]: value}))
+  }
+
   return (
     <div className='py-[10vh] w-full min-h-[66vh] flex flex-col items-center  bg-[#f0efeb]'>
      <h2 className='font-bold text-[2.5rem] text-green-900 pb-12'>Sign Up</h2>

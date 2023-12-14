@@ -6,7 +6,7 @@ function ReviewCard() {
     const user =  {
         fname: 'Edward',
         lname: "Ksija",
-        photo: "https://pivotalmist.backendless.app/api/files/photos/users/father.jpg",
+        photo: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/users/father.jpg",
         reviw: 'I had a fantastic experience using "Grandparents on weekend". The interface is user-friendly, offering a wide range of services/products. Excellent customer service and a smooth transaction process. Highly recommended!',
         rating: 5
     }

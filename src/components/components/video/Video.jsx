@@ -11,7 +11,6 @@ function Video({setnewUser}) {
         </div>
         <div className="flex justify-center collapse-content bg-yellow-100 text-black peer-checked:bg-orange-50 peer-checked:text-black"> 
             <Record  setnewUser={setnewUser}/>
-            {/* <RecordTwo /> */}
             
         </div>
     </div>
