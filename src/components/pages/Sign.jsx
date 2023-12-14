@@ -15,7 +15,7 @@ import Suggetions from '../components/signForm/Suggetions'
 
 function Sign() {
 
-  const {registration} = useAppContext()
+  const {registration, addOptions} = useAppContext()
 
   const [newUser, setnewUser] = useState({})
 
@@ -38,7 +38,9 @@ function Sign() {
         }
       }
 
-      registration(newUser)
+    
+      // console.log(addOptions(pets, children))
+      registration(newUser, pets, children)
       e.target.reset();
     }
 

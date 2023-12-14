@@ -1,7 +1,7 @@
 import Backendless from "backendless";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {AVATAR} from '../components/data/Data'
+import {AVATAR,PETS, CHILDREN} from '../data/Data'
 
 const { createContext } = require("react");
 
@@ -10,18 +10,35 @@ const AppContext = createContext();
 export const AppProvider = ({children}) => {
     //for protecting routing
     const [userStatus, setUserStatus] = useState(true)
-    const userId = '';
+    let userId = '';
     const navigate = useNavigate()
 
     function generateAvatar(role, gender) {
-        if(role === 'grand' && gender === 'men') return AVATAR.grandfather
-        if(role === 'grand' && gender === 'woomen') return AVATAR.grandmother
-        if(role === 'parent' && gender === 'men') return AVATAR.father
-        if(role === 'parent' && gender === 'foomen') return AVATAR.mother
+        if(role === 'grand' && gender === 'male') return AVATAR.grandfather
+        if(role === 'grand' && gender === 'female') return AVATAR.grandmother
+        if(role === 'parent' && gender === 'male') return AVATAR.father
+        if(role === 'parent' && gender === 'female') return AVATAR.mother
+        if(gender === 'another') return AVATAR.mother
     }
 
+    function generateOptions(pets, children) {
+        let optionsData = {}
+        PETS.map(el => {
+            pets.includes(el.nameId) ? optionsData[`${el.nameId}`] = true 
+                                     : optionsData[`${el.nameId}`] = false
+        })
+        CHILDREN.map(el => {
+            children.includes(el.nameId) ? optionsData[`${el.nameId}`] = true 
+                                     : optionsData[`${el.nameId}`] = false
+        })
+        return optionsData
+    }
 
-    async function  registration(userData) {
+   
+
+
+    async function  registration(userData, pets, children) {
+        let options = generateOptions(pets, children);
         const newUser= {...userData}
 
         try {
@@ -36,14 +53,25 @@ export const AppProvider = ({children}) => {
                 newUser.photo = generateAvatar(newUser.role, newUser.gender)
             }
 
+            console.log('role',newUser.role)
+            console.log('gender',newUser.gender)
+            console.log(newUser.photo)
+
             newUser.birthday = new Date(newUser.birthday)
 
             const user = new Backendless.User(newUser);
 
             const res = await  Backendless.UserService.register(user )
+            userId = res.objectId;
+
+            const optRes = await Backendless.Data.of('options').save(options)
+            
+            const userRel = { objectId: userId };
+            const optRel = { objectId:  optRes.objectId}; 
+            await Backendless.Data.of( "Users" ).addRelation( userRel, "optionsId", [optRel] )
+
             setUserStatus(i => true)
             navigate('/profile')
-            userId = res.objectId;
             
         } catch(error) {
             console.log(`error - ${error.message}`)
@@ -69,9 +97,10 @@ export const AppProvider = ({children}) => {
         navigate('home')
     }
 
+   
 
     return <AppContext.Provider value={{
-        userStatus, registration, loginUser, logoutUser, setUserStatus
+        userStatus, registration, loginUser, logoutUser, setUserStatus,
         }}>
         {children}
     </AppContext.Provider>
