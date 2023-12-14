@@ -4,11 +4,14 @@ import LetGoBtn from '../components/LetGoBtn'
 import OneStepUsing from '../components/OneStepUsing'
 import ReviewCard from '../components/ReviewCard'
 import bg from '../../images/main-bg.jpg'
+import { useAppContext } from '../../context/AppContext'
 
 function Home() {
+const {currentUser} = useAppContext()
   return (
     <div>
       <section id='main'>
+        {console.log(currentUser,'home')}
         <div className="hero min-h-[93vh] md:min-h-[90vh]" style={{backgroundImage: `url(${bg})`}}>
             <div className="hero-overlay bg-opacity-60"></div>
             <div className="hero-content text-center text-neutral-content">

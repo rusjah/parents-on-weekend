@@ -1,7 +1,9 @@
 import Backendless from "backendless";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {AVATAR,PETS, CHILDREN} from '../data/Data'
+import { toast } from "react-toastify";
+
 
 const { createContext } = require("react");
 
@@ -10,6 +12,8 @@ const AppContext = createContext();
 export const AppProvider = ({children}) => {
     //for protecting routing
     const [userStatus, setUserStatus] = useState(true)
+    const [currentUser, setCurrentUser] = useState({})
+    const [options, setOptions] = useState({})
     let userId = '';
     const navigate = useNavigate()
 
@@ -18,7 +22,7 @@ export const AppProvider = ({children}) => {
         if(role === 'grand' && gender === 'female') return AVATAR.grandmother
         if(role === 'parent' && gender === 'male') return AVATAR.father
         if(role === 'parent' && gender === 'female') return AVATAR.mother
-        if(gender === 'another') return AVATAR.mother
+        return AVATAR.mother
     }
 
     function generateOptions(pets, children) {
@@ -34,8 +38,11 @@ export const AppProvider = ({children}) => {
         return optionsData
     }
 
-   
-
+    const getAge = (date) => {
+        const subDate =  new Date() -  new Date(date);
+        const years = 365 * 24 * 60 * 60 * 1000;
+        return Math.floor(subDate / years)
+      }
 
     async function  registration(userData, pets, children) {
         let options = generateOptions(pets, children);
@@ -53,27 +60,28 @@ export const AppProvider = ({children}) => {
                 newUser.photo = generateAvatar(newUser.role, newUser.gender)
             }
 
-            console.log('role',newUser.role)
-            console.log('gender',newUser.gender)
-            console.log(newUser.photo)
-
             newUser.birthday = new Date(newUser.birthday)
 
             const user = new Backendless.User(newUser);
 
-            const res = await  Backendless.UserService.register(user )
+            const res = await  Backendless.UserService.register(user)
             userId = res.objectId;
 
             const optRes = await Backendless.Data.of('options').save(options)
             
             const userRel = { objectId: userId };
             const optRel = { objectId:  optRes.objectId}; 
+            // await Backendless.Data.of( "options" ).addRelation( optRel, "userId", [userRel] )
             await Backendless.Data.of( "Users" ).addRelation( userRel, "optionsId", [optRel] )
 
             setUserStatus(i => true)
             navigate('/profile')
             
         } catch(error) {
+            if (error.code === 3033) {
+                toast("You already have account! Please, Log In");
+                navigate('login')
+            }
             console.log(`error - ${error.message}`)
         }
 
@@ -86,6 +94,7 @@ export const AppProvider = ({children}) => {
         const email = userData.email
         const password = userData.password
         await Backendless.UserService.login(email, password, true )
+ 
         setUserStatus(i => true)
         navigate('mainList')
     }
@@ -98,9 +107,50 @@ export const AppProvider = ({children}) => {
     }
 
    
+    async function findUsersData() {
+        try {
+            // const curr =  await Backendless.UserService.getCurrentUser()
+            const curr = await Backendless.Data.of("Users").find( {
+                    relations: [`optionsId`]
+                })
+                // setOptions(optt)
+            setCurrentUser(curr[0])
+        } catch {
+            console.log('err');
+        }
+    }
+
+    function getOptions(opt) {
+        const userOptPs = []
+        const userOptCh = []
+        PETS.map(obj => {
+            for(let key in opt) {
+                if(obj.nameId === key && opt[key]) {
+                    userOptPs.push(key)
+                }
+            }
+        })
+        CHILDREN.map(obj => {
+            for(let key in opt) {
+                if(obj.nameId === key && opt[key]) {
+                    userOptCh.push(key)
+                }
+            }
+        })
+        return {pets: userOptPs, children: userOptCh};
+    }
+
+
+
+    useEffect(() => {
+        findUsersData()
+    }, [])
 
     return <AppContext.Provider value={{
-        userStatus, registration, loginUser, logoutUser, setUserStatus,
+        userStatus, setUserStatus,
+        registration, loginUser, logoutUser,
+        findUsersData, currentUser, 
+        getAge, getOptions
         }}>
         {children}
     </AppContext.Provider>

@@ -19,6 +19,7 @@ function PersonalData({setnewUser}) {
             <label className='font-normal  bg-lime-50 w-64 h-24 flex gap-1 items-center justify-center pl-2 flex-col p-1'>
               <select required onChange={(e) => setnewUser(i => ({...i, gender: e.target.value}))} name='gender' className="select select-warning w-full max-w-xs">
                 <option  disabled  value="default">Gender</option>
+                <option value=""></option>
                 <option  value="male">Male</option>
                 <option  value="female">Female</option>
                 <option  value="another">Another</option>
