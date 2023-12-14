@@ -1,7 +1,7 @@
 import Backendless from "backendless";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {AVATAR} from '../data/Data'
+import {AVATAR} from '../components/data/Data'
 
 const { createContext } = require("react");
 
@@ -54,21 +54,24 @@ export const AppProvider = ({children}) => {
     }
 
     //make login
-    function loginUser(userData) {
+    async function loginUser(userData) {
         const email = userData.email
         const password = userData.password
-        Backendless.UserService.login(email, password, true )
-        .then( res => {
-            setUserStatus(i => true)
-            navigate('mainList')
-            console.log(res);
-        } )
-        .catch( err => {console.log(err)} );
+        await Backendless.UserService.login(email, password, true )
+        setUserStatus(i => true)
+        navigate('mainList')
+    }
+
+      //make logout
+    async function logoutUser() {
+        await Backendless.UserService.logout()
+        setUserStatus(i => false)
+        navigate('home')
     }
 
 
     return <AppContext.Provider value={{
-        userStatus, registration, loginUser, setUserStatus
+        userStatus, registration, loginUser, logoutUser, setUserStatus
         }}>
         {children}
     </AppContext.Provider>

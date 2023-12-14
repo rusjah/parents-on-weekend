@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAppContext } from '../../../context/AppContext';
 import PetsChekBox from '../PetsChekBox';
-import {PETS, CHILDREN} from '../../../data/Data'
+import {PETS, CHILDREN} from '../../data/Data'
 
 
 function Suggetions() {
