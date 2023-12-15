@@ -21,10 +21,10 @@ import Backendless from 'backendless';
 
 
 function App() {
-  const id = process.env.REACT_APP_APL_ID
-  const api = process.env.REACT_APP_APP_KEY
+  const ID = process.env.REACT_APP_APL_ID
+  const API = process.env.REACT_APP_APP_KEY
   Backendless.serverURL = "https://eu-api.backendless.com"
-  Backendless.initApp( 'C9BF0216-F268-A538-FFB2-009C64336400', '010617C8-F52E-4210-A9A1-3BC6CE0501F6');
+  Backendless.initApp(ID,API);
   //for adding new users
  const {userStatus} = useAppContext()
 
