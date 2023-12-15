@@ -35,7 +35,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path='home' element={<Home />} />
             <Route path='login' element={<Login />} />
-            <Route path='signup' element={<Sign />} />
+            <Route path='sign' element={<Sign />} />
             <Route path='changeWorld' element={<ChangeWorld />} />
            
             <Route path='reviews' element={<ProtectedRoute  >

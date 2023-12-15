@@ -67,7 +67,7 @@ function Nav() {
                             <Link to={'/changeWorld'}><li><p>Help</p></li></Link>
                             {!userStatus && <>
                                 <Link to={'/login'}><li><p>Log in</p></li></Link> 
-                                <Link to={'/signup'}><li><p>Sign up</p></li></Link>
+                                <Link to={'/sign'}><li><p>Sign up</p></li></Link>
                             </>}
                             {userStatus && <>
                                 <Link to={'/mainList'}><li><p >People</p></li></Link>
@@ -86,7 +86,7 @@ function Nav() {
                     <Link to={'/changeWorld'}><li><p>Help</p></li></Link>
                     {!userStatus && <>
                         <Link to={'/login'}><li><p>Log in</p></li></Link> 
-                        <Link to={'/signup'}><li><p>Sign up</p></li></Link>
+                        <Link to={'/sign'}><li><p>Sign up</p></li></Link>
                     </>}
                     {userStatus && <>
                         <Link to={'/mainList'}><li><p >People</p></li></Link>

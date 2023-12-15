@@ -95,21 +95,8 @@ export const AppProvider = ({children}) => {
 
 
             if (newUser.photo) {
-                try {
-                    const formdata = new FormData();
-                    formdata.append("image", newUser.photo);
-                    const url = `https://eu.backendlessappcontent.com/${process.env.REACT_APP_APP_ID}/${process.env.REACT_APP_KEY}/files/images`
-                    const reph = await axios.post(url,formdata)
-                    console.log('photo', reph);
-                    newUser.photo = {
-                        tag :"photo",
-                        url :res.data.fileURL
-                    }
-                    // const fileReference = await getReferenseFile(newUser.photo, 'images', `avatar-${Math.random() * 10}`)  
-                    // newUser.photo = {
-                    // tag: 'avatars',
-                    // fileReference:  fileReference
-                
+               
+                   
                 } catch(err) {console.log(err)}
             } else { newUser.photo = generateAvatar(newUser.role, newUser.gender) }
 
