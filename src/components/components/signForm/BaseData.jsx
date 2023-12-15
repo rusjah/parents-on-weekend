@@ -1,14 +1,18 @@
 import React from 'react'
 import { useAppContext } from '../../../context/AppContext'
 
-function BaseData({setnewUser}) {
+function BaseData({setnewUser, edit}) {
   const {currentUser} = useAppContext()
-  const defaultPostNumber = currentUser.postNumber ? currentUser.postNumber : ''
-  const defaultRole = currentUser.defaultRole ? currentUser.defaultRole : ''
-  const defaultHelpType = currentUser.defaultHelpType ? currentUser.defaultHelpType : ''
 
-  const role = [{role:'grand', content: 'I have time'},{role:'parent', content: 'I need help'}]
-  const helpType = [{helpType: 'pets', content: 'Pets'}, {helpType: 'children', content: 'Children'}, {helpType: 'patsChildren', content: 'Pats & Children'}]
+  const defaultPostNumber = (edit && currentUser?.postNumber) ? currentUser.postNumber : ''
+  const defaultRole = (edit && currentUser?.role) ? currentUser.role : ''
+  const defaultHelpType = (edit && currentUser?.helpType) ? currentUser.helpType : ''
+
+  const role = [{role:'grand', content: 'I have time'},
+                {role:'parent', content: 'I need help'}]
+  const helpType = [{helpType: 'pets', content: 'Pets'}, 
+                    {helpType: 'children', content: 'Children'}, 
+                    {helpType: 'patsChildren', content: 'Pats & Children'}]
 
   return (
     <div className='flex flex-col lg:flex-row justify-center items-center gap-6 border-orange-100 border-2 p-4'>
@@ -16,8 +20,7 @@ function BaseData({setnewUser}) {
           <h2 className='font-bold text-[1.5em] text-brawn-950'>My role</h2>
           {role.map((el,ind) => 
           <label key={ind} className='font-bold  bg-lime-50 w-64 h-12 flex gap-2 items-center pl-2'>
-            {console.log(currentUser, 'role')}
-            <input required onChange={(e) => setnewUser(i => ({...i, role: e.target.value}))} type="radio" name="role"   value={el.role} className="mask mask-heart bg-lime-400 checked:bg-yellow-400" />
+            <input required onChange={(e) => setnewUser(i => ({...i, role: e.target.value}))} type="radio" name="role"  value={el.role} className="mask mask-heart bg-lime-400 checked:bg-yellow-400" />
             <span>{el.content}</span>
           </label>)}
         </div>

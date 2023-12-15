@@ -15,8 +15,11 @@ import Suggetions from '../components/signForm/Suggetions'
 
 function Sign() {
 
-  const {registration, addOptions} = useAppContext()
+  const {registration} = useAppContext()
 
+//  useEffect(()=>{
+//   console.log('currentUser', curentUser);
+//  },[])
   const [newUser, setnewUser] = useState({})
 
   function createUser(e) {
@@ -38,25 +41,28 @@ function Sign() {
         }
       }
 
+      console.log(newUser, 'userform');
       registration(newUser, pets, children)
+      // navigate('/profile',{currentUser: newUser})
+  
       e.target.reset();
    }
 
   return (
     <div className='py-[10vh] w-full min-h-[66vh] flex flex-col items-center  bg-[#f0efeb]'>
      <h2 className='font-bold text-[2.5rem] text-green-900 pb-12'>Sign Up</h2>
-    <form className='flex flex-col items-center md:text-[1.1em]' onSubmit={createUser}>
+    <form className='flex flex-col items-center md:text-[1.1em] w-[80vw]' onSubmit={createUser}>
 
-      <BaseData setnewUser={setnewUser} />
-      <LoginData setnewUser={setnewUser}/>
-      <PersonalData setnewUser={setnewUser} />
-      <AdditionalData setnewUser={setnewUser}/>
-      <AboutMe setnewUser={setnewUser}/>
+      <BaseData setnewUser={setnewUser} edit={false} />
+      <LoginData setnewUser={setnewUser} edit={false}/>
+       <PersonalData setnewUser={setnewUser}  edit={false}/>
+      <AdditionalData setnewUser={setnewUser} edit={false}/>
+      <AboutMe setnewUser={setnewUser} edit={false}/>
       <Suggetions />
       <div className='flex flex-col gap-4 border-orange-100 border-2 p-4'>
         <h2 className='font-bold text-[1.5em] text-brawn-950'>Record Video</h2>
         <label className='font-bold  bg-lime-50 mx-2 flex gap-1 items-center justify-center pl-2 flex-col p-4'>       
-          <Video  setnewUser={setnewUser}/>
+          <Video  setnewUser={setnewUser} edit={false}/>
         </label>
       </div>
 

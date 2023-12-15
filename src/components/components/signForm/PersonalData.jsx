@@ -1,10 +1,10 @@
 import React from 'react'
 import { useAppContext } from '../../../context/AppContext'
 
-function PersonalData({setnewUser}) {
+function PersonalData({setnewUser,edit}) {
   const {currentUser} = useAppContext()
-  const defaultFName = currentUser.fname ? currentUser.fname : ''
-  const defaultLName = currentUser.lname ? currentUser.lname : ''
+  const defaultFName = (edit && currentUser?.fname) ? currentUser.fname : ''
+  const defaultLName = (edit && currentUser?.lname) ? currentUser.lname : ''
   return (
     <div>
         <div className='flex flex-col lg:flex-row justify-center items-center lg:gap-6 border-orange-100 border-2 p-4'>

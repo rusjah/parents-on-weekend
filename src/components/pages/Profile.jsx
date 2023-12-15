@@ -7,17 +7,23 @@ import Backendless from 'backendless';
 import {AVATAR,PETS, CHILDREN} from '../../data/Data'
 
 function Profile({owner='me'}) {
-
   const navigate = useNavigate()
-  const {currentUser, getAge, getOptions, userId} = useAppContext()
+  
+  // const registratedUser = location.state.currentUser;
+  const { currentUser, getAge, getOptions, userId} = useAppContext()
+  
+  // const currentUser = getUser();
+
+  console.log(currentUser, 'prof');
+  
 
   const [modalStatus, setModalStatus] = useState(false)
   const [modalContent, setModalContent] = useState('')
   const [updatedUser, setUpdatedUser] = useState({})
 
-  const age = getAge(currentUser.birthday)
-  const pets = getOptions(currentUser.optionsId).pets
-  const children = getOptions(currentUser.optionsId).children
+  const age = currentUser?.birthday ? getAge(currentUser.birthday) : 1
+  const pets = getOptions(currentUser?.optionsId).pets
+  const children = getOptions(currentUser?.optionsId).children
 
 
   function editProfile(type) { 
@@ -46,14 +52,14 @@ function Profile({owner='me'}) {
             <img className='w-full h-full' src={currentUser.photo} alt="photo" />
           </figure>
           <figcaption className='w-64 md:w-96 h-64 md:h-64 pt-4 md:pt-0 text-[1em] font-bold text-yellow-900 mt-[-4vh]'>
-            <h2 className='font-bold text-[1.5em] text-lime-900 pb-4'>{currentUser.fname} {currentUser.lname}</h2> 
-            <p><span className='text-green-950 decoration-solid'>Age:</span> {age > 18 ? age : '-//-'}, {currentUser.gender}</p>
-            <p><span className='text-green-950 decoration-solid'>Email:</span> {currentUser.email}</p>
-            <p><span className='text-green-950 decoration-solid'>Post number:</span> {currentUser.postNumber}</p>
-            <p><span className='text-green-950 decoration-solid'>Role:</span> {currentUser.role === 'grand' ? 'grandparent' : 'parent'}</p>
-            <p><span className='text-green-950 decoration-solid'>Phone:</span> {currentUser.phone}</p>
-            <p><span className='text-green-950 decoration-solid'>It is possible:</span> {currentUser.state === 'go' ? 'to go to you' : 'to stay at home'}</p>
-            <p><span className='text-green-950 decoration-solid'>I like:</span> {currentUser.helpType === 'patsChildren' ? 'pets and children' : currentUser.helpType === 'pets' ? 'pets' : 'children'}</p>
+            <h2 className='font-bold text-[1.5em] text-lime-900 pb-4'>{currentUser?.fname} {currentUser?.lname}</h2> 
+            <p><span className='text-green-950 decoration-solid'>Age:</span> {age > 18 ? age : '-//-'}, {currentUser?.gender}</p>
+            <p><span className='text-green-950 decoration-solid'>Email:</span> {currentUser?.email}</p>
+            <p><span className='text-green-950 decoration-solid'>Post number:</span> {currentUser?.postNumber}</p>
+            <p><span className='text-green-950 decoration-solid'>Role:</span> {currentUser?.role === 'grand' ? 'grandparent' : 'parent'}</p>
+            <p><span className='text-green-950 decoration-solid'>Phone:</span> {currentUser?.phone}</p>
+            <p><span className='text-green-950 decoration-solid'>It is possible:</span> {currentUser?.state === 'go' ? 'to go to you' : 'to stay at home'}</p>
+            <p><span className='text-green-950 decoration-solid'>I like:</span> {currentUser?.helpType === 'patsChildren' ? 'pets and children' : currentUser?.helpType === 'pets' ? 'pets' : 'children'}</p>
           </figcaption>
         </div>
         
@@ -63,21 +69,24 @@ function Profile({owner='me'}) {
           <div className=' w-full md:w-[60%] h-full flex flex-col gap-1 justify-center items-center pt-10  font-roboto font-[450] text-justify'>
             <h2 className='font-bold text-[1.5em] text-lime-900 self-start'>About me</h2>
             <p className='font-merhey text-[1rem]'>
-              "{currentUser.aboutMe}"
+              "{currentUser?.aboutMe}"
             </p>
           </div>
         </div>
 
-        {currentUser.video > 0 && <div className='mt-10 p-10 flex justify-center gap-6 w-full md:w-[60%] relative  bg-white border-4 border-gradient-to-r from-[#181818] via-[#eee] to-[#181818]'>
+        {<div className='mt-10 p-10 flex justify-center gap-6 w-full md:w-[60%] relative  bg-white border-4 border-gradient-to-r from-[#181818] via-[#eee] to-[#181818]'>
         { owner === 'me' && <p onClick={() => editProfile('video')} className='absolute top-3 right-3 md:right-10 font-bold text-green-900 text-[2em]'><ion-icon name="create-outline"></ion-icon></p> }
 
           <div className=' w-[60%] h-full flex flex-col gap-1 justify-center items-center pt-1 md:pt-10  font-roboto font-[450] text-justify'>
             <h2 className='font-bold text-[1.5em] text-lime-900'>My video</h2>
-            <p className='md:hidden block font-dancing text-[1.5rem]'>
-               <iframe className='inline' width="200" height="200" src="https://www.youtube.com/embed/oa2jNw2JW_s" title="Cat and Dog Friendship - Dog and Cat Pure Love #short" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+            {/* <p className='md:hidden block font-dancing text-[1.5rem]'>
+               <iframe className='inline' width="200" height="200" src={currentUser?.video} title="Cat and Dog Friendship - Dog and Cat Pure Love #short" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
             </p>
             <p className='md:block hidden font-dancing text-[1.5rem]'>
-               <iframe className='inline' width="600" height="300" src="https://www.youtube.com/embed/oa2jNw2JW_s" title="Cat and Dog Friendship - Dog and Cat Pure Love #short" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+              <iframe className='inline' width="600" height="300" src={currentUser?.video} title="Cat and Dog Friendship - Dog and Cat Pure Love #short" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+            </p> */}
+            <p className='md:block hidden font-dancing text-[1.5rem]'>
+                  {currentUser > 0 &&  <video src={currentUser.video} onClick={e => e.target.play()}></video>}
             </p>
           </div>
         </div>}
@@ -91,7 +100,7 @@ function Profile({owner='me'}) {
             <div className='shadow-lg hover:shadow-green-500 md:hover:shadow-xl md:hover:shadow-lime-900 p-4'>
               <p className='text-[1.5rem] text-lime-800 pb-4' >Pets:</p>
                 <div className='w-[24vw] flex flex-wrap gap-4 justify-between'>
-                  {pets.length > 0 && pets.map((el, ind )=>
+                  {pets?.length > 0 && pets?.map((el, ind )=>
                     <p key={ind} className='flex gap-2 text-[1.3rem] justify-start items-center capitalize'><span className='font-bold text-[1.5em] text-green-900'><ion-icon name="checkmark-outline"></ion-icon></span> {el}</p>)}
                 </div>
               </div>
@@ -99,7 +108,7 @@ function Profile({owner='me'}) {
               <div className='shadow-lg hover:shadow-green-500 md:hover:shadow-xl md:hover:shadow-orange-900 p-4'>
                 <p className='text-[1.5rem] text-lime-800 flex flex-around pb-4' >Children:</p>
                 <div className='w-[24vw] flex flex-wrap gap-4 justify-between'>
-                    {children.length > 0 && children.map((el, ind) =>
+                    {children?.length > 0 && children?.map((el, ind) =>
                     <p key={ind} className='flex gap-2 text-[1.3rem] justify-start items-center capitalize'><span className='font-bold text-[1.5em] text-green-900'><ion-icon name="checkmark-outline"></ion-icon></span> {el}</p>)}
                 </div>
               </div>

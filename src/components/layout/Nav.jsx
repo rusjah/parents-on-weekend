@@ -6,7 +6,7 @@ import { useAppContext } from '../../context/AppContext';
 
 
 function Nav() {
-    const {userStatus, logoutUser} = useAppContext()
+    const {userStatus, toLogout} = useAppContext()
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -73,7 +73,7 @@ function Nav() {
                                 <Link to={'/mainList'}><li><p >People</p></li></Link>
                                 <Link to={'/reviews'}><li><p >Reviws</p></li></Link>
                                 <Link to={'/profile'}><li><p >Profile</p></li></Link>
-                                <li onClick={logoutUser}><p>Log out</p></li>
+                                <li onClick={toLogout}><p>Log out</p></li>
 
                          </>}
                         </ul>
@@ -96,7 +96,7 @@ function Nav() {
                             <p className='text-[1.5em]'><ion-icon name="chatbubble-outline"></ion-icon></p>
                         </li></Link>
                         <Link to={'/profile'}><li><p className='text-[1.5em]'><ion-icon name="person-outline"></ion-icon></p></li></Link>
-                        <li onClick={logoutUser}><p>Log out</p></li>
+                        <li onClick={toLogout}><p>Log out</p></li>
 
                     </>}
                 </ul>

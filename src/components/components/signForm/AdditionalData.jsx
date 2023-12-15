@@ -5,7 +5,9 @@ import { useAppContext } from '../../../context/AppContext'
 
 function AdditionalData({setnewUser}) {
     const {currentUser} = useAppContext()
-    const state = [{state: 'go', content:'Go to you'}, {state: 'home', content: 'Care at my home'}]
+
+    const state = [{stateType: 'go', content:'Go to you'}, 
+                   {stateType: 'home', content: 'Care at my home'}]
   return (
     <div>
         <div className='flex flex-col lg:flex-row justify-start gap-12 border-orange-100 border-2 p-4'>
@@ -22,9 +24,9 @@ function AdditionalData({setnewUser}) {
                 </label>
                 <h2 className='font-bold text-[1.5em] text-brawn-950'>I can</h2>
                 {state.map((el, ind) =>
-                    <label className='font-bold  bg-lime-50 w-64 h-12 flex gap-2 items-center pl-2'>
-                        <input onChange={(e) => setnewUser(i => ({...i, state: e.target.value}))}type="radio" name="state"  value={state.state} className="mask mask-heart bg-lime-400 checked:bg-yellow-400" />
-                        <span>{state.content}</span>
+                    <label key={ind} className='font-bold  bg-lime-50 w-64 h-12 flex gap-2 items-center pl-2'>
+                        <input onChange={(e) => setnewUser(i => ({...i, state: e.target.value}))}type="radio" name="state"  value={el.stateType} className="mask mask-heart bg-lime-400 checked:bg-yellow-400" />
+                        <span>{el.content}</span>
                   </label>
                   )}
             </div> 

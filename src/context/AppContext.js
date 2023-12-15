@@ -10,11 +10,11 @@ const { createContext } = require("react");
 const AppContext = createContext();
 
 export const AppProvider = ({children}) => {
-    //for protecting routing
-    const [userStatus, setUserStatus] = useState(true)
+
     const [currentUser, setCurrentUser] = useState({})
+    const [userStatus, setUserStatus] = useState(false)
+
     const [userId, setUserId] = useState()
-    // let userId = '';
     const navigate = useNavigate()
 
     function generateAvatar(role, gender) {
@@ -44,78 +44,112 @@ export const AppProvider = ({children}) => {
         return Math.floor(subDate / years)
       }
 
-    async function  registration(userData, pets, children) {
+    function setForUserID (id) {
+        setUserId(id);
+    }
+
+    function validation() {
+        Backendless.UserService.isValidLogin()
+            .then(res => {
+                res ? statusTrue() : statusFalse()
+                res && navigate('mainList')
+                return;
+            })
+            .catch(err => console.log(err))
+    }
+
+       function registration(userData,pets,children) {
+
+        validation()
+        
         let options = generateOptions(pets, children);
         const newUser= {...userData}
 
-        try {
-            if (userData.video) {
-                const videoURLs = await Backendless.Files.upload(userData.video, 'video')
-                newUser.video = videoURLs.fileURL;
-            }
-            if (userData.photo) {
-                const imgURLs = await Backendless.Files.upload(userData.photo, 'photo')
-                newUser.photo = imgURLs.fileURL;
-            } else {
-                newUser.photo = generateAvatar(newUser.role, newUser.gender)
-            }
-
-            newUser.birthday = new Date(newUser.birthday)
-
-            const user = new Backendless.User(newUser);
-
-            const res = await  Backendless.UserService.register(user)
-            // userId = res.objectId
-            setUserId(res.objectId)
-
-            const optRes = await Backendless.Data.of('options').save(options)
-            
-            const userRel = { objectId: userId };
-            const optRel = { objectId:  optRes.objectId}; 
-            // await Backendless.Data.of( "options" ).addRelation( optRel, "userId", [userRel] )
-            await Backendless.Data.of( "Users" ).addRelation( userRel, "optionsId", [optRel] )
-
-            setUserStatus(i => true)
-            navigate('/profile')
-            
-        } catch(error) {
-            if (error.code === 3033) {
-                toast("You already have account! Please, Log In");
-                navigate('login')
-            }
-            console.log(`error - ${error.message}`)
+        if (userData.photo) {
+            Backendless.Files.upload(userData.photo, 'photo')
+                .then( res => newUser.photo = res.fileURL)
+                .catch(err => console.log(err))   
+        } else {
+            newUser.photo = generateAvatar(newUser.role, newUser.gender)
         }
-    }
 
-    //make login
-    async function loginUser(userData) {
-        const email = userData.email
-        const password = userData.password
-        await Backendless.UserService.login(email, password, true )
- 
-        setUserStatus(i => true)
-        navigate('mainList')
-    }
+        if (userData.video) {
+            Backendless.Files.upload(userData.video, 'video')
+                .then( res => newUser.video = res.fileURL)
+                .catch(err => console.log(err))
+            
+        }
 
-      //make logout
-    async function logoutUser() {
-        await Backendless.UserService.logout()
-        setUserStatus(i => false)
-        navigate('home')
+        setForUserID('registrations', newUser.video)
+
+
+        newUser.birthday =  new Date(newUser.birthday)
+
+        const user = new Backendless.User(newUser);
+        Backendless.UserService.register( user )
+        .then( res => {
+            statusTrue();
+            console.log(res, 'registrations');
+            Backendless.Data.of('options').save(options)
+                .then(opt => {
+                    const userRel = { objectId: res.objectId };
+                    const optRel = { objectId:  opt.objectId}; 
+                    Backendless.Data.of( "Users" ).addRelation( userRel, "optionsId", [optRel] )
+                        .then(ress => {
+                            setCurrentUser(cur => newUser)
+                            findUser(ress.objectId)
+                            navigate('mainList')
+                            console.log(ress, 'regis')})
+                        .catch(err => console.log(err))
+                })
+        })
+        .catch(err => {
+            if (err.code === 3033) {
+                toast("You already have account! Please, Log In");
+                navigate('login')}
+            console.log(`error - ${err.message}`)
+        })
+       
+      }
+
+      function toLogin(loginBy) {
+        validation()
+        const email = loginBy.email
+        const password = loginBy.password
+        Backendless.UserService.login(email, password, true )
+            .then( res => {
+                statusTrue() 
+                const curUser = res
+                findUser(res.objectId)
+                
+                navigate('mainList')
+            })
+            .catch(err =>console.log(err))
+      }
+
+      function findUser(objectId) {
+    //    Backendless.UserService.getCurrentUser().then( res => {
+            Backendless.Data.of("Users").find({
+                    where : "objectId = '" + objectId + "'",
+                    relations: [`optionsId`]
+                })
+                .then(ek=> {
+                    console.log(ek, 'from find')
+                    setCurrentUser(ek[0])})
+                .catch(err=>console.log(err,'find'))
+      }
+
+    function toLogout() {
+        Backendless.UserService.logout()
+            .then( res => {
+                setCurrentUser(i => {})
+                statusFalse()
+                navigate('home')
+            })
+            .catch(err => console.log(err))    
     }
 
    
-    async function findUsersData() {
-        try {
-            // const curr =  await Backendless.UserService.getCurrentUser()
-            const curr = await Backendless.Data.of("Users").find( {
-                    relations: [`optionsId`]
-                })
-            setCurrentUser(curr[0])
-        } catch {
-            console.log('err');
-        }
-    }
 
     function getOptions(opt) {
         const userOptPs = []
@@ -137,15 +171,25 @@ export const AppProvider = ({children}) => {
         return {pets: userOptPs, children: userOptCh};
     }
 
-    useEffect(() => {
-        findUsersData()
-    }, [])
+    useEffect(() =>{
+        console.log('id', userId)
+        // findUser()
+      },[])
+   
+
+    function statusTrue() {
+        setUserStatus(true)
+    }
+
+    function statusFalse() {
+        setUserStatus(false)
+    }
 
     return <AppContext.Provider value={{
-        userStatus, setUserStatus,
-        registration, loginUser, logoutUser,
-        findUsersData, currentUser, 
-        getAge, getOptions, userId
+            userStatus, statusFalse,statusTrue,
+            registration,toLogin,toLogout, 
+            findUser, currentUser,
+            getAge, getOptions
         }}>
         {children}
     </AppContext.Provider>

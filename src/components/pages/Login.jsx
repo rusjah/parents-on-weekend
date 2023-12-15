@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { useAppContext } from '../../context/AppContext';
 
 function Login() {
-  const navigate = useNavigate();
-  const {loginUser, userStatus, registration} = useAppContext()
 
+  const {toLogin, userStatus, findUser} = useAppContext()
 
   function loginHandler(e) {
     e.preventDefault()
@@ -15,21 +14,16 @@ function Login() {
     const user = {
       email,
       password
-    }
-    loginUser(user)
+      }
 
-    e.target.passwordinp.value = ''
-    e.target.emailinp.value = ''
-
-    if (userStatus) {
-      navigate('/mainList')
-    } else {
-      navigate('/signup')
-    }
+      e.target.passwordinp.value = ''
+      e.target.emailinp.value = ''
+      
+      toLogin(user)
   }
 
   return (
-   <div className='py-[14vh] md:px-[30vw] h-[66vh]  bg-[#f0efeb] flex flex-col items-center'>
+   <div className='py-[14vh] md:px-[1vw] h-[66vh]  bg-[#f0efeb] flex flex-col items-center'>
      <h2 className='font-bold text-[2.5rem] text-green-900 pb-2'>Login</h2>
      <form onSubmit={loginHandler} className='flex flex-col justify-center items-center gap-6  w-[60%] h-full border-orange-950 border-4 border-yellow-700 p-12 rounded-lg bg-[#fff]'>
       <input required type="email" placeholder="email" name='emailinp' className="input input-bordered input-warning w-[90%]" />
