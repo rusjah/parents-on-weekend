@@ -41,9 +41,10 @@ function Sign() {
         }
       }
 
+      
+
       console.log(newUser, 'userform');
-      registration(newUser, pets, children)
-      // navigate('/profile',{currentUser: newUser})
+      registration(newUser, {pets:pets, children:children})
   
       e.target.reset();
    }

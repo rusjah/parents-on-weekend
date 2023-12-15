@@ -25,11 +25,7 @@ function App() {
   const API = process.env.REACT_APP_APP_KEY
   Backendless.serverURL = "https://eu-api.backendless.com"
   Backendless.initApp(ID,API);
-  //for adding new users
- const {userStatus} = useAppContext()
-
-  //for activete login and sign
-  const [validationStaus, setvalidationStaus] = useState(true)
+ 
 
   return (
     <div className="App">
@@ -42,37 +38,24 @@ function App() {
             <Route path='signup' element={<Sign />} />
             <Route path='changeWorld' element={<ChangeWorld />} />
            
-            <Route path='reviews' element={<ProtectedRoute user={userStatus} >
+            <Route path='reviews' element={<ProtectedRoute  >
                                               <Reviews />
                                            </ProtectedRoute>} />
 
-            <Route path='chat' element={<ProtectedRoute user={userStatus} >
+            <Route path='chat' element={<ProtectedRoute  >
                                               <ChatTwo />
                                             </ProtectedRoute>} />
-            <Route path='profile' element={<ProtectedRoute user={userStatus} >
+            <Route path='profile' element={<ProtectedRoute  >
                                               <Profile  />
                                            </ProtectedRoute>} />
 
-            <Route path='mainList' element={<ProtectedRoute user={userStatus} >
+            <Route path='mainList' element={<ProtectedRoute  >
                                               <MainList  />
                                             </ProtectedRoute>} />
             
             <Route path='*' element={<Home />} />
 
         </Routes>
-
-        {/* <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='login' element={<Login validationStaus={validationStaus} setvalidationStaus={setvalidationStaus}/>} />
-            <Route path='signup' element={<Sign  setUsers={setUser} validationStaus={validationStaus} setvalidationStaus={setvalidationStaus}/>} />
-            <Route path='changeWorld' element={<ChangeWorld />} />
-            <Route path='reviews' element={<Reviews />} />
-            <Route path='profile' element={<Profile  />} />
-            <Route path='chat' element={<ChatTwo />} />
-            <Route path='mainList' element={<MainList />} />
-            <Route path='test' element={<Test />} />
-
-        </Routes> */}
       </div>
       <Footer />
 

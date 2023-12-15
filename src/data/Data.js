@@ -58,5 +58,6 @@ export const AVATAR = {
    grand:"https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/users/mother.jpg",
    father:"https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/users/father.jpg",
    grandmother:"https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/users/grandmother.jpg",
-   grandfather: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/users/grandfather.jpg"
+   grandfather: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/users/grandfather.jpg",
+   default: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/users/default.jpg"
 }
