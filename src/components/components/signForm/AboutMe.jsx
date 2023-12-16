@@ -4,7 +4,7 @@ import { useAppContext } from '../../../context/AppContext'
 function AboutMe({setnewUser, edit}) {
 
   const {currentUser} = useAppContext()
-  const defaultValue = currentUser.aboutMe || ''
+  const defaultValue = currentUser && currentUser.aboutMe || ''
 
   return (
  

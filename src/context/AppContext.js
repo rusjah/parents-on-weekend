@@ -75,9 +75,10 @@ export const AppProvider = ({children}) => {
             const res = await Backendless.UserService.login(userLogin.email, userLogin.password, true);
             setCurrentUser(res)
             setUserStatus(true)
-            navigate('mainList')
+            // toast('')
+            navigate('home')
        } catch (e) {
-            console.log(e);
+            console.log(e, 'login err');
        }
     }
 
@@ -89,7 +90,7 @@ export const AppProvider = ({children}) => {
     }
 
     async function registration(registretedUser, userOptions) {
-        validationCheck()
+        // validationCheck()
         try {
             const options = generateOptions(userOptions);
             const newUser = {...registretedUser}
@@ -129,19 +130,25 @@ export const AppProvider = ({children}) => {
             const userRel = { objectId: res.objectId }
             const optRel = { objectId:  opt.objectId}
             const relation = await Backendless.Data.of( "Users" ).addRelation( userRel, "optionsId", [optRel] )
-            navigate('mainList')
+            toast('Welcome, to our platphorm. Please, login to your profile')
+            navigate('login')
         } catch(e) {
-            console.log(e);
+            console.log(e, 'regestration err', e.code);
         }
     }
 
     async function getCurrentUser() {
+       try {
+
         const user = await Backendless.Data.of('Users').findById(currentUser.objectId, {
-                relations: [`optionsId`]
+            relations: [`optionsId`]
         })
         console.log(user, 'form cont');
         setCurrentUser(user)
         setUserStatus(i => true)
+       } catch(e) {
+        console.log('error get current ', e);
+       }
         // return user;
     }
 
@@ -159,9 +166,8 @@ export const AppProvider = ({children}) => {
                 relations: [`optionsId`]
                 })
             setAllUsers(users)
-            console.log(users,'contect');
         } catch (e) {
-            console.log(e);
+            console.log(e, 'get all');
         }
     }
 
@@ -170,29 +176,6 @@ export const AppProvider = ({children}) => {
     function isFilterCheck() {
         filters.length > 0 ? setIsFilter(true) : setIsFilter(false)
     }
-
-    //  function togleFilter(filterProp) {
-    //     if (filterProp && filterProp.status) {
-    //         setFilters(i => [...i,filterProp])
-    //     } else {
-    //         const arr = filters.filter(el => el.name != filterProp.name)
-    //        setFilters(i => arr)
-    //     }
-    //     console.log(filters.length,'length');
-    // } 
-
-    // function filterUsers (filterProps) {
-    //   const unicFiltered = new Set();
-    //   filterProps && allUsers.map(user => {
-    //     console.log('start');
-    //     if ( user.optionsId[filterProps.name] === filterProps.status && filterProps.status === true ) unicFiltered.add(user)
-    //     if ( user.optionsId[filterProps.name] === filterProps.status && filterProps.status === false) unicFiltered.delete(user)
-    //     const filtr = Array.from(unicFiltered);
-    //       setFilteredUsers(filtr);
-    //       console.log(filtr, "filtered");
-    //     })
-    // }
-    // ////
 
     function togleFilter(filterProp) {
         const existingFilterIndex = filters.findIndex(el => el.name === filterProp.name);
@@ -221,25 +204,6 @@ export const AppProvider = ({children}) => {
         setFilteredUsers(filteredUsers);
       }
 
-
-    // function togleFilter(filterProp) {
-    //     if (filterProp && filterProp.status) {
-    //         setFilters(i => [...i,filterProp])
-    //     } else {
-    //         const arr = filters.filter(el => el.name != filterProp.name)
-    //        setFilters(i => arr)
-    //     }
-    //     console.log(filters.length,'length');
-    // } 
-
-    // function filterUsers () {
-    //   const newFiltVal = allUsers.filter(user => 
-    //     filters.map(filt => filt.status === user.optionsId[filt.name] ? user : ''))
-    //   const unicFiltered = new Set(newFiltVal);
-    //   const filtered = Array.from(unicFiltered);;
-    //   setFilteredUsers(filtered);
-    //   console.log(filtered, "filtered");
-    // }
     // ////////////////////////////////////////////////////
 
     function getOptions(opt) {
@@ -287,7 +251,6 @@ export const AppProvider = ({children}) => {
 
     useEffect(() =>{
         getAllUsers()
-        console.log(currentUser,'user from context');
     },[])
    
 

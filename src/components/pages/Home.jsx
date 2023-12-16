@@ -11,7 +11,6 @@ const {currentUser, statusTrue, statusFalse} = useAppContext()
   return (
     <div>
       <section id='main'>
-        {console.log(currentUser,'home')}
 
         <div className="hero min-h-[93vh] md:min-h-[90vh]" style={{backgroundImage: `url(${bg})`}}>
             <div className="hero-overlay bg-opacity-60"></div>

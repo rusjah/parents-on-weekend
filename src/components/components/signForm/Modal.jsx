@@ -24,8 +24,15 @@ function Modal() {
             <PersonalData  edit={true}/>
             <AdditionalData edit={true}/>
            </div>
-           <div className={`${editModalContent === 'aboutMe' ? 'flex' : 'hidden'}`}>
+           <div className={`${editModalContent === 'aboutMe' ? 'flex flex-col' : 'hidden'}`}>
                <AboutMe setupdatingData={setupdatingData}/>
+               {!currentUser.video && <> <div className='flex flex-col items-center'>
+                    <video ref={videoRef} controls width={300} height={100}>
+                      <source src={`${currentUser.video}`}/>  
+                      </video>
+                    <button onClick={toglePlay} className='w-12 h-12 rounted-full bg-green-50' ></button>
+                    <Record  edit={true}/> 
+                </div></>}
            </div>
            <div className={`${editModalContent === 'video' ? 'flex' : 'hidden'} flex flex-col items-center`}>
                 <div>

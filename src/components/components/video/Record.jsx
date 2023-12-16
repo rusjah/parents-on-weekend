@@ -9,7 +9,7 @@ function Record({setnewUser}) {
         console.log('blogurl', blobURL)
         const fileOfBlob = new File([blob], `Recorded-${Math.random() * 10}-version`);
         console.log('blogb', fileOfBlob)
-        setnewUser(i => ({...i, video: fileOfBlob}))
+        setnewUser && setnewUser(i => ({...i, video: fileOfBlob}))
         blobURL = ''
         blob = null
 
