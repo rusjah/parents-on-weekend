@@ -10,45 +10,29 @@ import {AVATAR,PETS, CHILDREN} from '../../data/Data'
 
 function Profile({owner='me'}) {
   const navigate = useNavigate()
-  
-  // const registratedUser = location.state.currentUser;
-  const { currentUser, getAge, getOptions, getCurrentUser, toglePlay, videoRef} = useAppContext()
+
+  const { currentUser, getAge, getOptions, getCurrentUser, toglePlay, videoRef, changeEditModalStatus, editModalStatus, changeEditModalContent, } = useAppContext()
   
   // const currentUser = getUser();
 
-  console.log(currentUser, 'prof');
+  // console.log(currentUser, 'prof');
   
 
-  const [modalStatus, setModalStatus] = useState(false)
-  const [modalContent, setModalContent] = useState('')
   const [updatedUser, setUpdatedUser] = useState({})
 
-  const age = currentUser?.birthday ? getAge(currentUser.birthday) : 1
+  const age = currentUser.birthday ? getAge(currentUser.birthday) : 1
   const pets = getOptions(currentUser.optionsId).pets
   const children = getOptions(currentUser.optionsId).children
 
 
-  function editProfile(type) { 
-    setModalContent(i => type)
-    setModalStatus(i => true)
+  function editProfile(content) {
+    changeEditModalStatus()
+    changeEditModalContent(content)
   }
-
-  function onSaveChanges() {
-    setModalStatus(i => false);
-    setModalContent(i => '')
-  }
-
-  function onClose() {
-    setModalStatus(i => false);
-    setModalContent(i => '')
-  }
-
 
   useEffect(() => {
     getCurrentUser()
   },[])
-
-  
 
   return (
     <div className='flex flex-col items-center bg-amber-50 w-[full] min-h-full p-6 bg-gradient-to-r from-green-50 to-orange-50 relative'>
@@ -61,14 +45,14 @@ function Profile({owner='me'}) {
             <img className='w-full h-full' src={currentUser.photo} alt="photo" />
           </figure>
           <figcaption className='w-64 md:w-96 h-64 md:h-64 pt-4 md:pt-0 text-[1em] font-bold text-yellow-900 mt-[-4vh]'>
-            <h2 className='font-bold text-[1.5em] text-lime-900 pb-4'>{currentUser?.fname} {currentUser?.lname}</h2> 
-            <p><span className='text-green-950 decoration-solid'>Age:</span> {age > 18 ? age : '-//-'}, {currentUser?.gender}</p>
-            <p><span className='text-green-950 decoration-solid'>Email:</span> {currentUser?.email}</p>
-            <p><span className='text-green-950 decoration-solid'>Post number:</span> {currentUser?.postNumber}</p>
-            <p><span className='text-green-950 decoration-solid'>Role:</span> {currentUser?.role === 'grand' ? 'grandparent' : 'parent'}</p>
+            <h2 className='font-bold text-[1.5em] text-lime-900 pb-4'>{currentUser.fname} {currentUser.lname}</h2> 
+            <p><span className='text-green-950 decoration-solid'>Age:</span> {age > 18 ? age : '-//-'}, {currentUser.gender}</p>
+            <p><span className='text-green-950 decoration-solid'>Email:</span> {currentUser.email}</p>
+            <p><span className='text-green-950 decoration-solid'>Post number:</span> {currentUser.postNumber}</p>
+            <p><span className='text-green-950 decoration-solid'>Role:</span> {currentUser.role === 'grand' ? 'grandparent' : 'parent'}</p>
             <p><span className='text-green-950 decoration-solid'>Phone:</span> {currentUser?.phone}</p>
-            <p><span className='text-green-950 decoration-solid'>It is possible:</span> {currentUser?.state === 'go' ? 'to go to you' : 'to stay at home'}</p>
-            <p><span className='text-green-950 decoration-solid'>I like:</span> {currentUser?.helpType === 'patsChildren' ? 'pets and children' : currentUser?.helpType === 'pets' ? 'pets' : 'children'}</p>
+            <p><span className='text-green-950 decoration-solid'>It is possible:</span> {currentUser.state === 'go' ? 'to go to you' : 'to stay at home'}</p>
+            <p><span className='text-green-950 decoration-solid'>I like:</span> {currentUser.helpType === 'patsChildren' ? 'pets and children' : currentUser?.helpType === 'pets' ? 'pets' : 'children'}</p>
           </figcaption>
         </div>
         
@@ -118,13 +102,12 @@ function Profile({owner='me'}) {
                 </div>
               </div>
 
-
-{console.log(updatedUser)}
+{/* {             console.log(updatedUser)} */}
             </div>
           </div>
 
         
-        {modalStatus && <Modal modalContent={modalContent} onClose={onClose} onSaveChanges={onSaveChanges} setUpdatedUser={setUpdatedUser}/>}
+        {editModalStatus && <Modal />}
           {/* <button onClick={() => navigate('/edit')} className='btn bg-yellow-900 text-yellow-200 absolute right-20 top-4 text-[4em] h-16 rounded-full'><ion-icon name="add-circle-outline"></ion-icon></button> */}
     </div>
   )

@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAppContext } from '../../../context/AppContext'
 
 function AboutMe({setnewUser, edit}) {
+
   const {currentUser} = useAppContext()
-  const defaultValue = (edit && currentUser?.aboutMe) && currentUser.aboutMe ? currentUser.aboutMe : ''
+  const defaultValue = (edit && currentUser.aboutMe) && currentUser.aboutMe ? currentUser.aboutMe : ''
+
   return (
  
         <div className='flex flex-col gap-4 border-orange-100 border-2 p-4 w-[100%]'>

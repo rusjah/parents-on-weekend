@@ -15,6 +15,8 @@ export const AppProvider = ({children}) => {
 
     const [currentUser, setCurrentUser] = useState({})
     const [userStatus, setUserStatus] = useState(false)
+    const [editModalStatus, setEditModalStatus] = useState(false)
+    const [editModalContent, setEditModalContent] = useState('')
 
 
     function generateAvatar(role, gender) {
@@ -161,7 +163,19 @@ export const AppProvider = ({children}) => {
       }
     }
 
-    
+    //for opetn modal window to edit profile
+    function changeEditModalStatus() {
+        setEditModalStatus(i => true)
+    }
+    function changeEditModalContent(content) {
+        setEditModalContent(i => content)
+    }
+    function closeEditModal(){
+        console.log(editModalContent, 'stat');
+        setEditModalStatus(i => false)
+        changeEditModalContent('')
+    }
+
     useEffect(() =>{
         console.log(currentUser,'user from context');
     },[])
@@ -172,7 +186,10 @@ export const AppProvider = ({children}) => {
         currentUser, userStatus,
         getCurrentUser,
         getOptions, getAge, 
-        toglePlay, videoRef
+        toglePlay, videoRef,
+        changeEditModalStatus, editModalStatus,
+        changeEditModalContent, editModalContent,
+        closeEditModal,
         }}>
         {children}
     </AppContext.Provider>
