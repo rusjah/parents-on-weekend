@@ -5,10 +5,13 @@ import Filter from '../components/Filter';
 import { useAppContext } from '../../context/AppContext';
 
 function MainList() {
-  const {allUsers, getAllUsers} = useAppContext()
+  const {allUsers, getAllUsers, filterUsers, isFilter, togleFilter, filteredUsers} = useAppContext()
   const users = data.users;
   
   useEffect(() => {
+    // togleFilter()
+    filterUsers()
+    filterUsers()
     getAllUsers()
   },[])
   return (
@@ -16,7 +19,7 @@ function MainList() {
         <h1 className='font-marhey font-bold text-green-900 text-[1.5em] md:text-[3em] pb-4  md:pb-20'>Find your best partner</h1>
         <Filter />
         <div className='flex flex-col gap-4 items-center py-4 md:py-20'>
-           {allUsers.map((el, id) => <UserSmalCard key={id} user={el}/>)}
+        {isFilter ? filteredUsers.map((el, id) => <UserSmalCard key={id} user={el}/>) : allUsers.map((el, id) => <UserSmalCard key={id} user={el}/>) }
         </div>
         
     </div>

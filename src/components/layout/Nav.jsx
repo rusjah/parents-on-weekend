@@ -6,10 +6,10 @@ import { useAppContext } from '../../context/AppContext';
 
 
 function Nav() {
-    const {userStatus, toLogout} = useAppContext()
+    const { toLogout, userStatus} = useAppContext()
     const navigate = useNavigate();
     const location = useLocation();
-
+// const userStatus = true
     
 
     //is true when user bekome new msg

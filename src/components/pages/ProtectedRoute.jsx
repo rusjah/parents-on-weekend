@@ -5,6 +5,7 @@ import { useAppContext } from '../../context/AppContext';
 
 function ProtectedRoute({user, children}) {
     const {userStatus} = useAppContext()
+    // const userStatus = true
 
     const notify = () => toast("You need to login !");
     if (!userStatus) {

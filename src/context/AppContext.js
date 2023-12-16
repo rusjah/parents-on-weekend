@@ -19,6 +19,10 @@ export const AppProvider = ({children}) => {
     const [editModalContent, setEditModalContent] = useState('')
     const [allUsers, setAllUsers] = useState([])
 
+    const [isFilter, setIsFilter] = useState(false)
+    let [filters, setFilters] = useState([])
+    const [filteredUsers, setFilteredUsers] = useState([])
+
 
     function generateAvatar(role, gender) {
         if(role === 'grand' && gender === 'male') return AVATAR.grandfather
@@ -154,29 +158,100 @@ export const AppProvider = ({children}) => {
                 where : "role =  '" + role + "'",
                 relations: [`optionsId`]
                 })
-            setAllUsers(i => [users[0]])
+            setAllUsers(users)
             console.log(users,'contect');
-            
-           
-
         } catch (e) {
             console.log(e);
         }
     }
-    ////////////////////////////////////////////////////
+
+    //filtering
+
+    function isFilterCheck() {
+        filters.length > 0 ? setIsFilter(true) : setIsFilter(false)
+    }
+
+    //  function togleFilter(filterProp) {
+    //     if (filterProp && filterProp.status) {
+    //         setFilters(i => [...i,filterProp])
+    //     } else {
+    //         const arr = filters.filter(el => el.name != filterProp.name)
+    //        setFilters(i => arr)
+    //     }
+    //     console.log(filters.length,'length');
+    // } 
+
+    // function filterUsers (filterProps) {
+    //   const unicFiltered = new Set();
+    //   filterProps && allUsers.map(user => {
+    //     console.log('start');
+    //     if ( user.optionsId[filterProps.name] === filterProps.status && filterProps.status === true ) unicFiltered.add(user)
+    //     if ( user.optionsId[filterProps.name] === filterProps.status && filterProps.status === false) unicFiltered.delete(user)
+    //     const filtr = Array.from(unicFiltered);
+    //       setFilteredUsers(filtr);
+    //       console.log(filtr, "filtered");
+    //     })
+    // }
+    // ////
+
+    function togleFilter(filterProp) {
+        const existingFilterIndex = filters.findIndex(el => el.name === filterProp.name);
+      
+        if (existingFilterIndex !== -1) {
+          // If the filter exists, remove it
+          const updatedFilters = filters.filter(el => el.name !== filterProp.name);
+          setFilters(updatedFilters);
+        } else {
+          setFilters(i => [...i, filterProp]);
+        }
+      }
+
+      function filterUsers() {
+        if (filters.length === 0) return;
+      
+        const filteredUsers = allUsers.filter(user => {
+          for (const filter of filters) {
+            if (filter.status !== user.optionsId[filter.name]) {
+              return false; // Exclude user if any filter condition doesn't match
+            }
+          }
+          return true; // Include user if all filter conditions match
+        });
+      
+        setFilteredUsers(filteredUsers);
+      }
+
+
+    // function togleFilter(filterProp) {
+    //     if (filterProp && filterProp.status) {
+    //         setFilters(i => [...i,filterProp])
+    //     } else {
+    //         const arr = filters.filter(el => el.name != filterProp.name)
+    //        setFilters(i => arr)
+    //     }
+    //     console.log(filters.length,'length');
+    // } 
+
+    // function filterUsers () {
+    //   const newFiltVal = allUsers.filter(user => 
+    //     filters.map(filt => filt.status === user.optionsId[filt.name] ? user : ''))
+    //   const unicFiltered = new Set(newFiltVal);
+    //   const filtered = Array.from(unicFiltered);;
+    //   setFilteredUsers(filtered);
+    //   console.log(filtered, "filtered");
+    // }
+    // ////////////////////////////////////////////////////
 
     function getOptions(opt) {
         const userOptPs = []
         const userOptCh = []
         PETS.map(obj => {
             for(let key in opt) {
-                (obj.nameId === key && opt[key]) && userOptPs.push(key)
-            }
+                (obj.nameId === key && opt[key]) && userOptPs.push(key)}
         })
         CHILDREN.map(obj => {
             for(let key in opt) {
-                (obj.nameId === key && opt[key]) && userOptCh.push(key)
-            }
+                (obj.nameId === key && opt[key]) && userOptCh.push(key)}
         })
         return {pets: userOptPs, children: userOptCh};
     }
@@ -203,7 +278,15 @@ export const AppProvider = ({children}) => {
         changeEditModalContent('')
     }
 
+
     useEffect(() =>{
+        isFilterCheck()
+        filterUsers()
+    },[filters])
+
+
+    useEffect(() =>{
+        getAllUsers()
         console.log(currentUser,'user from context');
     },[])
    
@@ -212,12 +295,14 @@ export const AppProvider = ({children}) => {
         toLogin, toLogout, registration,
         currentUser, userStatus,
         getCurrentUser, updateUser, 
-        getAllUsers,allUsers,
+        getAllUsers,allUsers, filterUsers,
         getOptions, getAge, 
         toglePlay, videoRef,
         changeEditModalStatus, editModalStatus,
         changeEditModalContent, editModalContent,
         closeEditModal,
+
+        isFilter, togleFilter, filteredUsers, filterUsers
         }}>
         {children}
     </AppContext.Provider>

@@ -5,8 +5,8 @@ function BaseData({setnewUser, edit}) {
   const {currentUser, editModalContent,} = useAppContext()
 
   const defaultPostNumber = currentUser && currentUser.postNumber || ''
-  const defaultRole =  currentUser.role || ''
-  const defaultHelpType =  currentUser.helpType || ''
+  const defaultRole = currentUser && currentUser.role || ''
+  const defaultHelpType = currentUser && currentUser.helpType || ''
 
   const role = [{role:'grand', content: 'I have time'},
                 {role:'parent', content: 'I need help'}]

@@ -61,3 +61,23 @@ export const AVATAR = {
    grandfather: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/users/grandfather.jpg",
    default: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/users/default.jpg"
 }
+
+
+export const FILTERPROPERTY =     {
+    pets: {
+      dog: false,
+      cat: false,
+      bird: false,
+      fish: false,
+      hamster: false,
+      rabbit: false,
+      reptilien: false
+    },
+    child: {
+      baby: false,
+      threeTofive: false,
+      sixToNine: false,
+      tenToTwelve: false,
+      more: false
+    }
+}
