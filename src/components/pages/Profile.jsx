@@ -32,6 +32,7 @@ function Profile({owner='me'}) {
 
   useEffect(() => {
     getCurrentUser()
+    console.log(currentUser.aboutMe, 'profile');
   },[])
 
   return (
@@ -65,7 +66,7 @@ function Profile({owner='me'}) {
           </div>
         </div>
 
-        {<div className='mt-10 p-10 flex justify-center gap-6 w-full md:w-[60%] relative  bg-white border-4 border-gradient-to-r from-[#181818] via-[#eee] to-[#181818]'>
+        {currentUser.video && <div className='mt-10 p-10 flex justify-center gap-6 w-full md:w-[60%] relative  bg-white border-4 border-gradient-to-r from-[#181818] via-[#eee] to-[#181818]'>
         { owner === 'me' && <p onClick={() => editProfile('video')} className='absolute top-3 right-3 md:right-10 font-bold text-green-900 text-[2em]'><ion-icon name="create-outline"></ion-icon></p> }
 
           <div className=' w-[60%] h-full flex flex-col gap-1 justify-center items-center pt-1 md:pt-10  font-roboto font-[450] text-justify'>

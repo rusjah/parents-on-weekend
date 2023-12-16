@@ -17,6 +17,7 @@ export const AppProvider = ({children}) => {
     const [userStatus, setUserStatus] = useState(false)
     const [editModalStatus, setEditModalStatus] = useState(false)
     const [editModalContent, setEditModalContent] = useState('')
+    const [allUsers, setAllUsers] = useState([])
 
 
     function generateAvatar(role, gender) {
@@ -136,15 +137,32 @@ export const AppProvider = ({children}) => {
         })
         console.log(user, 'form cont');
         setCurrentUser(user)
+        setUserStatus(i => true)
         // return user;
     }
 
     async function updateUser(updatedProp) {
-        const updating = {...updatedProp, objectId: currentUser.objectId}
-        const update = await Backendless.Data.of( "Users" ).save( updating)
-        getCurrentUser()
+        // const updating = {...updatedProp, objectId: currentUser.objectId}
+        // const update = await Backendless.Data.of( "Users" ).save( updating)
+        // getCurrentUser()
     }
 
+    async function getAllUsers(cond) {
+        try {
+           const role = currentUser.role === 'grand' ? 'parent' : 'grand'
+           const users = await Backendless.Data.of("Users").find({
+                where : "role =  '" + role + "'",
+                relations: [`optionsId`]
+                })
+            setAllUsers(i => [users[0]])
+            console.log(users,'contect');
+            
+           
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
     ////////////////////////////////////////////////////
 
     function getOptions(opt) {
@@ -181,7 +199,6 @@ export const AppProvider = ({children}) => {
         setEditModalContent(i => content)
     }
     function closeEditModal(){
-        console.log(editModalContent, 'stat');
         setEditModalStatus(i => false)
         changeEditModalContent('')
     }
@@ -194,7 +211,8 @@ export const AppProvider = ({children}) => {
     return <AppContext.Provider value={{
         toLogin, toLogout, registration,
         currentUser, userStatus,
-        getCurrentUser, updateUser,
+        getCurrentUser, updateUser, 
+        getAllUsers,allUsers,
         getOptions, getAge, 
         toglePlay, videoRef,
         changeEditModalStatus, editModalStatus,
