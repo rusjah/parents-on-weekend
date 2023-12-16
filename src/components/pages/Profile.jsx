@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import data from '../../data.json'
 import { useNavigate, useLocation } from 'react-router-dom';
 import Modal from '../components/signForm/Modal';
 import { useAppContext } from '../../context/AppContext';
 import Backendless from 'backendless';
+import ReactPlayer from 'react-player'
 import {AVATAR,PETS, CHILDREN} from '../../data/Data'
+
 
 function Profile({owner='me'}) {
   const navigate = useNavigate()
   
   // const registratedUser = location.state.currentUser;
-  const { currentUser, getAge, getOptions, userId} = useAppContext()
+  const { currentUser, getAge, getOptions, getCurrentUser, toglePlay, videoRef} = useAppContext()
   
   // const currentUser = getUser();
 
@@ -22,8 +24,8 @@ function Profile({owner='me'}) {
   const [updatedUser, setUpdatedUser] = useState({})
 
   const age = currentUser?.birthday ? getAge(currentUser.birthday) : 1
-  const pets = getOptions(currentUser?.optionsId).pets
-  const children = getOptions(currentUser?.optionsId).children
+  const pets = getOptions(currentUser.optionsId).pets
+  const children = getOptions(currentUser.optionsId).children
 
 
   function editProfile(type) { 
@@ -40,6 +42,13 @@ function Profile({owner='me'}) {
     setModalStatus(i => false);
     setModalContent(i => '')
   }
+
+
+  useEffect(() => {
+    getCurrentUser()
+  },[])
+
+  
 
   return (
     <div className='flex flex-col items-center bg-amber-50 w-[full] min-h-full p-6 bg-gradient-to-r from-green-50 to-orange-50 relative'>
@@ -79,15 +88,11 @@ function Profile({owner='me'}) {
 
           <div className=' w-[60%] h-full flex flex-col gap-1 justify-center items-center pt-1 md:pt-10  font-roboto font-[450] text-justify'>
             <h2 className='font-bold text-[1.5em] text-lime-900'>My video</h2>
-            {/* <p className='md:hidden block font-dancing text-[1.5rem]'>
-               <iframe className='inline' width="200" height="200" src={currentUser?.video} title="Cat and Dog Friendship - Dog and Cat Pure Love #short" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-            </p>
-            <p className='md:block hidden font-dancing text-[1.5rem]'>
-              <iframe className='inline' width="600" height="300" src={currentUser?.video} title="Cat and Dog Friendship - Dog and Cat Pure Love #short" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-            </p> */}
-            <p className='md:block hidden font-dancing text-[1.5rem]'>
-                  {currentUser > 0 &&  <video src={currentUser.video} onClick={e => e.target.play()}></video>}
-            </p>
+            {/* <ReactPlayer url={`${currentUser.video}`} playing /> */}
+            <video ref={videoRef} controls width={300} height={200}>
+                <source src={`${currentUser.video}`}/>  
+            </video>
+            <button onClick={toglePlay} className='w-12 h-12 rounted-full bg-green-50' ></button>
           </div>
         </div>}
 
@@ -100,7 +105,7 @@ function Profile({owner='me'}) {
             <div className='shadow-lg hover:shadow-green-500 md:hover:shadow-xl md:hover:shadow-lime-900 p-4'>
               <p className='text-[1.5rem] text-lime-800 pb-4' >Pets:</p>
                 <div className='w-[24vw] flex flex-wrap gap-4 justify-between'>
-                  {pets?.length > 0 && pets?.map((el, ind )=>
+                  {pets && pets.map((el, ind )=>
                     <p key={ind} className='flex gap-2 text-[1.3rem] justify-start items-center capitalize'><span className='font-bold text-[1.5em] text-green-900'><ion-icon name="checkmark-outline"></ion-icon></span> {el}</p>)}
                 </div>
               </div>
@@ -108,7 +113,7 @@ function Profile({owner='me'}) {
               <div className='shadow-lg hover:shadow-green-500 md:hover:shadow-xl md:hover:shadow-orange-900 p-4'>
                 <p className='text-[1.5rem] text-lime-800 flex flex-around pb-4' >Children:</p>
                 <div className='w-[24vw] flex flex-wrap gap-4 justify-between'>
-                    {children?.length > 0 && children?.map((el, ind) =>
+                    {children && children.map((el, ind) =>
                     <p key={ind} className='flex gap-2 text-[1.3rem] justify-start items-center capitalize'><span className='font-bold text-[1.5em] text-green-900'><ion-icon name="checkmark-outline"></ion-icon></span> {el}</p>)}
                 </div>
               </div>

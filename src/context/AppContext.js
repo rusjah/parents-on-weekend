@@ -1,5 +1,5 @@
 import Backendless from "backendless";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {AVATAR,PETS, CHILDREN} from '../data/Data'
 import { toast } from "react-toastify";
@@ -52,10 +52,10 @@ export const AppProvider = ({children}) => {
         return fileReference;
     }
 
-    async function toLogin( ) {
+    async function toLogin(userLogin) {
        try {
         const validation = await Backendless.UserService.isValidLogin()
-            const res = await Backendless.UserService.login("test@gmail.com", '11111', true);
+            const res = await Backendless.UserService.login(userLogin.email, userLogin.password, true);
             setCurrentUser(res)
             setUserStatus(true)
             navigate('mainList')
@@ -98,7 +98,7 @@ export const AppProvider = ({children}) => {
             } else { newUser.photo = generateAvatar(newUser.role, newUser.gender) }
 
             if (newUser.video) {
-                const fileReference = await getReferenseFile(newUser.photo, 'videos', `record-${Math.random() * 10}`)  
+                const fileReference = await getReferenseFile(newUser.video, 'videos', `record-${Math.random() * 10}`)  
                 const video = {
                     tag: 'records',
                     fileReference: fileReference
@@ -118,14 +118,48 @@ export const AppProvider = ({children}) => {
             const userRel = { objectId: res.objectId }
             const optRel = { objectId:  opt.objectId}
             const relation = await Backendless.Data.of( "Users" ).addRelation( userRel, "optionsId", [optRel] )
-            console.log(relation, 'realation');
             navigate('mainList')
         } catch(e) {
             console.log(e);
         }
     }
 
+    async function getCurrentUser() {
+        const user = await Backendless.Data.of('Users').findById(currentUser.objectId, {
+                relations: [`optionsId`]
+        })
+        console.log(user, 'form cont');
+        setCurrentUser(user)
+        // return user;
+    }
+
+    ////////////////////////////////////////////////////
+
+    function getOptions(opt) {
+        const userOptPs = []
+        const userOptCh = []
+        PETS.map(obj => {
+            for(let key in opt) {
+                (obj.nameId === key && opt[key]) && userOptPs.push(key)
+            }
+        })
+        CHILDREN.map(obj => {
+            for(let key in opt) {
+                (obj.nameId === key && opt[key]) && userOptCh.push(key)
+            }
+        })
+        return {pets: userOptPs, children: userOptCh};
+    }
     
+    //for playing video
+    const videoRef = useRef(null)
+    function toglePlay () {
+      if(videoRef.current.pauser) {
+        videoRef.current.play();
+      } else {
+        videoRef.current.pause()
+      }
+    }
 
     
     useEffect(() =>{
@@ -135,7 +169,10 @@ export const AppProvider = ({children}) => {
 
     return <AppContext.Provider value={{
         toLogin, toLogout, registration,
-        currentUser, userStatus
+        currentUser, userStatus,
+        getCurrentUser,
+        getOptions, getAge, 
+        toglePlay, videoRef
         }}>
         {children}
     </AppContext.Provider>

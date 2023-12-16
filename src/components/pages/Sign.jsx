@@ -16,10 +16,7 @@ import Suggetions from '../components/signForm/Suggetions'
 function Sign() {
 
   const {registration} = useAppContext()
-
-//  useEffect(()=>{
-//   console.log('currentUser', curentUser);
-//  },[])
+  
   const [newUser, setnewUser] = useState({})
 
   function createUser(e) {
@@ -40,8 +37,6 @@ function Sign() {
           children.push(checkedCild.value)
         }
       }
-
-      
 
       console.log(newUser, 'userform');
       registration(newUser, {pets:pets, children:children})
