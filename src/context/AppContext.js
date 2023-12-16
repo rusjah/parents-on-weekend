@@ -45,8 +45,8 @@ export const AppProvider = ({children}) => {
     async function getReferenseFile(userFile, fileFolder, fileName) {
         const fileUploadResponse = await Backendless.Files.upload(userFile, fileFolder, fileName )
         const fileReference = {
+            fileId: fileUploadResponse.fileId,
             fileUrl: fileUploadResponse.fileURL,
-            fileId: fileUploadResponse.id,
             name: fileUploadResponse.name
         }
         return fileReference;
@@ -87,28 +87,28 @@ export const AppProvider = ({children}) => {
                                 new Date(newUser.birthday) : 
                                 new Date();
 
-            // const axioRes =  await axios.post(
-            //                       `https://eu.backendlessappcontent.com/${process.env.REACT_APP_APL_ID}/${process.env.REACT_APP_APP_KEY}/files/images`,
-            //                       newUser.photo )
-
-            // console.log(axioRes, 'axios');
-
 
             if (newUser.photo) {
-               
-                   
-                } catch(err) {console.log(err)}
+                const fileReference = await getReferenseFile(newUser.photo, 'images', true, `avatar-${Math.random() * 10}`)  
+                const photo = {
+                    tag: 'avatars',
+                    fileReference:  fileReference
+                }
+                newUser.photo = photo.fileReference.fileUrl
             } else { newUser.photo = generateAvatar(newUser.role, newUser.gender) }
 
             if (newUser.video) {
                 const fileReference = await getReferenseFile(newUser.photo, 'videos', `record-${Math.random() * 10}`)  
-                newUser.video = {
+                const video = {
                     tag: 'records',
                     fileReference: fileReference
                 }
+                newUser.video = video.fileReference.fileUrl
             }
+         
 
             const user = new Backendless.User(newUser);
+            console.log(user,'user');
             const res = await Backendless.UserService.register( user )
             console.log(res, 'userRes');
             setUserStatus(true);
