@@ -4,7 +4,7 @@ import { useAppContext } from '../../../context/AppContext'
 function AboutMe({setnewUser, edit}) {
 
   const {currentUser} = useAppContext()
-  const defaultValue = (edit && currentUser.aboutMe) && currentUser.aboutMe ? currentUser.aboutMe : ''
+  const defaultValue = currentUser.aboutMe || ''
 
   return (
  

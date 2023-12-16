@@ -54,9 +54,19 @@ export const AppProvider = ({children}) => {
         return fileReference;
     }
 
-    async function toLogin(userLogin) {
-       try {
+    async function validationCheck () {
         const validation = await Backendless.UserService.isValidLogin()
+        if (validation) {
+            toast('You are login')
+            setUserStatus(true)
+            navigate('mainList')
+            return
+        }
+    }
+
+    async function toLogin(userLogin) {
+        validationCheck()
+       try {
             const res = await Backendless.UserService.login(userLogin.email, userLogin.password, true);
             setCurrentUser(res)
             setUserStatus(true)
@@ -74,13 +84,7 @@ export const AppProvider = ({children}) => {
     }
 
     async function registration(registretedUser, userOptions) {
-        const validation = await Backendless.UserService.isValidLogin()
-        if (validation) {
-            toast('You are login')
-            setUserStatus(true)
-            navigate('mainList')
-            return
-        }
+        validationCheck()
         try {
             const options = generateOptions(userOptions);
             const newUser = {...registretedUser}
@@ -135,6 +139,12 @@ export const AppProvider = ({children}) => {
         // return user;
     }
 
+    async function updateUser(updatedProp) {
+        const updating = {...updatedProp, objectId: currentUser.objectId}
+        const update = await Backendless.Data.of( "Users" ).save( updating)
+        getCurrentUser()
+    }
+
     ////////////////////////////////////////////////////
 
     function getOptions(opt) {
@@ -184,7 +194,7 @@ export const AppProvider = ({children}) => {
     return <AppContext.Provider value={{
         toLogin, toLogout, registration,
         currentUser, userStatus,
-        getCurrentUser,
+        getCurrentUser, updateUser,
         getOptions, getAge, 
         toglePlay, videoRef,
         changeEditModalStatus, editModalStatus,

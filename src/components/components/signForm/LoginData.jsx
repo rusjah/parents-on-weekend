@@ -4,8 +4,8 @@ import { useAppContext } from '../../../context/AppContext'
 function LoginData({setnewUser, edit}) {
     const {currentUser} = useAppContext()
 
-    const defaultEmail =  (edit && currentUser?.email)  ? currentUser.email : ''
-    const defaultPhone = (edit && currentUser?.phone) ? currentUser.phone : ''
+    const defaultEmail =  currentUser.email || ''
+    const defaultPhone = currentUser.phone || ''
   return (
     <div>
         

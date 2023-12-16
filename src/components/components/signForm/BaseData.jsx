@@ -4,9 +4,9 @@ import { useAppContext } from '../../../context/AppContext'
 function BaseData({setnewUser, edit}) {
   const {currentUser, editModalContent,} = useAppContext()
 
-  const defaultPostNumber = (edit && currentUser.postNumber) ? currentUser.postNumber : ''
-  const defaultRole = (edit && currentUser.role) ? currentUser.role : ''
-  const defaultHelpType = (edit && currentUser.helpType) ? currentUser.helpType : ''
+  const defaultPostNumber = currentUser && currentUser.postNumber || ''
+  const defaultRole =  currentUser.role || ''
+  const defaultHelpType =  currentUser.helpType || ''
 
   const role = [{role:'grand', content: 'I have time'},
                 {role:'parent', content: 'I need help'}]
