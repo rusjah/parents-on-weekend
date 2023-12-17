@@ -1,35 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PetsChekBox from './PetsChekBox'
 import OneFilterOption from './OneFilterOption'
+import {FILTERPROPERTY} from '../../data/Data'
+import { useAppContext } from '../../context/AppContext'
 
 function Filter() {
-  const [filtersProperty, setfiltersProperty] = useState(
-    {
-      pets: {
-        dog: false,
-        cat: false,
-        bird: false,
-        fish: false,
-        hamster: false,
-        rabbit: false,
-        reptilien: false
-      },
-      child: {
-        baby: false,
-        threeTofive: false,
-        sixToNine: false,
-        tenToTwelve: false,
-        more: false
-      }
-     }
-  )
+  const {filterUsers} = useAppContext()
+  const [filtersProperty, setfiltersProperty] = useState({})
 
-  function filterHandlerPets(filterProp, checking) {
-    setfiltersProperty({...filtersProperty, pets: {...filtersProperty.pets, [`${filterProp}`]: checking}})
+  function filterHandler(filterProp, checking) {
+    
+    setfiltersProperty(i => ({...i,
+      [filterProp]: checking}))
   }
-  function filterHandlerChild(filterProp, checking) {
-    setfiltersProperty({...filtersProperty, child: {...filtersProperty.child, [`${filterProp}`]: checking}})
-  }
+
+  useEffect(()=> {
+  }, [] )
 
 
   return (
@@ -43,10 +29,9 @@ function Filter() {
         <div className='w-[48%] pb-4 md:pb-0'>
           <h1 className='font-bold text-green-900 pb-4'>Pets:</h1>
           <div className='w-full flex flex-wrap gap-4 '>
-            {Object.keys(filtersProperty.pets).map((key) => (
+            {Object.keys(FILTERPROPERTY.pets).map((key) => (
               <div key={key} className=''>
-                  {console.log(key)}
-                <OneFilterOption type={'pets'} valueName={`${key}`} filterHandler={filterHandlerPets}/>
+                <OneFilterOption type={'pets'} valueName={`${key}`} filterHandler={filterHandler}/>
               </div>
             ))}
           </div>
@@ -56,10 +41,9 @@ function Filter() {
          <div className='w-[48%]'>
             <h1 className='font-bold text-green-900 pb-4'>Children:</h1>
             <div className='w-full flex flex-wrap gap-4'>
-              {console.log(filtersProperty)}
-              {Object.keys(filtersProperty.child).map((key) => (
+              {Object.keys(FILTERPROPERTY.child).map((key) => (
                 <div key={key} className=''>
-                  <OneFilterOption type={'child'} valueName={`${key}`} filterHandler={filterHandlerChild}/>
+                  <OneFilterOption type={'child'} valueName={`${key}`} filterHandler={filterHandler}/>
                 </div>
               ))}
             </div>

@@ -1,14 +1,13 @@
 import React from 'react'
 import { useAppContext } from '../../../context/AppContext'
 
-function LoginData({setnewUser}) {
+function LoginData({setnewUser, edit}) {
     const {currentUser} = useAppContext()
 
-    const defaultEmail = currentUser.email ? currentUser.email : ''
-    const defaultPhone = currentUser.phone ? currentUser.phone : ''
+    const defaultEmail = currentUser && currentUser.email || ''
+    const defaultPhone = currentUser && currentUser.phone || ''
   return (
     <div>
-        {console.log(currentUser, 'jajaj')}
         <div className='flex flex-col lg:flex-row justify-center items-center gap-2 md:gap-6 border-orange-100 border-2 p-4'>
             <div className='flex flex-col gap-4'>
                 <h2 className='font-bold text-[1.5em] text-brawn-950'>Contact</h2>

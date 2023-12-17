@@ -21,16 +21,11 @@ import Backendless from 'backendless';
 
 
 function App() {
-  const id = process.env.REACT_APP_APL_ID
-  const api = process.env.REACT_APP_APP_KEY
+  const ID = process.env.REACT_APP_APL_ID
+  const API = process.env.REACT_APP_APP_KEY
   Backendless.serverURL = "https://eu-api.backendless.com"
-  Backendless.initApp( '8D0ABF78-BBBA-A115-FFB6-60E3DFD8B600', '942B1B21-82F9-49AB-BA00-8CDEF5C27D54');
-  //for adding new users
- const {userStatus} = useAppContext()
-
-  //for activete login and sign
-  const [user, setUser] = useState([])
-  const [validationStaus, setvalidationStaus] = useState(true)
+  Backendless.initApp(ID,API);
+ 
 
   return (
     <div className="App">
@@ -39,41 +34,28 @@ function App() {
       <Routes>
             <Route index element={<Home />} />
             <Route path='home' element={<Home />} />
-            <Route path='login' element={<Login validationStaus={validationStaus} setvalidationStaus={setvalidationStaus}/>} />
-            <Route path='signup' element={<Sign />} />
+            <Route path='login' element={<Login />} />
+            <Route path='sign' element={<Sign />} />
             <Route path='changeWorld' element={<ChangeWorld />} />
            
-            <Route path='reviews' element={<ProtectedRoute user={userStatus} >
+            <Route path='reviews' element={<ProtectedRoute  >
                                               <Reviews />
                                            </ProtectedRoute>} />
 
-            <Route path='chat' element={<ProtectedRoute user={userStatus} >
+            <Route path='chat' element={<ProtectedRoute  >
                                               <ChatTwo />
                                             </ProtectedRoute>} />
-            <Route path='profile' element={<ProtectedRoute user={userStatus} >
+            <Route path='profile' element={<ProtectedRoute  >
                                               <Profile  />
                                            </ProtectedRoute>} />
 
-            <Route path='mainList' element={<ProtectedRoute user={userStatus} >
+            <Route path='mainList' element={<ProtectedRoute  >
                                               <MainList  />
                                             </ProtectedRoute>} />
             
             <Route path='*' element={<Home />} />
 
         </Routes>
-
-        {/* <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='login' element={<Login validationStaus={validationStaus} setvalidationStaus={setvalidationStaus}/>} />
-            <Route path='signup' element={<Sign  setUsers={setUser} validationStaus={validationStaus} setvalidationStaus={setvalidationStaus}/>} />
-            <Route path='changeWorld' element={<ChangeWorld />} />
-            <Route path='reviews' element={<Reviews />} />
-            <Route path='profile' element={<Profile  />} />
-            <Route path='chat' element={<ChatTwo />} />
-            <Route path='mainList' element={<MainList />} />
-            <Route path='test' element={<Test />} />
-
-        </Routes> */}
       </div>
       <Footer />
 

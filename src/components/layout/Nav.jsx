@@ -6,10 +6,10 @@ import { useAppContext } from '../../context/AppContext';
 
 
 function Nav() {
-    const {userStatus, logoutUser} = useAppContext()
+    const { toLogout, userStatus} = useAppContext()
     const navigate = useNavigate();
     const location = useLocation();
-
+// const userStatus = true
     
 
     //is true when user bekome new msg
@@ -67,13 +67,13 @@ function Nav() {
                             <Link to={'/changeWorld'}><li><p>Help</p></li></Link>
                             {!userStatus && <>
                                 <Link to={'/login'}><li><p>Log in</p></li></Link> 
-                                <Link to={'/signup'}><li><p>Sign up</p></li></Link>
+                                <Link to={'/sign'}><li><p>Sign up</p></li></Link>
                             </>}
                             {userStatus && <>
                                 <Link to={'/mainList'}><li><p >People</p></li></Link>
                                 <Link to={'/reviews'}><li><p >Reviws</p></li></Link>
                                 <Link to={'/profile'}><li><p >Profile</p></li></Link>
-                                <li onClick={logoutUser}><p>Log out</p></li>
+                                <li onClick={toLogout}><p>Log out</p></li>
 
                          </>}
                         </ul>
@@ -86,7 +86,7 @@ function Nav() {
                     <Link to={'/changeWorld'}><li><p>Help</p></li></Link>
                     {!userStatus && <>
                         <Link to={'/login'}><li><p>Log in</p></li></Link> 
-                        <Link to={'/signup'}><li><p>Sign up</p></li></Link>
+                        <Link to={'/sign'}><li><p>Sign up</p></li></Link>
                     </>}
                     {userStatus && <>
                         <Link to={'/mainList'}><li><p >People</p></li></Link>
@@ -96,7 +96,7 @@ function Nav() {
                             <p className='text-[1.5em]'><ion-icon name="chatbubble-outline"></ion-icon></p>
                         </li></Link>
                         <Link to={'/profile'}><li><p className='text-[1.5em]'><ion-icon name="person-outline"></ion-icon></p></li></Link>
-                        <li onClick={logoutUser}><p>Log out</p></li>
+                        <li onClick={toLogout}><p>Log out</p></li>
 
                     </>}
                 </ul>

@@ -58,5 +58,26 @@ export const AVATAR = {
    grand:"https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/users/mother.jpg",
    father:"https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/users/father.jpg",
    grandmother:"https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/users/grandmother.jpg",
-   grandfather: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/users/grandfather.jpg"
+   grandfather: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/users/grandfather.jpg",
+   default: "https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/users/default.jpg"
+}
+
+
+export const FILTERPROPERTY =     {
+    pets: {
+      dog: false,
+      cat: false,
+      bird: false,
+      fish: false,
+      hamster: false,
+      rabbit: false,
+      reptilien: false
+    },
+    child: {
+      baby: false,
+      threeTofive: false,
+      sixToNine: false,
+      tenToTwelve: false,
+      more: false
+    }
 }
