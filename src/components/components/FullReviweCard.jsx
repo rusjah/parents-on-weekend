@@ -17,7 +17,7 @@ function FullReviweCard({review}) {
                     </div>
                 </figcaption>
             </div>
-            <div className="min-h-12">"{review.review}" I had a fantastic experience using "Grandparents on weekend". The interface is user-friendly, offering a wide range of services/products. Excellent customer service and a smooth transaction process. Highly recommended!'I had a fantastic experience using "Grandparents on weekend". The interface is user-friendly, offering a wide range of services/products. Excellent customer service and a smooth transaction process. Highly recommended!'</div>
+            <div className="min-h-12">{review.content}</div>
         </div>
     </div>
   )

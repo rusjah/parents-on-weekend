@@ -301,6 +301,11 @@ export const AppProvider = ({children}) => {
             const userRel = { objectId: send.objectId }
             const optRel = { objectId:  currentUser.objectId}
             const relation = await Backendless.Data.of( "reviews" ).addRelation( userRel, "usersId", [optRel] )
+            const savedReview = await Backendless.Data.of('reviews').findById(send.objectId, {
+                relations: ['usersId'] // Include 'usersId' relation to fetch user data
+              });
+          
+            setReviews(i => [ savedReview, ...i])
         } catch (err) {
             // console.log(err)
         }
@@ -316,10 +321,6 @@ export const AppProvider = ({children}) => {
             // console.log(e);
         }
     }
-
-    useEffect(() =>{
-        getAllReviws()
-    },[])
 
     useEffect(() =>{
         isFilterCheck()
