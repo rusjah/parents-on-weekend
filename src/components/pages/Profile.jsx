@@ -31,6 +31,11 @@ function Profile({owner='me'}) {
   useEffect(() => {
     getCurrentUser()
   },[!editModalStatus])
+ 
+  useEffect(() => {
+    console.log(currentUser);
+    getCurrentUser()
+  },[])
 
   return (
     <div className='flex flex-col items-center bg-amber-50 w-[full] min-h-full p-6 bg-gradient-to-r from-green-50 to-orange-50 relative'>

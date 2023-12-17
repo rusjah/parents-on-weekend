@@ -4,11 +4,11 @@ import { toast } from 'react-toastify';
 import { useAppContext } from '../../context/AppContext';
 
 function ProtectedRoute({user, children}) {
-    const {userStatus} = useAppContext()
+    const {userStatus, currentUser} = useAppContext()
     // const userStatus = true
 
     const notify = () => toast("You need to login !");
-    if (!userStatus) {
+    if (!currentUser) {
         // {notify()}
         return <Home />
     } else {

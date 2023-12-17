@@ -143,7 +143,8 @@ export const AppProvider = ({children}) => {
 
     async function getCurrentUser() {
        try {
-        const user = await Backendless.Data.of('Users').findById(currentUser.objectId, {
+        const refCur = await Backendless.UserService.getCurrentUser()
+        const user = await Backendless.Data.of('Users').findById(refCur.objectId, {
             relations: [`optionsId`]
         })
         setCurrentUser(user)

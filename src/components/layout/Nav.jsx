@@ -6,7 +6,7 @@ import { useAppContext } from '../../context/AppContext';
 
 
 function Nav() {
-    const { toLogout, userStatus} = useAppContext()
+    const { toLogout, userStatus, currentUser} = useAppContext()
     const navigate = useNavigate();
     const location = useLocation();
 // const userStatus = true
@@ -65,11 +65,11 @@ function Nav() {
                             <Link to={'/'}><li><p >Home</p></li></Link>
                             <Link to={'/#about'}><li><p>About Us</p></li></Link>
                             <Link to={'/changeWorld'}><li><p>Help</p></li></Link>
-                            {!userStatus && <>
+                            {!currentUser && <>
                                 <Link to={'/login'}><li><p>Log in</p></li></Link> 
                                 <Link to={'/sign'}><li><p>Sign up</p></li></Link>
                             </>}
-                            {userStatus && <>
+                            {currentUser && <>
                                 <Link to={'/mainList'}><li><p >People</p></li></Link>
                                 <Link to={'/reviews'}><li><p >Reviws</p></li></Link>
                                 <Link to={'/profile'}><li><p >Profile</p></li></Link>
@@ -84,11 +84,11 @@ function Nav() {
                     <Link to={'/'}><li><p >Home</p></li></Link>
                     <Link to={'/#about'}><li><p>About Us</p></li></Link>
                     <Link to={'/changeWorld'}><li><p>Help</p></li></Link>
-                    {!userStatus && <>
+                    {!currentUser && <>
                         <Link to={'/login'}><li><p>Log in</p></li></Link> 
                         <Link to={'/sign'}><li><p>Sign up</p></li></Link>
                     </>}
-                    {userStatus && <>
+                    {currentUser && <>
                         <Link to={'/mainList'}><li><p >People</p></li></Link>
                         <Link to={'/reviews'}><li><p >Reviws</p></li></Link>
                         <Link to={'/chat'}><li className='relative'>

@@ -18,7 +18,7 @@ const {currentUser, statusTrue, statusFalse} = useAppContext()
                 <div className="max-w-md">
                 <h1 className="mb-5 text-5xl font-bold font-marhey">Grandparents on weekend</h1>
                 <p className="mb-5 capitalize font-roboto font-bold text-[1.5em] italic text-green-100"> Warm hearts, cozy weeknds: Embracing the delight of Grandparents on weeknds - where generations unite, creeating a haven filled with love, laughter, and furry hugs, spreading joy into every corner of every home</p>
-                <LetGoBtn title={"Let's go"}/>
+                {!currentUser && <LetGoBtn title={"Let's go"}/>}
                 </div>
             </div>
         </div>

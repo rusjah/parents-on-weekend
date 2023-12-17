@@ -4,7 +4,7 @@ import { useAppContext } from '../../context/AppContext';
 
 function Login() {
 
-  const {toLogin, userStatus, findUser} = useAppContext()
+  const {toLogin, userStatus, findUse, currenUser} = useAppContext()
 
   function loginHandler(e) {
     e.preventDefault()
