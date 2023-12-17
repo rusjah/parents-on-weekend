@@ -1,12 +1,13 @@
 import React from 'react'
 import { useAppContext } from '../../context/AppContext'
 
-function AddReviw({setReviews}) {
+function AddReviw() {
+
     const {saveReview} = useAppContext()
+    
     function sendReview(e) {
         e.preventDefault()
         const stars = Array.from(e.target.rating).find(radio => radio.checked);  
-       
         const review = {
             content: e.target.newReviwe.value,
             rating: Number(stars.value)

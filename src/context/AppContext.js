@@ -26,6 +26,8 @@ export const AppProvider = ({children}) => {
     const [usersModalStatus, setUsersModalStatus] = useState(false)
     const [usersModalContent, setUsersModalContent] = useState()
 
+    const [reviews, setReviews] = useState([])
+
 
     function generateAvatar(role, gender) {
         if(role === 'grand' && gender === 'male') return AVATAR.grandfather
@@ -125,8 +127,6 @@ export const AppProvider = ({children}) => {
                 }
                 newUser.video = video.fileReference.fileUrl
             }
-         
-
             const user = new Backendless.User(newUser);
             const res = await Backendless.UserService.register( user )
             setUserStatus(true);
@@ -297,15 +297,29 @@ export const AppProvider = ({children}) => {
 
     async function saveReview(review) {
         try {
-            const savedReview = {
-                usersId: currentUser.objectId,
-                ...review
-            }
-            const send = await Backendless.Data.of('reviews').save(savedReview)
+            const send = await Backendless.Data.of('reviews').save(review)
+            const userRel = { objectId: send.objectId }
+            const optRel = { objectId:  currentUser.objectId}
+            const relation = await Backendless.Data.of( "reviews" ).addRelation( userRel, "usersId", [optRel] )
         } catch (err) {
-            console.log(err)
+            // console.log(err)
         }
     }
+
+    async function getAllReviws() {
+        try {
+            const reviws = await Backendless.Data.of('reviews').find( {
+                relations: ['usersId']
+              });
+            setReviews(i => reviws)
+        } catch(e) {
+            // console.log(e);
+        }
+    }
+
+    useEffect(() =>{
+        getAllReviws()
+    },[])
 
     useEffect(() =>{
         isFilterCheck()
@@ -314,6 +328,7 @@ export const AppProvider = ({children}) => {
 
 
     useEffect(() =>{
+        getAllReviws()
         getAllUsers()
     },[])
    
@@ -334,7 +349,7 @@ export const AppProvider = ({children}) => {
 
         isFilter, togleFilter, filteredUsers, filterUsers,
 
-        saveReview,
+        saveReview, reviews, getAllReviws
         }}>
         {children}
     </AppContext.Provider>

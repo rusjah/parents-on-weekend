@@ -18,18 +18,18 @@ function BaseData({setnewUser, edit, setUpdatingData, modal}) {
     edit ? setUpdatingData(i => ({...i, role: e.target.value})) : setnewUser(i => ({...i, role: e.target.value}))
   }
   const postNumberHandler = (e) => {
-    edit ? editModalContent(i => ({...i, postNumber: e.target.value})) : setnewUser(i => ({...i, postNumber: e.target.value}))
+    edit ? setUpdatingData(i => ({...i, postNumber: e.target.value})) : setnewUser(i => ({...i, postNumber: e.target.value}))
   }
   const helpTypeHandler = (e) => {
-    edit ? editModalContent(i => ({...i, helpType: e.target.value})) : setnewUser(i => ({...i, helpType: e.target.value}))
+    edit ? setUpdatingData(i => ({...i, helpType: e.target.value})) : setnewUser(i => ({...i, helpType: e.target.value}))
   }
   return (
     <div className='flex flex-col lg:flex-row justify-center items-center lg:items-start gap-2 md:gap-6 border-orange-100 border-2 p-4'>
-      <div className='flex flex-col gap-4'>
+      <div className='rating gap-1 flex flex-col gap-4'>
           <h2 className='font-bold text-[1.5em] text-brawn-950'>My role</h2>
           {role.map((el,ind) => 
           <label key={ind} className='font-bold  bg-lime-50 w-64 h-12 flex gap-2 items-center pl-2'>
-            <input required onChange={(e) => roleHandler(e)} type="radio" name="role"  value={el.role} className="mask mask-heart bg-lime-400 checked:bg-yellow-400" />
+            <input required onChange={(e) => roleHandler(e)} type="radio" name="role"  value={el.role}  className="mask mask-heart bg-lime-400 checked:bg-yellow-400"  />
             <span>{el.content}</span>
           </label>)}
         </div>
@@ -37,10 +37,10 @@ function BaseData({setnewUser, edit, setUpdatingData, modal}) {
         <div className=' rating gap-1 flex flex-col gap-4'>
           <h2 className='font-bold text-[1.5em] text-brawn-950'>I can/need help:</h2>
           {helpType.map((el,ind) => 
-              <label key={ind} className='font-bold  bg-lime-50 w-64 h-12 flex gap-2 items-center pl-2'>
-                <input  onChange={(e) => helpTypeHandler(e)} type="radio" name="helpType"   value={el.helpType} className="mask mask-heart bg-lime-400 checked:bg-yellow-400" />
-                <span>{el.content}</span>
-            </label>
+          <label key={ind} className='font-bold  bg-lime-50 w-64 h-12 flex gap-2 items-center pl-2'>
+              <input  onChange={(e) => helpTypeHandler(e)} type="radio" name="helpType"   value={el.helpType} className="mask mask-heart bg-lime-400 checked:bg-yellow-400" />
+              <span>{el.content}</span>
+          </label>
             )}
         </div>
 
