@@ -17,10 +17,6 @@ function AddReviw({setReviews}) {
         setReviews(i => [review, ...i])
     }
 
-
-    // send review to db and then read from db for displaying
-    // function sendReview() {}
-
   return (
     <div>
         <div className="collapse bg-base-200">

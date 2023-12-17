@@ -23,6 +23,9 @@ export const AppProvider = ({children}) => {
     let [filters, setFilters] = useState([])
     const [filteredUsers, setFilteredUsers] = useState([])
 
+    const [usersModalStatus, setUsersModalStatus] = useState(false)
+    const [usersModalContent, setUsersModalContent] = useState()
+
 
     function generateAvatar(role, gender) {
         if(role === 'grand' && gender === 'male') return AVATAR.grandfather
@@ -263,7 +266,7 @@ export const AppProvider = ({children}) => {
       }
     }
 
-    //for opetn modal window to edit profile
+    //for open modal window to edit profile
     function changeEditModalStatus() {
         setEditModalStatus(i => true)
     }
@@ -274,6 +277,22 @@ export const AppProvider = ({children}) => {
         setEditModalStatus(i => false)
         changeEditModalContent('')
     }
+
+
+    //for open modal window about user
+    function changeUsertModalStatus() {
+       setUsersModalStatus(i => true)
+    }
+    function changeUserModalContent(content) {
+        setUsersModalContent(i => content)
+    }
+    function closeUserModal(){
+        setUsersModalStatus(i => false)
+        changeUserModalContent('')
+    }
+
+    // const [usersModalStatus, setUsersModalStatus] = useState(false)
+    // const [usersModalContent, setusersModalContent] = useState('')
 
 
     useEffect(() =>{
@@ -297,6 +316,9 @@ export const AppProvider = ({children}) => {
         changeEditModalStatus, editModalStatus,
         changeEditModalContent, editModalContent,
         closeEditModal,
+        
+        changeUserModalContent, changeUsertModalStatus,
+        usersModalContent, usersModalStatus, closeUserModal,
 
         isFilter, togleFilter, filteredUsers, filterUsers
         }}>
