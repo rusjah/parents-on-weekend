@@ -11,7 +11,7 @@ function Reviews() {
     getAllReviws()
   }, [])
   return (
-    <div className='flex flex-col justify-center items-center '>
+    <div className='flex flex-col justify-center items-center px-20'>
        <h2 className='font-bold text-[2rem] text-green-900 pb-4'>All Reviws</h2>
       <AddReviw />
       <div className='flex flex-col gap-8 p-12'>

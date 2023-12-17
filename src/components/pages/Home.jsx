@@ -7,7 +7,7 @@ import bg from '../../images/main-bg.jpg'
 import { useAppContext } from '../../context/AppContext'
 
 function Home() {
-const {currentUser, statusTrue, statusFalse} = useAppContext()
+const {currentUser, statusTrue, statusFalse, reviews} = useAppContext()
   return (
     <div>
       <section id='main'>
@@ -45,9 +45,9 @@ const {currentUser, statusTrue, statusFalse} = useAppContext()
       <section id='reviews' className='flex flex-col justify-center items-center py-4 bg-[#ffe8d6]'>
           <h2 className='font-bold text-[2.5rem] text-green-900'>Reviews</h2>
           <div className='py-10 flex flex-col md:flex-row justify-center gap-24'>
-              <ReviewCard />
-              <ReviewCard />
-              <ReviewCard />
+          {reviews.length > 0 &&  <ReviewCard  review={reviews[0]} />  }
+          {reviews.length > 1 &&  <ReviewCard  review={reviews[1]} />  }
+          {reviews.length > 2 &&  <ReviewCard  review={reviews[2]} />  }
           </div>
          <div className='self-end pr-12'>
          <  LetGoBtn title={"More..."}/>
