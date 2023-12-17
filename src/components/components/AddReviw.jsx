@@ -1,20 +1,19 @@
 import React from 'react'
+import { useAppContext } from '../../context/AppContext'
 
 function AddReviw({setReviews}) {
+    const {saveReview} = useAppContext()
     function sendReview(e) {
         e.preventDefault()
         const stars = Array.from(e.target.rating).find(radio => radio.checked);  
        
         const review = {
-            userId: 123,
-            fname: 'Mark',
-            lname: 'Yousch', 
-            photo: 'https://ik.imagekit.io/gdvzxjp5x/parentsOnWeekend/photos/users/father.jpg',
-            review: e.target.newReviwe.value,
+            content: e.target.newReviwe.value,
             rating: Number(stars.value)
         }
         e.target.newReviwe.value = ''
-        setReviews(i => [review, ...i])
+
+        saveReview(review)
     }
 
   return (

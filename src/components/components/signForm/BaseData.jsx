@@ -24,7 +24,7 @@ function BaseData({setnewUser, edit, setUpdatingData, modal}) {
     edit ? editModalContent(i => ({...i, helpType: e.target.value})) : setnewUser(i => ({...i, helpType: e.target.value}))
   }
   return (
-    <div className='flex flex-col lg:flex-row justify-center items-center gap-2 md:gap-6 border-orange-100 border-2 p-4'>
+    <div className='flex flex-col lg:flex-row justify-center items-center lg:items-start gap-2 md:gap-6 border-orange-100 border-2 p-4'>
       <div className='flex flex-col gap-4'>
           <h2 className='font-bold text-[1.5em] text-brawn-950'>My role</h2>
           {role.map((el,ind) => 

@@ -295,6 +295,18 @@ export const AppProvider = ({children}) => {
     // const [usersModalContent, setusersModalContent] = useState('')
 
 
+    async function saveReview(review) {
+        try {
+            const savedReview = {
+                usersId: currentUser.objectId,
+                ...review
+            }
+            const send = await Backendless.Data.of('reviews').save(savedReview)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     useEffect(() =>{
         isFilterCheck()
         filterUsers()
@@ -320,7 +332,9 @@ export const AppProvider = ({children}) => {
         changeUserModalContent, changeUsertModalStatus,
         usersModalContent, usersModalStatus, closeUserModal,
 
-        isFilter, togleFilter, filteredUsers, filterUsers
+        isFilter, togleFilter, filteredUsers, filterUsers,
+
+        saveReview,
         }}>
         {children}
     </AppContext.Provider>

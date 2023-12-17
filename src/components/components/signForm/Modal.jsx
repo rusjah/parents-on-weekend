@@ -63,7 +63,7 @@ function Modal() {
            <div className={`${editModalContent === 'options' ? 'flex' : 'hidden'}`}>
             <form action="">
             </form>
-               <Suggetions  edit={true} />
+               <Suggetions  edit={true} setUpdatingData={setUpdatingData}/>
            </div>
 
           <div className='flex justify-end w-full'>
