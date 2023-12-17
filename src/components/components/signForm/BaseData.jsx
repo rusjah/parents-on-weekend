@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useAppContext } from '../../../context/AppContext'
 
-function BaseData({setnewUser, edit, setUpdatingData}) {
+function BaseData({setnewUser, edit, setUpdatingData, modal}) {
   const {currentUser, editModalContent} = useAppContext()
 
   const defaultPostNumber = currentUser && currentUser.postNumber || ''
@@ -24,8 +24,8 @@ function BaseData({setnewUser, edit, setUpdatingData}) {
     edit ? editModalContent(i => ({...i, helpType: e.target.value})) : setnewUser(i => ({...i, helpType: e.target.value}))
   }
   return (
-    <div className='flex flex-col lg:flex-row justify-center items-center md:items-start gap-6 border-orange-100 border-2 p-4'>
-        <div className=' rating gap-1 flex flex-col gap-4'>
+    <div className='flex flex-col lg:flex-row justify-center items-center gap-2 md:gap-6 border-orange-100 border-2 p-4'>
+      <div className='flex flex-col gap-4'>
           <h2 className='font-bold text-[1.5em] text-brawn-950'>My role</h2>
           {role.map((el,ind) => 
           <label key={ind} className='font-bold  bg-lime-50 w-64 h-12 flex gap-2 items-center pl-2'>

@@ -35,10 +35,10 @@ function Modal() {
  }
   
   return (
-    <div className='z-10 fixed bg-amber-50 w-[90vw] md:w-[60vw] max-h-[86vh] top-[12vh] overflow-auto'>
-        <div className='flex flex-col justify-center border-2 border-amber-800'>
+    <div className='z-10 fixed bg-amber-50 w-[90vw] md:w-[80vw] max-h-[86vh] top-[12vh] overflow-auto'>
+        <div className='flex flex-col justify-center items-center border-2 border-amber-800'>
           <h1 className='text-green-900 text-[2em] p-5'>Make change</h1>
-           <div className={`${editModalContent === 'base' ? 'flex' : 'hidden'} flex flex-col`}>          
+           <div className={`${editModalContent === 'base' ? 'flex' : 'hidden'} flex flex-col items-center `}>          
             <BaseData  edit={true} setUpdatingData={setUpdatingData}/>
             <LoginData  edit={true} setUpdatingData={setUpdatingData}/>
             <PersonalData  edit={true} setUpdatingData={setUpdatingData}/>
