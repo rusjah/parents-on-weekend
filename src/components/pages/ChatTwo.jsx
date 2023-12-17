@@ -37,7 +37,6 @@ function Chat() {
                     msgId: msg.msgId,
                     chatId: msg.chatId
                 }
-                console.log('i am here', newChat);
                 updateChat.push(newChat)
             }
           })

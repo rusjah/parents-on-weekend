@@ -36,15 +36,15 @@ function App() {
             <Route path='home' element={<Home />} />
             <Route path='login' element={<Login />} />
             <Route path='sign' element={<Sign />} />
-            <Route path='changeWorld' element={<ChangeWorld />} />
+            {/* <Route path='changeWorld' element={<ChangeWorld />} /> */}
            
             <Route path='reviews' element={<ProtectedRoute  >
                                               <Reviews />
                                            </ProtectedRoute>} />
 
-            <Route path='chat' element={<ProtectedRoute  >
+            {/* <Route path='chat' element={<ProtectedRoute  >
                                               <ChatTwo />
-                                            </ProtectedRoute>} />
+                                            </ProtectedRoute>} /> */}
             <Route path='profile' element={<ProtectedRoute  >
                                               <Profile  />
                                            </ProtectedRoute>} />

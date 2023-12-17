@@ -64,7 +64,7 @@ function Nav() {
                         <ul onClick={hiddenMenu} tabIndex={0} className={showSubMenu ? `menu menu-sm dropdown-content mt-12 z-[1] p-2 shadow bg-base-100 rounded-box w-52 right-1`: 'hidden'}>
                             <Link to={'/'}><li><p >Home</p></li></Link>
                             <Link to={'/#about'}><li><p>About Us</p></li></Link>
-                            <Link to={'/changeWorld'}><li><p>Help</p></li></Link>
+                            {/* <Link to={'/changeWorld'}><li><p>Help</p></li></Link> */}
                             {!currentUser && <>
                                 <Link to={'/login'}><li><p>Log in</p></li></Link> 
                                 <Link to={'/sign'}><li><p>Sign up</p></li></Link>
@@ -83,7 +83,7 @@ function Nav() {
                 <ul className="hidden md:flex menu menu-horizontal px-1 text-green-950 font-bold">
                     <Link to={'/'}><li><p >Home</p></li></Link>
                     <Link to={'/#about'}><li><p>About Us</p></li></Link>
-                    <Link to={'/changeWorld'}><li><p>Help</p></li></Link>
+                    {/* <Link to={'/changeWorld'}><li><p>Help</p></li></Link> */}
                     {!currentUser && <>
                         <Link to={'/login'}><li><p>Log in</p></li></Link> 
                         <Link to={'/sign'}><li><p>Sign up</p></li></Link>
@@ -91,10 +91,10 @@ function Nav() {
                     {currentUser && <>
                         <Link to={'/mainList'}><li><p >People</p></li></Link>
                         <Link to={'/reviews'}><li><p >Reviws</p></li></Link>
-                        <Link to={'/chat'}><li className='relative'>
+                        {/* <Link to={'/chat'}><li className='relative'>
                             <Notification notification={notification}/>
                             <p className='text-[1.5em]'><ion-icon name="chatbubble-outline"></ion-icon></p>
-                        </li></Link>
+                        </li></Link> */}
                         <Link to={'/profile'}><li><p className='text-[1.5em]'><ion-icon name="person-outline"></ion-icon></p></li></Link>
                         <li onClick={toLogout}><p>Log out</p></li>
 

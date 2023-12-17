@@ -33,7 +33,6 @@ function Profile({owner='me'}) {
   },[!editModalStatus])
  
   useEffect(() => {
-    console.log(currentUser);
     getCurrentUser()
   },[])
 

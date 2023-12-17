@@ -9,7 +9,6 @@ function UserSmalCard({user}) {
     const {changeUserModalContent, changeUsertModalStatus} = useAppContext()
 
     function aboutUser() {
-        console.log('clicked');
         changeUsertModalStatus()
         changeUserModalContent(user)
       }
