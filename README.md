@@ -16,4 +16,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The Parents on Weekends is a web application where elderly individuals with a lot of free time, feeling lonely, can connect with parents in need of assistance with children and pets due to their busy work schedules
 
 ## Features and resources: 
-For creating were used React, Tailwind and Backendless
+For creating were used ***React***, ***Tailwind*** and ***Backendless***
