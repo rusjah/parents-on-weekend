@@ -5,7 +5,7 @@ function Test() {
     const [first, setfirst] = useState()
    
     function func(e) {
-        {console.log('dfsdfsd', e.target)}
+        // {console.log('dfsdfsd', e.target)}
     }
   return (
         <div>

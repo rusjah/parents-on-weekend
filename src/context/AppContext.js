@@ -70,7 +70,7 @@ export const AppProvider = ({children}) => {
     }
 
     async function toLogin(userLogin) {
-        validationCheck()
+        // validationCheck()
        try {
             const res = await Backendless.UserService.login(userLogin.email, userLogin.password, true);
             setCurrentUser(res)
@@ -78,7 +78,10 @@ export const AppProvider = ({children}) => {
             // toast('')
             navigate('home')
        } catch (e) {
-            console.log(e, 'login err');
+            if (e.code === 3003) {
+                toast('Your password or email is not correct...\n Please, try again...')
+            }
+            // console.log(e, 'login err');
        }
     }
 
@@ -88,6 +91,7 @@ export const AppProvider = ({children}) => {
         setUserStatus(false)
         navigate('home')
     }
+
 
     async function registration(registretedUser, userOptions) {
         // validationCheck()
@@ -108,6 +112,7 @@ export const AppProvider = ({children}) => {
                 }
                 newUser.photo = photo.fileReference.fileUrl
             } else { newUser.photo = generateAvatar(newUser.role, newUser.gender) }
+            
 
             if (newUser.video) {
                 const fileReference = await getReferenseFile(newUser.video, 'videos', `record-${Math.random() * 10}`)  
@@ -120,42 +125,70 @@ export const AppProvider = ({children}) => {
          
 
             const user = new Backendless.User(newUser);
-            console.log(user,'user');
             const res = await Backendless.UserService.register( user )
-            console.log(res, 'userRes');
             setUserStatus(true);
             const opt = await Backendless.Data.of('options').save(options)
-            console.log(opt, 'optRes');
-
             const userRel = { objectId: res.objectId }
             const optRel = { objectId:  opt.objectId}
             const relation = await Backendless.Data.of( "Users" ).addRelation( userRel, "optionsId", [optRel] )
             toast('Welcome, to our platphorm. Please, login to your profile')
             navigate('login')
         } catch(e) {
-            console.log(e, 'regestration err', e.code);
+            // console.log(e, 'regestration err', e.code);
         }
     }
 
     async function getCurrentUser() {
        try {
-
         const user = await Backendless.Data.of('Users').findById(currentUser.objectId, {
             relations: [`optionsId`]
         })
-        console.log(user, 'form cont');
         setCurrentUser(user)
         setUserStatus(i => true)
        } catch(e) {
-        console.log('error get current ', e);
+        // console.log('error get current ', e);
        }
         // return user;
     }
 
-    async function updateUser(updatedProp) {
-        // const updating = {...updatedProp, objectId: currentUser.objectId}
-        // const update = await Backendless.Data.of( "Users" ).save( updating)
-        // getCurrentUser()
+    async function updateUser(updatedProp, userOptions) {
+        try {
+            if (updatedProp.birthday) {
+                updatedProp.birthday = new Date(updatedProp.birthday)
+             } else { new Date() }
+
+            if (updatedProp.video)  {
+                const fileReference = await getReferenseFile(updatedProp.video, 'videos', `record-${Math.random() * 10}`)  
+                const video = {
+                    tag: 'records',
+                    fileReference: fileReference
+                }
+                updatedProp.video = video.fileReference.fileUrl 
+            }
+            if(updatedProp.photo){
+                const fileReference = await getReferenseFile(updatedProp.photo, 'images', true, `avatar-${Math.random() * 10}`)  
+                const photo = {
+                    tag: 'avatars',
+                    fileReference:  fileReference
+                }
+                updatedProp.photo = photo.fileReference.fileUrl
+            }
+            const options = generateOptions(userOptions);
+
+
+            const currentUser = await Backendless.UserService.getCurrentUser()
+            const obj = {
+                objectId: currentUser.objectId,
+                ...updatedProp
+            }
+            const update = await Backendless.Data.of( "Users" ).save( obj)
+            const opt = await Backendless.Data.of('options').save(options)
+            getCurrentUser()
+            setEditModalStatus(i => false)
+            changeEditModalContent('')
+        } catch(e) {
+            // console.log('update', e);
+        }
     }
 
     async function getAllUsers(cond) {
@@ -167,7 +200,7 @@ export const AppProvider = ({children}) => {
                 })
             setAllUsers(users)
         } catch (e) {
-            console.log(e, 'get all');
+            // console.log(e, 'get all');
         }
     }
 
@@ -209,11 +242,11 @@ export const AppProvider = ({children}) => {
     function getOptions(opt) {
         const userOptPs = []
         const userOptCh = []
-        PETS.map(obj => {
+        opt && PETS.map(obj => {
             for(let key in opt) {
                 (obj.nameId === key && opt[key]) && userOptPs.push(key)}
         })
-        CHILDREN.map(obj => {
+        opt && CHILDREN.map(obj => {
             for(let key in opt) {
                 (obj.nameId === key && opt[key]) && userOptCh.push(key)}
         })

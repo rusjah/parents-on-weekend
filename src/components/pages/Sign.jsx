@@ -38,7 +38,6 @@ function Sign() {
         }
       }
 
-      console.log(newUser, 'userform');
       registration(newUser, {pets:pets, children:children})
   
       e.target.reset();
@@ -55,7 +54,7 @@ function Sign() {
       <AdditionalData setnewUser={setnewUser} edit={false}/>
       <AboutMe setnewUser={setnewUser} edit={false}/>
       <Suggetions />
-      <div className='flex flex-col gap-4 border-orange-100 border-2 p-4'>
+      <div className='flex flex-col md:w-[71%] gap-4 border-orange-100 border-2 p-4'>
         <h2 className='font-bold text-[1.5em] text-brawn-950'>Record Video</h2>
         <label className='font-bold  bg-lime-50 mx-2 flex gap-1 items-center justify-center pl-2 flex-col p-4'>       
           <Video  setnewUser={setnewUser} edit={false}/>

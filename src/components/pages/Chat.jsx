@@ -54,8 +54,7 @@ function Chat() {
 
 
   function aktiveteChatFunc(e) {
-    console.log('lala');
-    console.log(e);
+//  
   }
 
 

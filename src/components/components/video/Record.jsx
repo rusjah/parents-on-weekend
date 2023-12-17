@@ -4,12 +4,10 @@ import { useReactMediaRecorder } from 'react-media-recorder-2';
 
 
 
-function Record({setnewUser}) {
+function Record({setnewUser, edit, setUpdatingData}) {
       const onRecordStop = (blobURL, blob) => {
-        console.log('blogurl', blobURL)
         const fileOfBlob = new File([blob], `Recorded-${Math.random() * 10}-version`);
-        console.log('blogb', fileOfBlob)
-        setnewUser && setnewUser(i => ({...i, video: fileOfBlob}))
+        edit ? setUpdatingData(i => ({...i, video: fileOfBlob})) : (setnewUser && setnewUser(i => ({...i, video: fileOfBlob})))
         blobURL = ''
         blob = null
 
@@ -46,7 +44,7 @@ function Record({setnewUser}) {
         }, [stream]);
       
         if (!stream) {
-          console.log("No stream available");
+          // console.log("No stream available");
           return null;
         }
       
@@ -71,10 +69,6 @@ function Record({setnewUser}) {
        <div className={'flex gap-2'}>
             <div className={`flex-col w-96 h-96  ${status === 'stopped' ? 'hidden' : 'flex'}`}>    
                 <h3 className='font-bold italic'>Record:</h3>
-                {/* <div className='flex gap-2'> */}
-                    {/* <button className={`font-bold ${status === 'recording' ? 'text-green-800' : 'text-yellow-800'} `} onClick={startRecording} disabled={status === "recording"}>Start</button>
-                    <button className='font-bold'  onClick={stopRecording} disabled={status !== "recording"}>Stop</button> */}
-                {/* </div> */}
                 <div className='w-full h-full'>{previewStream && <LiveStreamPreview stream={previewStream} />}</div>
             </div>
             <div className={`flex-col w-96 h-96  ${status === 'stopped' ? 'flex' : 'hidden'}`}>

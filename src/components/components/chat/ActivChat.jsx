@@ -6,10 +6,10 @@ function ActivChat({content, myId}) {
     <div className=' overflow-scroll h-[80%]'>
         {content.map((el, ind) => {
           if(myId === el.senderId) {
-            {console.log("ffffff", el)}
+
             return <Message key={ind} msgType={'end'} content={el}/>
           } else {
-            {console.log("elelel", el)}
+           
             return  <Message key={ind} msgType={'start'} content = {el}/>
           }
         })}

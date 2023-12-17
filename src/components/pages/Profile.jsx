@@ -10,15 +10,13 @@ import {AVATAR,PETS, CHILDREN} from '../../data/Data'
 
 function Profile({owner='me'}) {
   const navigate = useNavigate()
+    const [updatedUser, setUpdatedUser] = useState({})
 
   const { currentUser, getAge, getOptions, getCurrentUser, toglePlay, videoRef, changeEditModalStatus, editModalStatus, changeEditModalContent, } = useAppContext()
   
   // const currentUser = getUser();
 
   // console.log(currentUser, 'prof');
-  
-
-  const [updatedUser, setUpdatedUser] = useState({})
 
   const age = currentUser.birthday ? getAge(currentUser.birthday) : 1
   const pets = getOptions(currentUser.optionsId).pets
@@ -32,7 +30,7 @@ function Profile({owner='me'}) {
 
   useEffect(() => {
     getCurrentUser()
-  },[])
+  },[!editModalStatus])
 
   return (
     <div className='flex flex-col items-center bg-amber-50 w-[full] min-h-full p-6 bg-gradient-to-r from-green-50 to-orange-50 relative'>
@@ -65,7 +63,7 @@ function Profile({owner='me'}) {
           </div>
         </div>
 
-        {currentUser.video  && <div className='mt-10 p-10 flex justify-center gap-6 w-full md:w-[60%] relative  bg-white border-4 border-gradient-to-r from-[#181818] via-[#eee] to-[#181818]'>
+       <div className='mt-10 p-10 flex justify-center gap-6 w-full md:w-[60%] relative  bg-white border-4 border-gradient-to-r from-[#181818] via-[#eee] to-[#181818]'>
         { owner === 'me' && <p onClick={() => editProfile('video')} className='absolute top-3 right-3 md:right-10 font-bold text-green-900 text-[2em]'><ion-icon name="create-outline"></ion-icon></p> }
 
           <div className=' w-[60%] h-full flex flex-col gap-1 justify-center items-center pt-1 md:pt-10  font-roboto font-[450] text-justify'>
@@ -75,7 +73,7 @@ function Profile({owner='me'}) {
             </video>
             <button onClick={toglePlay} className='w-12 h-12 rounted-full bg-green-50' ></button>
           </div>
-        </div>}
+        </div>
 
         <div className=' relative mt-10 w-full md:w-[60%] h-full flex flex-col gap-1 justify-center items-center p-10 font-roboto font-[450] text-justify bg-white border-4 border-gradient-to-r from-[#181818] via-[#eee] to-[#181818]'>
         { owner === 'me' && <p onClick={() => editProfile('options')} className='absolute top-3 right-3 md:right-10 font-bold text-green-900 text-[2em]'><ion-icon name="create-outline"></ion-icon></p> }

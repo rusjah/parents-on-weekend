@@ -12,7 +12,7 @@ function ReviewCard() {
     }
 
     function starsGenerate(e) {
-        console.log(e.target);
+        // console.log(e.target);
     }
   return (
     <div className="card w-96 bg-orange-50 shadow-xl w-96 h-64">

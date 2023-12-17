@@ -68,7 +68,7 @@ function Chat() {
 
   return (
     <div className='min-h-[66vh] bg-yellow-50 py-20 flex justify-center'>
-        {console.log(chatsList)}
+        {/* {console.log(chatsList)} */}
       <div className='flex flex-col w-[80%] h-[66vh] border-orange-900 border-4 rounded-[20px]'>
 
         <header className='bg-yellow-900 h-[10%] text-yellow-400 pl-6 font-bold text-[1.5rem] flex gap-4'>
