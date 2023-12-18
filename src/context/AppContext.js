@@ -29,6 +29,16 @@ export const AppProvider = ({children}) => {
     const [reviews, setReviews] = useState([])
 
 
+
+
+    const [chats, setChats] = useState([])
+    const [activeChat, setActiveChat] = useState({})
+    const [messages, setMessages] = useState([])
+
+
+
+
+
     function generateAvatar(role, gender) {
         if(role === 'grand' && gender === 'male') return AVATAR.grandfather
         if(role === 'grand' && gender === 'female') return AVATAR.grandmother
@@ -336,6 +346,23 @@ export const AppProvider = ({children}) => {
         
     }
 
+
+
+
+    // const [chats, setChats] = useState([])
+    // const [activeChat, setActiveChat] = useState({})
+    // const [messages, setMessages] = useState([])
+    const [recieverID, setRecieverID] = useState('')
+
+    function sendNewMessage(newMsg) {
+        setMessages(i => [...i, newMsg])
+    }
+
+    function setRevievedID(id) {
+        setRecieverID(id)
+    }
+
+
     useEffect(() =>{
         isFilterCheck()
         filterUsers()
@@ -364,7 +391,10 @@ export const AppProvider = ({children}) => {
 
         isFilter, togleFilter, filteredUsers, filterUsers, 
 
-        saveReview, reviews, getAllReviws,filteredReviw, togleReview, filterReviw
+        saveReview, reviews, getAllReviws,filteredReviw, togleReview, filterReviw,
+
+        sendNewMessage, setRevievedID, recieverID,
+
         }}>
         {children}
     </AppContext.Provider>

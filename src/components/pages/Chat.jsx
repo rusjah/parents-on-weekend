@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import MsgForm from '../components/chat/MsgForm'
-import SmallChatCard from '../components/chat/SmallChatCard'
-import ActivChat from '../components/chat/ActivChat'
-import data from '../../data.json'
-
+import React, { useContext, useEffect, useState } from 'react'
+import MsgForm from './chat/MsgForm'
+import SmallChatCard from './chat/SmallChatCard'
+import ActivChat from './chat/ActivChat'
+import data from './data.json'
+import { useAppContext } from '../../context/AppContext'
 
 function Chat() {
+  const {chatReciever} = useAppContext()
+
   // const users = data.users
   const myId = data.myId
   // const msgList = data.msgList
@@ -81,7 +83,6 @@ useEffect(() => {
   return (
     <div className='min-h-[66vh] bg-yellow-50 py-20 flex justify-center'>
       <div className='flex flex-col w-[80%] h-[66vh] border-orange-900 border-4 rounded-[20px]'>
-
         <header className='bg-yellow-900 h-[10%] text-yellow-400 pl-6 font-bold text-[1.5rem] flex gap-4'>
           <img className='w-8 h-8 rounded-full' src={aktiveUser.photo} alt="" />
           <p>{aktiveUser.fname}</p>
@@ -91,6 +92,7 @@ useEffect(() => {
             {chatsList.map((chatElem, ind) =>  
                 <SmallChatCard key={ind} aktiveteChatFunc={aktiveteChatFunc} msgId={chatElem.chatContent[0].msgId} />
             )}
+            <p>{console.log('hi dfsfs',chatReciever)}</p>
           </div>
           
           <div className='w-full md:w-[80%] h-[80%] md:h-full bg-[#e4f0d0] p-2 relative'> 

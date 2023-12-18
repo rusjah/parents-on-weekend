@@ -7,7 +7,7 @@ function FullReviweCard({review}) {
         <div className="card-body">
             <div className='flex gap-4'>
                 <figure className='w-12 h-12'>
-                  { review.usersId && <img className='w-full h-full rounded-full' src={review.usersId.photo} alt="photo" />}
+                  { review.usersId  && <img className='w-full h-full rounded-full' src={review.usersId.photo} alt="photo" />}
                 </figure>
                 <figcaption>
                     {review.usersId &&  <p className='font-bold text-yellow-995'>{review.usersId.fname} {review.usersId.lname}</p>}

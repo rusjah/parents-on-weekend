@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import LetGoBtn from '../components/LetGoBtn'
 import OneStepUsing from '../components/OneStepUsing'
@@ -8,6 +8,7 @@ import { useAppContext } from '../../context/AppContext'
 
 function Home() {
 const {currentUser, statusTrue, statusFalse, reviews} = useAppContext()
+
   return (
     <div>
       <section id='main'>

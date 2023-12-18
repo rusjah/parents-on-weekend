@@ -4,12 +4,13 @@ import { useNavigate } from 'react-router-dom'
 
 function AboutUserModal() {
     const navigate = useNavigate()
-    const {closeUserModal, usersModalContent, getAge, getOptions, toglePlay, videoRef,} = useAppContext()
+    const {closeUserModal, usersModalContent, getAge, getOptions, toglePlay, videoRef,setRevievedID} = useAppContext()
     const age = usersModalContent.birthday ? getAge(usersModalContent.birthday) : 1
     const pets = getOptions(usersModalContent.optionsId).pets
     const children = getOptions(usersModalContent.optionsId).children
 
     function goToChat() {
+        setRevievedID(usersModalContent.objectId)
         closeUserModal()
         navigate('/chat')
     }

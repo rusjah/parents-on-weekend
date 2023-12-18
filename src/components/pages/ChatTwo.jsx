@@ -4,9 +4,12 @@ import SmallChatCard from '../components/chat/SmallChatCard'
 import ActivChat from '../components/chat/ActivChat'
 import data from '../../data.json'
 import AktiveChatTwo from '../components/chat/ActiveChatTwo'
+import { useAppContext } from '../../context/AppContext'
 
 
 function Chat() {
+  const {} = useAppContext()
+
   // const users = data.users
   const myId = data.myId
   // const msgList = data.msgList
@@ -60,9 +63,6 @@ function Chat() {
 
     },[])
 
-// useEffect(() => {
-//   setActiveUser()
-// },[aktiveUser])
 
 
   return (
@@ -73,7 +73,7 @@ function Chat() {
         <header className='bg-yellow-900 h-[10%] text-yellow-400 pl-6 font-bold text-[1.5rem] flex gap-4'>
           {/* <img className='w-8 h-8 rounded-full' src={aktiveUser.photo} alt="" />
           <p>{aktiveUser.fname}</p> */}
-          Chat
+          Chat 
         </header>
         <div className='flex w-full h-[90%] flex flex-col md:flex-row items-center'>
           <div className='w-full md:w-[20%] h-[25%] md:h-full bg-[#fffcf7] p-4 overflow-auto flex flex-col gap-4'>

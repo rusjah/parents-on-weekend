@@ -12,17 +12,17 @@ function ReviewCard({review}) {
         <div className="card-body">
             <div className='flex gap-4'>
                 <figure className='w-12 h-12'>
-                    <img className='w-full h-full rounded-full' src={review.usersId.photo} alt="photo" />
+                { review.usersId  &&  <img className='w-full h-full rounded-full' src={review.usersId.photo} alt="photo" />}
                 </figure>
                 <figcaption>
-                    <p className='font-bold text-yellow-995'>{review.usersId.fname} {review.usersId.lname}</p>
+                {review.usersId &&   <p className='font-bold text-yellow-995'>{review.usersId.fname} {review.usersId.lname}</p>}
                     <div className="rating" onClick={starsGenerate}>
                         <p className='mask mask-star-2 bg-orange-400 w-6 h-6'></p>
-                        <RatingStars rating={review.rating} />
+                        {review &&  <RatingStars rating={review.rating} />}
                     </div>
                 </figcaption>
             </div>
-            <div className="h-32 overflow-hidden">"{review.content}" I had a fantastic experience using "Grandparents on weekend". The interface is user-friendly, offering a wide range of services/products. Excellent customer service and a smooth transaction process. Highly recommended!'I had a fantastic experience using "Grandparents on weekend". The interface is user-friendly, offering a wide range of services/products. Excellent customer service and a smooth transaction process. Highly recommended!'</div>
+            {review &&  <div className="h-32 overflow-hidden">{review.content}</div>}
         </div>
     </div>
   )

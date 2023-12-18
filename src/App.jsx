@@ -42,9 +42,9 @@ function App() {
                                               <Reviews />
                                            </ProtectedRoute>} />
 
-            {/* <Route path='chat' element={<ProtectedRoute  >
+            <Route path='chat' element={<ProtectedRoute  >
                                               <ChatTwo />
-                                            </ProtectedRoute>} /> */}
+                                            </ProtectedRoute>} />
             <Route path='profile' element={<ProtectedRoute  >
                                               <Profile  />
                                            </ProtectedRoute>} />

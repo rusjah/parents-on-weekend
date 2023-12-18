@@ -1,17 +1,25 @@
 import React from 'react'
+import { useAppContext } from '../../../context/AppContext'
+
 
 function MsgForm({setMsgList, aktiveChat}) {
+  
+  const {sendNewMessage, recieverID} = useAppContext()
+
     function sendMsg(e) {
       e.preventDefault()
-      const newMsg = {
-        sgId: "220",
-        senderId: "1",
-        recieverId: "2",
-        date: "Mar 12 2012 10:00:00 AM",
-        chatId: aktiveChat,
-        msg: "New message in this chat",
-        status: "send"                   
-      }
+
+      // const newMsg = {
+      //   sgId: "220",
+      //   senderId: "1",
+      //   recieverId: "2",
+      //   date: "Mar 12 2012 10:00:00 AM",
+      //   chatId: aktiveChat,
+      //   msg: "New message in this chat",
+      //   status: "send"                   
+      // }
+
+      
 
       //add msg to msg
 
