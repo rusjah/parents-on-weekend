@@ -292,9 +292,6 @@ export const AppProvider = ({children}) => {
         changeUserModalContent('')
     }
 
-    // const [usersModalStatus, setUsersModalStatus] = useState(false)
-    // const [usersModalContent, setusersModalContent] = useState('')
-
 
     async function saveReview(review) {
         try {
@@ -323,6 +320,22 @@ export const AppProvider = ({children}) => {
         }
     }
 
+    const [togleReview, setTogleReview] = useState(false)
+    const [filteredReviw, setFilteredReviw] = useState([])
+
+    async function filterReviw() {
+        console.log(togleReview);
+       if (togleReview) {
+             setTogleReview(false)
+        } else {
+            const curUsr = await Backendless.UserService.getCurrentUser()
+            const filteredRev = reviews.filter(el =>el.usersId.objectId === curUsr.objectId)
+            setFilteredReviw(i => filteredRev)
+            setTogleReview(true)
+        }
+        
+    }
+
     useEffect(() =>{
         isFilterCheck()
         filterUsers()
@@ -349,9 +362,9 @@ export const AppProvider = ({children}) => {
         changeUserModalContent, changeUsertModalStatus,
         usersModalContent, usersModalStatus, closeUserModal,
 
-        isFilter, togleFilter, filteredUsers, filterUsers,
+        isFilter, togleFilter, filteredUsers, filterUsers, 
 
-        saveReview, reviews, getAllReviws
+        saveReview, reviews, getAllReviws,filteredReviw, togleReview, filterReviw
         }}>
         {children}
     </AppContext.Provider>

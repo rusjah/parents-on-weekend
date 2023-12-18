@@ -7,10 +7,10 @@ function FullReviweCard({review}) {
         <div className="card-body">
             <div className='flex gap-4'>
                 <figure className='w-12 h-12'>
-                    <img className='w-full h-full rounded-full' src={review.usersId.photo} alt="photo" />
+                  { review.usersId && <img className='w-full h-full rounded-full' src={review.usersId.photo} alt="photo" />}
                 </figure>
                 <figcaption>
-                    <p className='font-bold text-yellow-995'>{review.usersId.fname} {review.usersId.lname}</p>
+                    {review.usersId &&  <p className='font-bold text-yellow-995'>{review.usersId.fname} {review.usersId.lname}</p>}
                     <div className="rating">
                         <p className='mask mask-star-2 bg-orange-400 w-6 h-6'></p>
                         <RatingStars rating={review.rating} />
