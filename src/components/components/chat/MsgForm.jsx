@@ -4,7 +4,7 @@ import { useAppContext } from '../../../context/AppContext'
 
 function MsgForm({setMsgList, aktiveChat}) {
   
-  const {sendNewMessage, recieverID} = useAppContext()
+  const {sendNewMessage, recieverID, currentUser} = useAppContext()
 
     function sendMsg(e) {
       e.preventDefault()
@@ -18,8 +18,17 @@ function MsgForm({setMsgList, aktiveChat}) {
       //   msg: "New message in this chat",
       //   status: "send"                   
       // }
+      const newMsg = {
+        senderId: currentUser.id,
+        recieverId: recieverID,
+        date: new Date(),
+        chatId: aktiveChat,
+        msg: "New message in this chat",
+        status: "send"                   
+      }
 
-      
+      console.log(recieverID, 'from form');
+      sendNewMessage(newMsg)
 
       //add msg to msg
 

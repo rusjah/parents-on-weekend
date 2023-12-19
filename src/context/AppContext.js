@@ -25,17 +25,18 @@ export const AppProvider = ({children}) => {
 
     const [usersModalStatus, setUsersModalStatus] = useState(false)
     const [usersModalContent, setUsersModalContent] = useState()
-
+    
     const [reviews, setReviews] = useState([])
 
-
-
-
+    
+    
+    
     const [chats, setChats] = useState([])
     const [activeChat, setActiveChat] = useState({})
     const [messages, setMessages] = useState([])
-
-
+    const [recieverID, setRecieverID] = useState('')
+    const [chatBriefOponent, setChatBriefOponent] = useState()
+    
 
 
 
@@ -326,7 +327,7 @@ export const AppProvider = ({children}) => {
               });
             setReviews(i => reviws)
         } catch(e) {
-            // console.log(e);
+            console.log(e);
         }
     }
 
@@ -352,14 +353,45 @@ export const AppProvider = ({children}) => {
     // const [chats, setChats] = useState([])
     // const [activeChat, setActiveChat] = useState({})
     // const [messages, setMessages] = useState([])
-    const [recieverID, setRecieverID] = useState('')
+    // const [recieverID, setRecieverID] = useState('')
+    // const [chatBriefOponent, setChatBriefOponent] = useState()
+
+    
+
+    async function getCurrentUserInfo() {
+        const cur = await Backendless.UserService.getCurrentUser()
+        setCurrentUser(i => cur)
+    }
 
     function sendNewMessage(newMsg) {
+        console.log(currentUser, 'currentuser');
+        console.log(newMsg, 'newMsg');
         setMessages(i => [...i, newMsg])
     }
 
-    function setRevievedID(id) {
-        setRecieverID(id)
+    async function getChats() {
+        const chatsList = await Backendless.Data.of('chanels').find({
+            relations: ['participants']
+        })
+        const curUs = await Backendless.UserService.getCurrentUser()
+        const usersChats = chatsList.filter(chat =>
+            chat.participants.some(participant => participant.objectId === curUs.objectId)
+        );
+
+        console.log(usersChats, 'userschats');
+        setChats(i => usersChats)
+    }
+
+    async function chatBrief(chat) {
+        const curUs = await Backendless.UserService.getCurrentUser()
+        const chatOponent = chat.participants[0].objectId === curUs.objectId ? chat.participants[1] : chat.participants[0]
+        console.log(chatOponent, 'userschats');
+    
+        setChatBriefOponent(i => chatOponent)
+    }
+
+    function getChatBrieefOpponent() {
+        return chatBriefOponent
     }
 
 
@@ -370,6 +402,7 @@ export const AppProvider = ({children}) => {
 
 
     useEffect(() =>{
+        getChats()
         getAllReviws()
         getAllUsers()
     },[])
@@ -393,7 +426,8 @@ export const AppProvider = ({children}) => {
 
         saveReview, reviews, getAllReviws,filteredReviw, togleReview, filterReviw,
 
-        sendNewMessage, setRevievedID, recieverID,
+        sendNewMessage, recieverID, setRecieverID, 
+        getChats, chats, chatBrief, chatBriefOponent, getChatBrieefOpponent
 
         }}>
         {children}
