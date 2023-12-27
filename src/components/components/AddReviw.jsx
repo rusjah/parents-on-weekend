@@ -5,7 +5,7 @@ function AddReviw() {
 
     const {saveReview} = useAppContext()
     
-    function sendReview(e) {
+     function sendReview(e) {
         e.preventDefault()
         const stars = Array.from(e.target.rating).find(radio => radio.checked);  
         const review = {
@@ -14,7 +14,7 @@ function AddReviw() {
         }
         e.target.newReviwe.value = ''
 
-        saveReview(review)
+         saveReview(review)
     }
 
   return (
@@ -32,7 +32,8 @@ function AddReviw() {
                     <input type="radio" name="rating" value={2} className="mask mask-star-2 bg-orange-400" />
                     <input type="radio" name="rating" value={3} className="mask mask-star-2 bg-orange-400" />
                     <input type="radio" name="rating" value={4} className="mask mask-star-2 bg-orange-400" />
-                    <input type="radio" name="rating" value={5} className="mask mask-star-2 bg-orange-400" />
+                    <input type="radio" name="rating" value={5} className="mask mask-star-2 bg-orange-400" id='rating5'/> 
+                    {/* <label htmlFor="rating5" className='checked:text-orange-400 w-6 h-6 font-bold text-lg'>&#9733;</label> */}
                 </div>
                     <textarea name='newReviwe' style={{scrollbarWidth: 'none'}} className="textarea textarea-warning h-[12vh] w-[100%] " placeholder="Write message"></textarea>
                     <button type='submit'className='absolute right-1 bottom-1 text-green-800 text-[2em]' ><ion-icon name="send-outline"></ion-icon></button>

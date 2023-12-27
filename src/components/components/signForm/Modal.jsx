@@ -42,7 +42,6 @@ function Modal() {
             <BaseData  edit={true} setUpdatingData={setUpdatingData}/>
             <LoginData  edit={true} setUpdatingData={setUpdatingData}/>
             <PersonalData  edit={true} setUpdatingData={setUpdatingData}/>
-            <LoginData edit={true} setUpdatingData={setUpdatingData} />
             <AdditionalData edit={true} setUpdatingData={setUpdatingData}/>
            </div>
            <div className={`${editModalContent === 'aboutMe' ? 'flex flex-col' : 'hidden'}`}>
