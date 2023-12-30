@@ -25,7 +25,6 @@ function App() {
   const API = process.env.REACT_APP_APP_KEY
   Backendless.serverURL = "https://eu-api.backendless.com"
   Backendless.initApp(ID,API);
- 
 
   return (
     <div className="App">

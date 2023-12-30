@@ -85,23 +85,23 @@ function Profile({owner='me'}) {
           <h2 className='font-bold text-[1.5em] text-lime-900 pb-4'>My options:</h2>
           <div className='w-full  flex flex-col lg:flex-row justify-between relative'>
 
-            <div className='shadow-lg hover:shadow-green-500 md:hover:shadow-xl md:hover:shadow-lime-900 p-4'>
+           {pets.length > 0 && <div className='shadow-lg hover:shadow-green-500 md:hover:shadow-xl md:hover:shadow-lime-900 p-4'>
               <p className='text-[1.5rem] text-lime-800 pb-4' >Pets:</p>
                 <div className='w-[24vw] flex flex-wrap gap-4 justify-between'>
                   {pets && pets.map((el, ind )=>
                     <p key={ind} className='flex gap-2 text-[1.3rem] justify-start items-center capitalize'><span className='font-bold text-[1.5em] text-green-900'><ion-icon name="checkmark-outline"></ion-icon></span> {el}</p>)}
                 </div>
               </div>
-            
-              <div className='shadow-lg hover:shadow-green-500 md:hover:shadow-xl md:hover:shadow-orange-900 p-4'>
+            }
+            {children.length > 0 &&  <div className='shadow-lg hover:shadow-green-500 md:hover:shadow-xl md:hover:shadow-orange-900 p-4'>
                 <p className='text-[1.5rem] text-lime-800 flex flex-around pb-4' >Children:</p>
                 <div className='w-[24vw] flex flex-wrap gap-4 justify-between'>
                     {children && children.map((el, ind) =>
                     <p key={ind} className='flex gap-2 text-[1.3rem] justify-start items-center capitalize'><span className='font-bold text-[1.5em] text-green-900'><ion-icon name="checkmark-outline"></ion-icon></span> {el}</p>)}
                 </div>
               </div>
+            }
 
-{/* {             console.log(updatedUser)} */}
             </div>
           </div>
 

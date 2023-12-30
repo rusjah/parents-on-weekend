@@ -398,6 +398,17 @@ export const AppProvider = ({children}) => {
   // const [recieverID, setRecieverID] = useState('')
   // const [chatBriefOponent, setChatBriefOponent] = useState()
 
+  async function getChatsList () {
+    let userChats = await Backendless.Data.of ('chanels').find ({
+      relations: ['parts'],
+    });
+    const user = await Backendless.UserService.getCurrentUser ();
+    userChats = userChats.filter (chat =>
+      chat.name.includes (`${user.objectId}`)
+    );
+    setChats (userChats);
+  }
+
   useEffect (
     () => {
       isFilterCheck ();
@@ -409,6 +420,7 @@ export const AppProvider = ({children}) => {
   useEffect (() => {
     getAllReviws ();
     getAllUsers ();
+    getChatsList ();
   }, []);
 
   return (
@@ -452,6 +464,9 @@ export const AppProvider = ({children}) => {
         togleReview,
         filterReviw,
         deleteReview,
+
+        getChatsList,
+        chats,
       }}
     >
       {children}

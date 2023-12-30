@@ -8,53 +8,51 @@ import { useAppContext } from '../../context/AppContext'
 
 
 function Chat() {
-  const {getChats, chats} = useAppContext()
+  // const {getChats, chats} = useAppContext()
+  const {getChatsList, chats}  = useAppContext()
 
   // const users = data.users
   const myId = data.myId
   // const msgList = data.msgList
 
-  const [users, setUuers] = useState(data.users)
-  const [msgList, setMsgList] = useState(data.msgList)
+  // const [users, setUuers] = useState(data.users)
+  // const [msgList, setMsgList] = useState(data.msgList)
 
-  const [chatsList, setChatsList] = useState([])
-  const [aktiveChat, setAktiveChat] = useState()
-  // const [aktiveUser, setaktiveUser] = useState({})
+  // const [chatsList, setChatsList] = useState([])
+  // const [aktiveChat, setAktiveChat] = useState()
+  // // const [aktiveUser, setaktiveUser] = useState({})
 
-  function sortMsgList() {
-    msgList.sort((a, b) => {
-        return  new Date(b.date) - new Date(a.date)
-    })
-  }
+  // function sortMsgList() {
+  //   msgList.sort((a, b) => {
+  //       return  new Date(b.date) - new Date(a.date)
+  //   })
+  // }
 
 
-  function getUsersChats () {
-      sortMsgList()
-      const userMsgList = msgList.filter(el => el.senderId === myId || el.recieverId === myId)
-      const updateChat = [...chatsList]
+  // function getUsersChats () {
+  //     sortMsgList()
+  //     const userMsgList = msgList.filter(el => el.senderId === myId || el.recieverId === myId)
+  //     const updateChat = [...chatsList]
      
-      userMsgList.forEach(msg => {
-            const ind = updateChat.findIndex(chl => chl.chatId === msg.chatId)
-            if (ind == -1) {
-                let newChat = {
-                    msgId: msg.msgId,
-                    chatId: msg.chatId
-                }
-                updateChat.push(newChat)
-            }
-          })
-      setChatsList(i => updateChat)
-      setAktiveChat(i => updateChat[0])
+  //     userMsgList.forEach(msg => {
+  //           const ind = updateChat.findIndex(chl => chl.chatId === msg.chatId)
+  //           if (ind == -1) {
+  //               let newChat = {
+  //                   msgId: msg.msgId,
+  //                   chatId: msg.chatId
+  //               }
+  //               updateChat.push(newChat)
+  //           }
+  //         })
+  //     setChatsList(i => updateChat)
+  //     setAktiveChat(i => updateChat[0])
      
-  }
+  // }
 
 
     useEffect(() => {
-      getChats();
-      sortMsgList()
-      setChatsList(i => []) ;
-      getUsersChats()
-
+      getChatsList()
+      console.log('current user from chats', chats);
     },[])
 
 
@@ -74,10 +72,10 @@ function Chat() {
           </div>
           
           <div className='w-full md:w-[80%] h-[80%] md:h-full bg-[#e4f0d0] p-2 relative'> 
-            {aktiveChat && <AktiveChatTwo myId={myId} aktiveChat={aktiveChat}/>}
+            {/* {aktiveChat && <AktiveChatTwo myId={myId} aktiveChat={aktiveChat}/>} */}
             {/* {aktiveChat.length > 0}<ActivChat myId={myId} content={aktiveChat}/> */}
              <div className='absolute bottom-2 w-[98%]'>
-              <MsgForm setMsgList={setMsgList} aktiveChat={aktiveChat}/>
+              {/* <MsgForm setMsgList={setMsgList} aktiveChat={aktiveChat}/> */}
             </div>
           </div> 
 
