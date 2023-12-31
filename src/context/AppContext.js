@@ -32,6 +32,7 @@ export const AppProvider = ({children}) => {
   const [messages, setMessages] = useState ([]);
   const [recieverID, setRecieverID] = useState ('');
   const [chatBriefOponent, setChatBriefOponent] = useState ();
+  const [chatsUser, setChatsUser] = useState (null);
 
   function generateAvatar (role, gender) {
     if (role === 'grand' && gender === 'male') return AVATAR.grandfather;
@@ -397,12 +398,13 @@ export const AppProvider = ({children}) => {
   // const [messages, setMessages] = useState([])
   // const [recieverID, setRecieverID] = useState('')
   // const [chatBriefOponent, setChatBriefOponent] = useState()
+  // const [lastMsg, setLastMsg] = useState('');
 
   async function getChatsList () {
+    const user = await Backendless.UserService.getCurrentUser ();
     let userChats = await Backendless.Data.of ('chanels').find ({
       relations: ['parts'],
     });
-    const user = await Backendless.UserService.getCurrentUser ();
     userChats = userChats.filter (chat =>
       chat.name.includes (`${user.objectId}`)
     );

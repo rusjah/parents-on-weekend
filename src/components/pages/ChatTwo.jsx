@@ -52,7 +52,6 @@ function Chat() {
 
     useEffect(() => {
       getChatsList()
-      console.log('current user from chats', chats);
     },[])
 
 
@@ -65,13 +64,13 @@ function Chat() {
           Chat 
         </header>
         <div className='flex w-full h-[90%] flex flex-col md:flex-row items-center'>
-          <div className='w-full md:w-[20%] h-[25%] md:h-full bg-[#fffcf7] p-4 overflow-auto flex flex-col gap-4'>
+          <div className='w-full md:w-[25%] h-[25%] md:h-full bg-[#fffcf7] p-4 overflow-auto flex flex-col gap-4'>
             {chats && chats.map((chat, ind) => (
               <SmallChatCard key={ind} chat={chat} />
             ))}
           </div>
           
-          <div className='w-full md:w-[80%] h-[80%] md:h-full bg-[#e4f0d0] p-2 relative'> 
+          <div className='w-full md:w-[75%] h-[80%] md:h-full bg-[#e4f0d0] p-2 relative'> 
             {/* {aktiveChat && <AktiveChatTwo myId={myId} aktiveChat={aktiveChat}/>} */}
             {/* {aktiveChat.length > 0}<ActivChat myId={myId} content={aktiveChat}/> */}
              <div className='absolute bottom-2 w-[98%]'>
