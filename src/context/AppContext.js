@@ -28,8 +28,8 @@ export const AppProvider = ({children}) => {
   const [reviews, setReviews] = useState ([]);
 
   const [chats, setChats] = useState ([]);
-  const [activeChat, setActiveChat] = useState ({});
-  const [messages, setMessages] = useState ([]);
+  const [activeChat, setActiveChat] = useState (null);
+  const [chatMessages, setChatMessages] = useState ([]);
   const [recieverID, setRecieverID] = useState ('');
   const [chatBriefOponent, setChatBriefOponent] = useState ();
   const [chatsUser, setChatsUser] = useState (null);
@@ -395,10 +395,10 @@ export const AppProvider = ({children}) => {
 
   // const [chats, setChats] = useState([])
   // const [activeChat, setActiveChat] = useState({})
-  // const [messages, setMessages] = useState([])
   // const [recieverID, setRecieverID] = useState('')
   // const [chatBriefOponent, setChatBriefOponent] = useState()
   // const [lastMsg, setLastMsg] = useState('');
+  // const [chatMessages, setChatMessages] = useState ([]);
 
   async function getChatsList () {
     const user = await Backendless.UserService.getCurrentUser ();
@@ -409,6 +409,16 @@ export const AppProvider = ({children}) => {
       chat.name.includes (`${user.objectId}`)
     );
     setChats (userChats);
+  }
+
+  async function getChatMsg (chat) {
+    const user = await Backendless.UserService.getCurrentUser ();
+    const msgs = await Backendless.Data.of ('messages').find ({
+      relations: ['recieverId', 'senderId', 'chat'],
+      where: "chat.name = '" + chat.name + "'",
+    });
+    setChatMessages (i => msgs);
+    console.log ('active chat', msgs);
   }
 
   useEffect (
@@ -469,6 +479,10 @@ export const AppProvider = ({children}) => {
 
         getChatsList,
         chats,
+        setActiveChat,
+        activeChat,
+        getChatMsg,
+        chatMessages,
       }}
     >
       {children}

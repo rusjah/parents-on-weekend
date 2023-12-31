@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 
 function Message({msgType, content}) {
 
   function getTime(date) {
-    return (String(date).split(' ')[3]).slice(0,5)
+    // return (String(date).split(' ')[3]).slice(0,5)
+    return (String(new Date()).split(' ')[3]).slice(0,5)
   }
+  
+  useEffect(() => {
+    console.log(content);
+  },[])
+  
+
   return (
     <div>
         {msgType === 'start' ? <div className={`chat chat-start `}>

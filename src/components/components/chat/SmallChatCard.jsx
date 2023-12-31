@@ -4,6 +4,7 @@ import { useAppContext } from '../../../context/AppContext';
 import Backendless from 'backendless';
 
 function SmallChatCard({chat}) {
+    const {setActiveChat, getChatMsg} = useAppContext()
     const [lastMsg, setLastMsg] = useState()
     const [chatsUser, setChatsUser] = useState()
 
@@ -21,13 +22,19 @@ function SmallChatCard({chat}) {
         setChatsUser (i => chatUser[0]);
     }
 
+     function activateChat() {
+        console.log('ja');
+        setActiveChat(i => chat)
+        getChatMsg(chat)
+    }
+
     useEffect(() => {
         getLastMsg()
         getChatsUser()
     },[])
 
   return (
-    <div className="card-body border-2 border-yellow-100 rounded-full max-h-20 py-2">
+    <div onClick={activateChat} className="card-body border-2 border-yellow-100 rounded-full max-h-20 py-2">
         {chatsUser && <div className='flex max-h-full gap-4'>
             <figure className='w-8 h-8'>
                 <img className='w-full h-full rounded-full' src={chatsUser.photo} alt="photo" />

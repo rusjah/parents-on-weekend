@@ -71,6 +71,7 @@ function Chat() {
           </div>
           
           <div className='w-full md:w-[75%] h-[80%] md:h-full bg-[#e4f0d0] p-2 relative'> 
+          <AktiveChatTwo />
             {/* {aktiveChat && <AktiveChatTwo myId={myId} aktiveChat={aktiveChat}/>} */}
             {/* {aktiveChat.length > 0}<ActivChat myId={myId} content={aktiveChat}/> */}
              <div className='absolute bottom-2 w-[98%]'>
