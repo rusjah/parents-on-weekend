@@ -416,11 +416,39 @@ export const AppProvider = ({children}) => {
     const msgs = await Backendless.Data.of ('messages').find ({
       relations: ['recieverId', 'senderId', 'chat'],
       where: "chat.name = '" + chat.name + "'",
+      sortBy: 'created ASC',
     });
     setChatMessages (i => msgs);
     console.log ('active chat', msgs);
   }
 
+  async function sendMsg (msgObj) {
+    const currentUserId = await Backendless.UserService.getCurrentUser ();
+    const res = await Backendless.Data.of ('messages').save (msgObj);
+
+    const parent = {objectId: res.objectId};
+    const childrenObj = {objectId: activeChat.objectId};
+    const children = [childrenObj];
+
+    await Backendless.Data
+      .of ('messages')
+      .setRelation (parent, 'chat', children);
+    childrenObj.objectId = currentUserId.objectId;
+    await Backendless.Data
+      .of ('messages')
+      .setRelation (parent, 'senderId', children);
+    childrenObj.objectId = activeChat.parts.filter (
+      el => el.objectId !== currentUserId.objectId
+    )[0].objectId;
+    await Backendless.Data
+      .of ('messages')
+      .setRelation (parent, 'recieverId', children);
+
+    getChatMsg (activeChat);
+
+    //   console.log (rel);
+    //   setChatMessages (i => ({...i, newMessage}));
+  }
   useEffect (
     () => {
       isFilterCheck ();
@@ -483,6 +511,7 @@ export const AppProvider = ({children}) => {
         activeChat,
         getChatMsg,
         chatMessages,
+        sendMsg,
       }}
     >
       {children}

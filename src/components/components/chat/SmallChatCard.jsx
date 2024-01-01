@@ -22,8 +22,7 @@ function SmallChatCard({chat}) {
         setChatsUser (i => chatUser[0]);
     }
 
-     function activateChat() {
-        console.log('ja');
+    function activateChat() {
         setActiveChat(i => chat)
         getChatMsg(chat)
     }

@@ -2,43 +2,26 @@ import React from 'react'
 import { useAppContext } from '../../../context/AppContext'
 
 
-function MsgForm({setMsgList, aktiveChat}) {
+function MsgForm({setMsgList}) {
+  const {activeChat, sendMsg} = useAppContext()
   
-  const {sendNewMessage, recieverID, currentUser} = useAppContext()
-
-    function sendMsg(e) {
+    function sendHandler(e) {
       e.preventDefault()
-
-      // const newMsg = {
-      //   sgId: "220",
-      //   senderId: "1",
-      //   recieverId: "2",
-      //   date: "Mar 12 2012 10:00:00 AM",
-      //   chatId: aktiveChat,
-      //   msg: "New message in this chat",
-      //   status: "send"                   
-      // }
+      const msg = e.target.newMsg.value;
       const newMsg = {
-        senderId: currentUser.id,
-        recieverId: recieverID,
-        date: new Date(),
-        chatId: aktiveChat,
-        msg: "New message in this chat",
+        sendDate: new Date(),
+        msg: msg,
         status: "send"                   
       }
-
-      console.log(recieverID, 'from form');
-      sendNewMessage(newMsg)
-
-      //add msg to msg
+      e.target.newMsg.value = ''
+      sendMsg(newMsg)
 
       // setMsgList(i => [...i, newMsg])
-      // console.log(newMsg,'new message');
     }
     
   return (
     <div className='w-[100%]'> 
-        <form action="" className='w-[90%] md:w-[100%] relative' onSubmit={sendMsg}>
+        <form action="" className='w-[90%] md:w-[100%] relative' onSubmit={sendHandler}>
             <input type="text"name='newMsg' placeholder="Write message" className="input input-bordered input-warning h-[5vh] w-[100%]" />
             <button type='submit'className='absolute right-1 text-green-800 text-[2em]' ><ion-icon name="send-outline"></ion-icon></button>
         </form>
