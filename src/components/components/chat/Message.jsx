@@ -7,7 +7,6 @@ function Message({msgType, content}) {
   }
   
   useEffect(() => {
-    console.log(content);
   },[])
   
 

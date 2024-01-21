@@ -5,15 +5,50 @@ import ActivChat from '../components/chat/ActivChat'
 import data from '../../data.json'
 import AktiveChatTwo from '../components/chat/ActiveChatTwo'
 import { useAppContext } from '../../context/AppContext'
+import Backendless from 'backendless'
+import { act } from 'react-dom/test-utils'
 
 
-function Chat() {
-  // const {getChats, chats} = useAppContext()
-  const {getChatsList, chats}  = useAppContext()
-
-    useEffect(() => {
+ function Chat() {
+  const {getChatsList,getChatMsg, chats,  subscribeMsg, activeChat,chatMessages, setChatMessages, msgLen}  = useAppContext()
+  // const [newMsg, setNewMsg] = useState(false)
+  const [flagMsg, setFlagMsg] = useState(false)
+ 
+    useEffect( () => {
       getChatsList()
+
     },[])
+
+    useEffect(()=>{
+    
+        const subscription = Backendless.Data.of('messages').rt();
+        Backendless.Data.of('chanels').rt();
+    
+        subscription.addCreateListener(async (newMessage) => {
+          console.log('recieve new msg', newMessage );
+          console.log('recieve new  and chatmsg',  chatMessages);
+        
+          console.log("newMessage", chatMessages[chatMessages.length - 1]);
+          setFlagMsg(i => !flagMsg)
+          if (activeChat) {
+            getChatMsg(activeChat)
+            console.log('here is active chat')
+          }
+          
+          // console.log("newMessageFromCall", newMessage);/
+        
+          // setChatMessages (i => [...i, newMsg]);
+          // getChatMsg(activeChat)
+          // setMessages((prevMessages) => [...prevMessages, newMessage]);
+          // chatMessages(i => [i, ...newMessage])
+        });
+    
+        // return () => {
+        //   subscription.removeCreateListener();
+        // };
+    },[])
+
+
 
   return (
     <div className='min-h-[66vh] bg-yellow-50 py-20 flex justify-center'>
@@ -25,12 +60,12 @@ function Chat() {
         <div className='flex w-full h-[90%] flex flex-col md:flex-row items-center'>
           <div className='w-full md:w-[25%] h-[25%] md:h-full bg-[#fffcf7] p-4 overflow-auto flex flex-col gap-4'>
             {chats && chats.map((chat, ind) => (
-              <SmallChatCard key={ind} chat={chat} />
+              <SmallChatCard key={ind} chat={chat}  flagMsg = {flagMsg} />
             ))}
           </div>
           
           <div className='w-full md:w-[75%] h-[80%] md:h-full bg-[#e4f0d0] p-2 relative'> 
-              <AktiveChatTwo /> 
+              <AktiveChatTwo flagMsg={flagMsg}/> 
              <div className='absolute bottom-2 w-[98%]'>
               <MsgForm />
             </div>

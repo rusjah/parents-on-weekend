@@ -33,6 +33,8 @@ export const AppProvider = ({children}) => {
   const [recieverID, setRecieverID] = useState ('');
   const [chatBriefOponent, setChatBriefOponent] = useState ();
   const [chatsUser, setChatsUser] = useState (null);
+  const [lastMsg, setLastMsg] = useState ();
+  const [msgLen, setMsgLen] = useState (0);
 
   function generateAvatar (role, gender) {
     if (role === 'grand' && gender === 'male') return AVATAR.grandfather;
@@ -399,30 +401,41 @@ export const AppProvider = ({children}) => {
   // const [chatBriefOponent, setChatBriefOponent] = useState()
   // const [lastMsg, setLastMsg] = useState('');
   // const [chatMessages, setChatMessages] = useState ([]);
+  const [isNewMsg, setIsNewMsg] = useState (false);
 
   async function getChatsList () {
     const user = await Backendless.UserService.getCurrentUser ();
     let userChats = await Backendless.Data.of ('chanels').find ({
       relations: ['parts'],
     });
-    userChats = userChats.filter (chat =>
-      chat.name.includes (`${user.objectId}`)
-    );
-    setChats (userChats);
+
+    console.log ('user', user);
+    console.log ('userChats', userChats);
+
+    if (userChats && user) {
+      userChats = userChats.filter (chat =>
+        chat.name.includes (`${user.objectId.slice (0, 21)}`)
+      );
+      console.log ('userChats2', userChats);
+      setChats (userChats);
+    }
   }
 
   async function getChatMsg (chat) {
-    const user = await Backendless.UserService.getCurrentUser ();
     const msgs = await Backendless.Data.of ('messages').find ({
       relations: ['recieverId', 'senderId', 'chat'],
       where: "chat.name = '" + chat.name + "'",
       sortBy: 'created ASC',
     });
+
     setChatMessages (i => msgs);
     console.log ('active chat', msgs);
   }
 
+  // const [lastMsg, setLastMsg] = useState()
+
   async function sendMsg (msgObj) {
+    Backendless.Data.of ('messages').rt ();
     const currentUserId = await Backendless.UserService.getCurrentUser ();
     const res = await Backendless.Data.of ('messages').save (msgObj);
 
@@ -445,10 +458,32 @@ export const AppProvider = ({children}) => {
       .setRelation (parent, 'recieverId', children);
 
     getChatMsg (activeChat);
-
-    //   console.log (rel);
-    //   setChatMessages (i => ({...i, newMessage}));
   }
+  const [newMsg, setNewMsg] = useState (false);
+
+  function subscribeMsg (chat) {
+    const channelName = [
+      chat.parts[0].objectId.slice (0, 21),
+      chat.parts[1].objectId.slice (0, 21),
+    ].join ();
+    const channel = Backendless.Messaging.subscribe (channelName);
+    function onMessage (msg) {
+      console.log (`Message received on ${channelName}: ${msg}`);
+      getChatMsg (chat);
+      setNewMsg (i => false);
+      // setNewMsg (i => false);
+    }
+    channel.addMessageListener (onMessage);
+    console.log ('chanel', channel);
+
+    return () => {
+      channel.removeMessageListener (onMessage);
+      Backendless.Messaging.unsubscribe (channel);
+    };
+  }
+
+  async function initRT () {}
+
   useEffect (
     () => {
       isFilterCheck ();
@@ -512,6 +547,14 @@ export const AppProvider = ({children}) => {
         getChatMsg,
         chatMessages,
         sendMsg,
+        subscribeMsg,
+        newMsg,
+        setNewMsg,
+
+        setChatMessages,
+
+        msgLen,
+        setMsgLen,
       }}
     >
       {children}

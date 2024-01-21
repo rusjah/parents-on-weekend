@@ -3,8 +3,8 @@ import data from '../../../data.json'
 import { useAppContext } from '../../../context/AppContext';
 import Backendless from 'backendless';
 
-function SmallChatCard({chat}) {
-    const {setActiveChat, getChatMsg} = useAppContext()
+function SmallChatCard({chat,  flagMsg}) {
+    const {setActiveChat, getChatMsg, msgLen, setMsgLen} = useAppContext()
     const [lastMsg, setLastMsg] = useState()
     const [chatsUser, setChatsUser] = useState()
 
@@ -14,7 +14,7 @@ function SmallChatCard({chat}) {
           where: "chat.name = '" + chat.name + "'",
         });
         setLastMsg (i => lastChatsMsg.msg);
-      }
+    }
 
     async function getChatsUser () {
         const user = await Backendless.UserService.getCurrentUser ();
@@ -30,7 +30,12 @@ function SmallChatCard({chat}) {
     useEffect(() => {
         getLastMsg()
         getChatsUser()
+        setMsgLen(i => 0)
     },[])
+
+    useEffect(() => {
+        activateChat()
+    }, [flagMsg])
 
   return (
     <div onClick={activateChat} className="card-body border-2 border-yellow-100 rounded-full max-h-20 py-2">
