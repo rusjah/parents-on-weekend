@@ -11,44 +11,28 @@ import { act } from 'react-dom/test-utils'
 
  function Chat() {
   const {getChatsList,getChatMsg, chats,  subscribeMsg, activeChat,chatMessages, setChatMessages, msgLen}  = useAppContext()
-  // const [newMsg, setNewMsg] = useState(false)
-  const [flagMsg, setFlagMsg] = useState(false)
- 
-    useEffect( () => {
-      getChatsList()
+  const [newMsg, setNewMsg] = useState([])
 
-    },[])
 
-    useEffect(()=>{
+  useEffect(()=>{
     
-        const subscription = Backendless.Data.of('messages').rt();
-        Backendless.Data.of('chanels').rt();
-    
-        subscription.addCreateListener(async (newMessage) => {
-          console.log('recieve new msg', newMessage );
-          console.log('recieve new  and chatmsg',  chatMessages);
-        
-          console.log("newMessage", chatMessages[chatMessages.length - 1]);
-          setFlagMsg(i => !flagMsg)
-          if (activeChat) {
-            getChatMsg(activeChat)
-            console.log('here is active chat')
-          }
-          
-          // console.log("newMessageFromCall", newMessage);/
-        
-          // setChatMessages (i => [...i, newMsg]);
-          // getChatMsg(activeChat)
-          // setMessages((prevMessages) => [...prevMessages, newMessage]);
-          // chatMessages(i => [i, ...newMessage])
-        });
-    
-        // return () => {
-        //   subscription.removeCreateListener();
-        // };
-    },[])
+    const subscription = Backendless.Data.of('messages').rt();
+    Backendless.Data.of('chanels').rt();
 
+    subscription.addCreateListener((newMessage) => {
+      console.log('recieve new msg', newMessage );
+      console.log('after recieving all msgs', newMsg)
+      const addingMsg = {
+        msg: newMessage.msg,
+        senderId: newMessage.ownerId
+      }
+      setNewMsg(i => [...i, addingMsg])
+    });
 
+      // return () => {
+      //   subscription.removeCreateListener();
+      // };
+  },[])
 
   return (
     <div className='min-h-[66vh] bg-yellow-50 py-20 flex justify-center'>
@@ -60,12 +44,12 @@ import { act } from 'react-dom/test-utils'
         <div className='flex w-full h-[90%] flex flex-col md:flex-row items-center'>
           <div className='w-full md:w-[25%] h-[25%] md:h-full bg-[#fffcf7] p-4 overflow-auto flex flex-col gap-4'>
             {chats && chats.map((chat, ind) => (
-              <SmallChatCard key={ind} chat={chat}  flagMsg = {flagMsg} />
+              <SmallChatCard key={ind} chat={chat} setNewMsg={setNewMsg} />
             ))}
           </div>
           
           <div className='w-full md:w-[75%] h-[80%] md:h-full bg-[#e4f0d0] p-2 relative'> 
-              <AktiveChatTwo flagMsg={flagMsg}/> 
+              <AktiveChatTwo newMsg={newMsg}/> 
              <div className='absolute bottom-2 w-[98%]'>
               <MsgForm />
             </div>

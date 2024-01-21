@@ -3,7 +3,7 @@ import data from '../../../data.json'
 import { useAppContext } from '../../../context/AppContext';
 import Backendless from 'backendless';
 
-function SmallChatCard({chat,  flagMsg}) {
+function SmallChatCard({chat,  setNewMsg}) {
     const {setActiveChat, getChatMsg, msgLen, setMsgLen} = useAppContext()
     const [lastMsg, setLastMsg] = useState()
     const [chatsUser, setChatsUser] = useState()
@@ -22,10 +22,20 @@ function SmallChatCard({chat,  flagMsg}) {
         setChatsUser (i => chatUser[0]);
     }
 
-    function activateChat() {
+    async function activateChat() {
         setActiveChat(i => chat)
         getChatMsg(chat)
+        const msgs = await Backendless.Data.of ('messages').find ({
+            relations: ['recieverId', 'senderId', 'chat'],
+            where: "chat.name = '" + chat.name + "'",
+            sortBy: 'created ASC',
+          });
+        const activTalk =  msgs.map((el) => ({ msg: el.msg, senderId: el.senderId.objectId }));
+
+        setNewMsg(activTalk)
     }
+
+    
 
     useEffect(() => {
         getLastMsg()
@@ -33,9 +43,9 @@ function SmallChatCard({chat,  flagMsg}) {
         setMsgLen(i => 0)
     },[])
 
-    useEffect(() => {
-        activateChat()
-    }, [flagMsg])
+    // useEffect(() => {
+    //     activateChat()
+    // }, [flagMsg])
 
   return (
     <div onClick={activateChat} className="card-body border-2 border-yellow-100 rounded-full max-h-20 py-2">

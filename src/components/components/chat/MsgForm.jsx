@@ -4,9 +4,9 @@ import Backendless from 'backendless'
 import { act } from 'react-dom/test-utils'
 
 
-function MsgForm({setMsgList}) {
+function MsgForm({setFlagMsg, flagMsg}) {
 
-  const {activeChat, sendMsg, setNewMsg,setChatMessages, setActiveChat, msgLen, setMsgLen} = useAppContext()
+  const {activeChat, sendMsg, setNewMsg, msgLen, setMsgLen} = useAppContext()
   
     async function sendHandler(e) {
       console.log('msg length: ', msgLen);

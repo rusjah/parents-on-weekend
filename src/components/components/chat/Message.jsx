@@ -15,17 +15,21 @@ function Message({msgType, content}) {
         {msgType === 'start' ? <div className={`chat chat-start `}>
           <div className="chat-header"> 
           </div>
-          <div className="chat-bubble flex flex-col">{content.msg} <span className='text-[10px] text-white-700'>{getTime(content.sendDate)}</span></div>
+          <div className="chat-bubble flex flex-col">{content.msg} 
+          {/* <span className='text-[10px] text-white-700'>{getTime(content.sendDate)}</span> */}
+          </div>
           <div className="chat-footer opacity-50">
-            {content.status}
+            {/* {content.status} */}
           </div> 
         </div> :
           <div className={`chat chat-end`}>
           <div className="chat-header"> 
           </div>
-          <div className="chat-bubble flex flex-col">{content.msg} <span className='text-[10px] text-white-700'>{getTime(content.sendDate)}</span></div>
+          <div className="chat-bubble flex flex-col">{content.msg} 
+          {/* <span className='text-[10px] text-white-700'>{getTime(content.sendDate)}</span> */}
+          </div>
           <div className="chat-footer opacity-50">
-            {content.status}
+            {/* {content.status} */}
           </div> 
         </div>
         }
