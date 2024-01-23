@@ -1,61 +1,57 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Message from './Message'
-import data from '../../../data.json'
 import { useAppContext } from '../../../context/AppContext'
 import Backendless from 'backendless'
 
 function ActivChat(newMsg) {
-  const {activeChat, getChatMsg, chatMessages} = useAppContext()
+  const {activeChat} = useAppContext()
   const [userId, setUserId] = useState()
-  const [activeMsgs, setActiveMsgs] = useState([])
 
-  const [messages, setMessages] = useState(chatMessages)
+  const containerRef = useRef(null);
   
   async function getUserId() {
     const user = (await Backendless.UserService.getCurrentUser())
     setUserId(i => user.objectId)
   }
 
+  const scrollToBottom = () => {
+    // if (newMsg.length) {
+    //   containerRef.current?.scrollIntoView({
+    //     behavior: "smooth",
+    //     block: "end",
+    //   });
+    // }
+    if (containerRef) {
+      containerRef.current.addEventListener('DOMNodeInserted', event => {
+        const { currentTarget: target } = event;
+        target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
+      });
+    }
+  };
+
+
   useEffect( ()=> {
     getUserId()
-    // setActiveMsgs(i => chatMessages)
+    // scrollToBottom()
   },[])
 
 
+  useEffect(() => {
+    scrollToBottom();
+   
+  }, [newMsg]);
     
   return (
-    <div className=' overflow-scroll h-[80%]'>
-      {activeChat && console.log('active chat from chat room', newMsg.newMsg)}
-        {newMsg.newMsg.length > 0 && newMsg.newMsg.map((el, ind) => {
-        {/* {messages.length > 0 && messages.map((el, ind) => { */}
+    <div ref={containerRef} className=' overflow-scroll h-[80%]' id='chat-room'>
+        {activeChat && newMsg.newMsg.length > 0 && newMsg.newMsg.map((el, ind) => {
           if(userId === el.senderId) {
-            // {console.log("ffffff", el)}
             return <Message key={ind} msgType={'end'} content={el}/>
           } else {
-            // {console.log("elelel", el)}
             return  <Message key={ind} msgType={'start'} content = {el}/>
           }
         })}
-        {chatMessages.length === 0  && <p className='p-2 font-bold text-lg'>Choose chat to start talking</p>}
-        {/* {messages.length === 0  && <p className='p-2 font-bold text-lg'>Choose chat to start talking</p>} */}
-        
+        {newMsg.newMsg.length === 0  && <p className='p-2 font-bold text-lg'>Choose chat to start talking</p>}
     </div>
-    // <div className=' overflow-scroll h-[80%]'>
-    //     {chatMessages.length > 0 && chatMessages.map((el, ind) => {
-    //     {/* {messages.length > 0 && messages.map((el, ind) => { */}
-    //     {activeChat && console.log('active chat from chat room', newMsg)}
-    //       if(userId === el.senderId.objectId) {
-    //         // {console.log("ffffff", el)}
-    //         return <Message key={ind} msgType={'end'} content={el}/>
-    //       } else {
-    //         // {console.log("elelel", el)}
-    //         return  <Message key={ind} msgType={'start'} content = {el}/>
-    //       }
-    //     })}
-    //     {chatMessages.length === 0  && <p className='p-2 font-bold text-lg'>Choose chat to start talking</p>}
-    //     {/* {messages.length === 0  && <p className='p-2 font-bold text-lg'>Choose chat to start talking</p>} */}
-        
-    // </div>
   )
 }
 

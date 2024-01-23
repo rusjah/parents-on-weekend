@@ -4,7 +4,7 @@ import { useAppContext } from '../../../context/AppContext';
 import Backendless from 'backendless';
 
 function SmallChatCard({chat,  setNewMsg}) {
-    const {setActiveChat, getChatMsg, msgLen, setMsgLen} = useAppContext()
+    const {setActiveChat, getChatMsg} = useAppContext()
     const [lastMsg, setLastMsg] = useState()
     const [chatsUser, setChatsUser] = useState()
 
@@ -40,12 +40,9 @@ function SmallChatCard({chat,  setNewMsg}) {
     useEffect(() => {
         getLastMsg()
         getChatsUser()
-        setMsgLen(i => 0)
     },[])
 
-    // useEffect(() => {
-    //     activateChat()
-    // }, [flagMsg])
+  
 
   return (
     <div onClick={activateChat} className="card-body border-2 border-yellow-100 rounded-full max-h-20 py-2">

@@ -30,11 +30,6 @@ export const AppProvider = ({children}) => {
   const [chats, setChats] = useState ([]);
   const [activeChat, setActiveChat] = useState (null);
   const [chatMessages, setChatMessages] = useState ([]);
-  const [recieverID, setRecieverID] = useState ('');
-  const [chatBriefOponent, setChatBriefOponent] = useState ();
-  const [chatsUser, setChatsUser] = useState (null);
-  const [lastMsg, setLastMsg] = useState ();
-  const [msgLen, setMsgLen] = useState (0);
 
   function generateAvatar (role, gender) {
     if (role === 'grand' && gender === 'male') return AVATAR.grandfather;
@@ -395,14 +390,6 @@ export const AppProvider = ({children}) => {
     filterReviw ();
   }
 
-  // const [chats, setChats] = useState([])
-  // const [activeChat, setActiveChat] = useState({})
-  // const [recieverID, setRecieverID] = useState('')
-  // const [chatBriefOponent, setChatBriefOponent] = useState()
-  // const [lastMsg, setLastMsg] = useState('');
-  // const [chatMessages, setChatMessages] = useState ([]);
-  const [isNewMsg, setIsNewMsg] = useState (false);
-
   async function getChatsList () {
     const user = await Backendless.UserService.getCurrentUser ();
     let userChats = await Backendless.Data.of ('chanels').find ({
@@ -432,8 +419,6 @@ export const AppProvider = ({children}) => {
     console.log ('active chat', msgs);
   }
 
-  // const [lastMsg, setLastMsg] = useState()
-
   async function sendMsg (msgObj) {
     Backendless.Data.of ('messages').rt ();
     const currentUserId = await Backendless.UserService.getCurrentUser ();
@@ -459,30 +444,6 @@ export const AppProvider = ({children}) => {
 
     getChatMsg (activeChat);
   }
-  const [newMsg, setNewMsg] = useState (false);
-
-  function subscribeMsg (chat) {
-    const channelName = [
-      chat.parts[0].objectId.slice (0, 21),
-      chat.parts[1].objectId.slice (0, 21),
-    ].join ();
-    const channel = Backendless.Messaging.subscribe (channelName);
-    function onMessage (msg) {
-      console.log (`Message received on ${channelName}: ${msg}`);
-      getChatMsg (chat);
-      setNewMsg (i => false);
-      // setNewMsg (i => false);
-    }
-    channel.addMessageListener (onMessage);
-    console.log ('chanel', channel);
-
-    return () => {
-      channel.removeMessageListener (onMessage);
-      Backendless.Messaging.unsubscribe (channel);
-    };
-  }
-
-  async function initRT () {}
 
   useEffect (
     () => {
@@ -510,7 +471,6 @@ export const AppProvider = ({children}) => {
         updateUser,
         getAllUsers,
         allUsers,
-        filterUsers,
         getOptions,
         getAge,
         toglePlay,
@@ -547,14 +507,6 @@ export const AppProvider = ({children}) => {
         getChatMsg,
         chatMessages,
         sendMsg,
-        subscribeMsg,
-        newMsg,
-        setNewMsg,
-
-        setChatMessages,
-
-        msgLen,
-        setMsgLen,
       }}
     >
       {children}

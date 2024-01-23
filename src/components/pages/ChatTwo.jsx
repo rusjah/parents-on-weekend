@@ -10,7 +10,7 @@ import { act } from 'react-dom/test-utils'
 
 
  function Chat() {
-  const {getChatsList,getChatMsg, chats,  subscribeMsg, activeChat,chatMessages, setChatMessages, msgLen}  = useAppContext()
+  const { chats }  = useAppContext()
   const [newMsg, setNewMsg] = useState([])
 
 
@@ -27,6 +27,7 @@ import { act } from 'react-dom/test-utils'
         senderId: newMessage.ownerId
       }
       setNewMsg(i => [...i, addingMsg])
+      
     });
 
       // return () => {

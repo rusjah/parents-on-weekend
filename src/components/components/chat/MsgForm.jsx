@@ -1,17 +1,14 @@
 import React from 'react'
 import { useAppContext } from '../../../context/AppContext'
 import Backendless from 'backendless'
-import { act } from 'react-dom/test-utils'
 
 
 function MsgForm({setFlagMsg, flagMsg}) {
 
-  const {activeChat, sendMsg, setNewMsg, msgLen, setMsgLen} = useAppContext()
+  const {activeChat, sendMsg} = useAppContext()
   
     async function sendHandler(e) {
-      console.log('msg length: ', msgLen);
       e.preventDefault()
-      setNewMsg(i => false)
       const msg = e.target.newMsg.value;
       const newMsg = {
         sendDate: new Date(),
@@ -26,14 +23,6 @@ function MsgForm({setFlagMsg, flagMsg}) {
       newMsg.recieverId = activeChat.parts.filter(el => el.objectId !== user.objectId)
       newMsg.senderId = user.objectId
       sendMsg(newMsg)
-      setMsgLen(i => i+1)
-
-      // const chanelName = [activeChat.parts[0].objectId.slice(0,21), 
-      //                     activeChat.parts[0].objectId.slice(0,21)].sort().join()
-
-      // await Backendless.Messaging.publish( chanelName, newMsg )
-      // setChatMessages(i => [...i, newMsg])
-      // setNewMsg(i => true)
     }
     
   return (
