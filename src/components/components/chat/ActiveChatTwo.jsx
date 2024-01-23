@@ -15,12 +15,6 @@ function ActivChat(newMsg) {
   }
 
   const scrollToBottom = () => {
-    // if (newMsg.length) {
-    //   containerRef.current?.scrollIntoView({
-    //     behavior: "smooth",
-    //     block: "end",
-    //   });
-    // }
     if (containerRef) {
       containerRef.current.addEventListener('DOMNodeInserted', event => {
         const { currentTarget: target } = event;

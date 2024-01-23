@@ -14,8 +14,19 @@ import { act } from 'react-dom/test-utils'
   const [newMsg, setNewMsg] = useState([])
 
 
+  const [lastOfMsg, setLastOfMsg] = useState()
+
+
+  async function getLastMsg (msgId) {
+    const lastChatsMsg = await Backendless.Data.of ('messages').findLast ({
+      relations: ['chat'],
+      where: "objectId = '" + msgId + "'",
+    });
+    setLastOfMsg (i => lastChatsMsg.msg);
+  }
+
+ 
   useEffect(()=>{
-    
     const subscription = Backendless.Data.of('messages').rt();
     Backendless.Data.of('chanels').rt();
 
@@ -27,12 +38,13 @@ import { act } from 'react-dom/test-utils'
         senderId: newMessage.ownerId
       }
       setNewMsg(i => [...i, addingMsg])
+      getLastMsg(newMessage.objectId)
       
     });
 
-      // return () => {
-      //   subscription.removeCreateListener();
-      // };
+      return () => {
+        subscription.removeCreateListener();
+      };
   },[])
 
   return (
@@ -45,7 +57,7 @@ import { act } from 'react-dom/test-utils'
         <div className='flex w-full h-[90%] flex flex-col md:flex-row items-center'>
           <div className='w-full md:w-[25%] h-[25%] md:h-full bg-[#fffcf7] p-4 overflow-auto flex flex-col gap-4'>
             {chats && chats.map((chat, ind) => (
-              <SmallChatCard key={ind} chat={chat} setNewMsg={setNewMsg} />
+              <SmallChatCard key={ind} chat={chat} setNewMsg={setNewMsg} lastOfMsg={lastOfMsg} getLastMsg={getLastMsg} setLastOfMsg={setLastOfMsg}/>
             ))}
           </div>
           

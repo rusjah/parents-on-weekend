@@ -3,7 +3,7 @@ import data from '../../../data.json'
 import { useAppContext } from '../../../context/AppContext';
 import Backendless from 'backendless';
 
-function SmallChatCard({chat,  setNewMsg}) {
+function SmallChatCard({chat,  setNewMsg, lastOfMsg}) {
     const {setActiveChat, getChatMsg} = useAppContext()
     const [lastMsg, setLastMsg] = useState()
     const [chatsUser, setChatsUser] = useState()
@@ -52,7 +52,7 @@ function SmallChatCard({chat,  setNewMsg}) {
             </figure>
             <figcaption>
                 <p className='font-bold text-yellow-995'>{chatsUser.fname} {chatsUser.lname}</p>
-                <p className="w-[40vw] md:w-[6vw] truncate">{lastMsg}</p>
+                <p className="w-[40vw] md:w-[6vw] truncate">{lastOfMsg || lastMsg}</p>
             </figcaption>
         </div>}
         
