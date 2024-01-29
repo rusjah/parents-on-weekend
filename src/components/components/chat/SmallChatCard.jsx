@@ -13,7 +13,8 @@ function SmallChatCard({chat,  setNewMsg, lastOfMsg}) {
           relations: ['chat'],
           where: "chat.name = '" + chat.name + "'",
         });
-        setLastMsg (i => lastChatsMsg.msg);
+        
+        lastChatsMsg != undefined ? setLastMsg (i => lastChatsMsg.msg) : setLastMsg (i => '')
     }
 
     async function getChatsUser () {
@@ -52,6 +53,7 @@ function SmallChatCard({chat,  setNewMsg, lastOfMsg}) {
             </figure>
             <figcaption>
                 <p className='font-bold text-yellow-995'>{chatsUser.fname} {chatsUser.lname}</p>
+                {/* <p className="w-[40vw] md:w-[6vw] truncate">{lastOfMsg }</p> */}
                 <p className="w-[40vw] md:w-[6vw] truncate">{lastOfMsg || lastMsg}</p>
             </figcaption>
         </div>}
