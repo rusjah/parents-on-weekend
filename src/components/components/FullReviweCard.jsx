@@ -7,11 +7,11 @@ function FullReviweCard({review}) {
 
   const {deleteReview,currentUser} = useAppContext()
 
-  useEffect(() => {
-    console.log(currentUser, 'user');
-    console.log(review, 'review');
+  // useEffect(() => {
+  //   console.log(currentUser, 'user');
+  //   console.log(review, 'review');
 
-  },[])
+  // },[])
 
   return (
     <div className="card w-full bg-orange-50 shadow-xl w-96 min-h-64 relative">

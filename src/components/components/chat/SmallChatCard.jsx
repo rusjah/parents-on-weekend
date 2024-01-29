@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import data from '../../../data.json'
 import { useAppContext } from '../../../context/AppContext';
 import Backendless from 'backendless';
 
-function SmallChatCard({chat,  setNewMsg, lastOfMsg}) {
-    const {setActiveChat, getChatMsg} = useAppContext()
+function SmallChatCard({chat,  setNewMsg}) {
+    const {setActiveChat, getChatMsg, activeChat} = useAppContext()
     const [lastMsg, setLastMsg] = useState()
     const [chatsUser, setChatsUser] = useState()
 
@@ -36,14 +35,14 @@ function SmallChatCard({chat,  setNewMsg, lastOfMsg}) {
         setNewMsg(activTalk)
     }
 
-    
-
     useEffect(() => {
         getLastMsg()
         getChatsUser()
     },[])
 
-  
+    useEffect(() => {
+        getLastMsg()
+    },[activateChat])
 
   return (
     <div onClick={activateChat} className="card-body border-2 border-yellow-100 rounded-full max-h-20 py-2">
@@ -53,8 +52,7 @@ function SmallChatCard({chat,  setNewMsg, lastOfMsg}) {
             </figure>
             <figcaption>
                 <p className='font-bold text-yellow-995'>{chatsUser.fname} {chatsUser.lname}</p>
-                {/* <p className="w-[40vw] md:w-[6vw] truncate">{lastOfMsg }</p> */}
-                <p className="w-[40vw] md:w-[6vw] truncate">{lastOfMsg || lastMsg}</p>
+                <p className="w-[40vw] md:w-[6vw] truncate">{lastMsg}</p> 
             </figcaption>
         </div>}
         

@@ -26,9 +26,12 @@ function App() {
   Backendless.serverURL = "https://eu-api.backendless.com"
   Backendless.initApp(ID,API);
 
+
+  const [notification, setNotification] = useState(false)
+
   return (
     <div className="App">
-      <Nav/>
+      <Nav notification={notification}/>
       <div className='min-h-[66vh]'>
       <Routes>
             <Route index element={<Home />} />
@@ -42,7 +45,7 @@ function App() {
                                            </ProtectedRoute>} />
 
             <Route path='chat' element={<ProtectedRoute  >
-                                              <ChatTwo />
+                                              <ChatTwo notification={notification} setNotification={setNotification}/>
                                             </ProtectedRoute>} />
             <Route path='profile' element={<ProtectedRoute  >
                                               <Profile  />

@@ -396,14 +396,10 @@ export const AppProvider = ({children}) => {
       relations: ['parts'],
     });
 
-    console.log ('user', user);
-    console.log ('userChats', userChats);
-
     if (userChats && user) {
       userChats = userChats.filter (chat =>
         chat.name.includes (`${user.objectId.slice (0, 21)}`)
       );
-      console.log ('userChats2', userChats);
       setChats (userChats);
     }
   }
@@ -416,7 +412,6 @@ export const AppProvider = ({children}) => {
     });
 
     setChatMessages (i => msgs);
-    console.log ('active chat', msgs);
   }
 
   async function sendMsg (msgObj) {
