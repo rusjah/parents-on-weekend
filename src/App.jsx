@@ -28,10 +28,28 @@ function App() {
 
 
   const [notification, setNotification] = useState(false)
+  const [isNewMsgs, setIsNewMsgs] = useState(false)
+  const [currentUserId, setCurrentUserId] = useState()
+
+  async function getUserId() {
+    try {
+      const user = (await Backendless.UserService.getCurrentUser())
+      user && setCurrentUserId(i => user.objectId)
+    } catch (e) {
+      console.log('Now isn')
+    }
+   
+  }
+
+  useEffect(() => {
+    getUserId()
+    return setCurrentUserId(null)
+  }, [])
+  
 
   return (
     <div className="App">
-      <Nav notification={notification}/>
+      <Nav notification={notification} setNotification={setNotification}/>
       <div className='min-h-[66vh]'>
       <Routes>
             <Route index element={<Home />} />
@@ -45,7 +63,7 @@ function App() {
                                            </ProtectedRoute>} />
 
             <Route path='chat' element={<ProtectedRoute  >
-                                              <ChatTwo notification={notification} setNotification={setNotification}/>
+                                              <ChatTwo notification={notification} setNotification={setNotification} currentUserId={currentUserId} isNewMsgs={isNewMsgs} setIsNewMsgs={setIsNewMsgs}/>
                                             </ProtectedRoute>} />
             <Route path='profile' element={<ProtectedRoute  >
                                               <Profile  />

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useAppContext } from '../../context/AppContext'
 import { useNavigate } from 'react-router-dom'
+import Backendless from 'backendless'
 
 function AboutUserModal() {
     const navigate = useNavigate()
@@ -9,8 +10,28 @@ function AboutUserModal() {
     const pets = getOptions(usersModalContent.optionsId).pets
     const children = getOptions(usersModalContent.optionsId).children
 
-    function goToChat() {
-        setRecieverID(i => usersModalContent.objectId)
+   async function goToChat() {
+    try {
+      Backendless.Data.of('chanels').rt();
+      const user = await Backendless.UserService.getCurrentUser ();
+      const chatsName = [user.objectId.slice(0,21), usersModalContent.objectId.slice(0, 21)].join(',');
+      const chat = { name: chatsName }
+      const addingChat = await Backendless.Data.of('chanels').save(chat)
+
+   
+      const chatUrl = {objectId: addingChat.objectId};
+      const senderRel = {objectId: user.objectId};
+      const reciverRel = {objectId: usersModalContent.objectId}
+
+      const relation = await Backendless.Data
+        .of ('chanels')
+        .addRelation (chatUrl, 'parts', [senderRel, reciverRel]);
+
+    } catch(e) {
+      console.log('from about users modal', e)
+    }
+    
+        // setRecieverID(i => usersModalContent.objectId)
         closeUserModal()
         navigate('/chat')
     }

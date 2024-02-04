@@ -5,7 +5,7 @@ import logo from '../../images/logo2.1-min.png'
 import { useAppContext } from '../../context/AppContext';
 
 
-function Nav({notification}) {
+function Nav({notification, setNotification}) {
     const { toLogout, userStatus, currentUser} = useAppContext()
     const navigate = useNavigate();
     const location = useLocation();
@@ -25,6 +25,9 @@ function Nav({notification}) {
         setShowSubMenu(i => true)
     }
 
+    function recieveNewMsg() {
+        setNotification(i => false)
+    }
 
     useEffect(() => {
         if (location.hash) {
@@ -48,7 +51,7 @@ function Nav({notification}) {
             <div className="md:flex flex-none ">
 
                 <div className="dropdown dropdown-endh-full mt-[-12px] list-none flex md:hidden ">
-                   {currentUser && <Link to={'/chat'}>
+                   {currentUser && <Link to={'/chat'} onClick={recieveNewMsg}>
                         <li className='relative'>
                             <Notification notification={notification}/>
                             <p className='text-[1.5em] mt-2'><ion-icon name="chatbubble-outline"></ion-icon></p>
@@ -92,7 +95,7 @@ function Nav({notification}) {
                     {currentUser && <>
                         <Link to={'/mainList'}><li><p >People</p></li></Link>
                         <Link to={'/reviews'}><li><p >Reviews</p></li></Link>
-                        <Link to={'/chat'}><li className='relative'>
+                        <Link to={'/chat'} onClick={recieveNewMsg}><li className='relative'>
                             <Notification notification={notification}/>
                             <p className='text-[1.5em]'><ion-icon name="chatbubble-outline"></ion-icon></p>
                         </li></Link>

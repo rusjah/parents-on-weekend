@@ -4,13 +4,12 @@ import SmallChatCard from '../components/chat/SmallChatCard'
 import AktiveChatTwo from '../components/chat/ActiveChatTwo'
 import { useAppContext } from '../../context/AppContext'
 import Backendless from 'backendless'
-import { act } from 'react-dom/test-utils'
 
 
- function Chat({notification, setNotification}) {
+ function Chat({notification, setNotification,currentUserId, isNewMsgs, setIsNewMsgs}) {
   const { chats, activeChat }  = useAppContext()
   const [newMsg, setNewMsg] = useState([])
-
+ 
   useEffect(()=>{
     const subscription = Backendless.Data.of('messages').rt();
     Backendless.Data.of('chanels').rt();
@@ -20,8 +19,11 @@ import { act } from 'react-dom/test-utils'
         msg: newMessage.msg,
         senderId: newMessage.ownerId
       }
+      console.log('recieve msg', newMessage);
       setNewMsg(i => [...i, addingMsg])
-      
+      // if (currentUserId !== newMessage.ownerId) {
+      //   setNotification(i => true)
+      // } 
     });
 
       // return () => {
