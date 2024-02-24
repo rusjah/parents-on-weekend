@@ -6,5 +6,5 @@ This web application helps old and lonely people bring some light into their liv
 ###### npm start (version of node should be 18 and more)
 
 
-### Visit our site([parents-on-wekend.netlify.app](https://parents-on-wekend.netlify.app/)https://parents-on-wekend.netlify.app/)
+### [Visit our site](https://parents-on-wekend.netlify.app/)
 
