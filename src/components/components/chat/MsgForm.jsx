@@ -13,14 +13,14 @@ function MsgForm({setFlagMsg, flagMsg}) {
       const newMsg = {
         sendDate: new Date(),
         msg: msg,
-        status: "send"  ,
+        status: "sent"  ,
         chat: activeChat.name                 
       }
-      e.target.newMsg.value = ''
+      e.target.newMsg.value = '' //todo
       
-      const user = await Backendless.UserService.getCurrentUser()
-      newMsg.chat = activeChat.name
-      newMsg.recieverId = activeChat.parts.filter(el => el.objectId !== user.objectId)
+      const user = await Backendless.UserService.getCurrentUser() //todo
+      // newMsg.chat = activeChat.name
+      newMsg.recieverId = activeChat.parts.filter(el => el.objectId !== user.objectId) //todo
       newMsg.senderId = user.objectId
       sendMsg(newMsg)
     }

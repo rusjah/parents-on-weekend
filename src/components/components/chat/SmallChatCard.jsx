@@ -12,6 +12,7 @@ function SmallChatCard({chat,  setNewMsg, newMsg}) {
           relations: ['chat'],
           where: "chat.name = '" + chat.name + "'",
         });
+        console.log("lastChatsMsg", lastChatsMsg)
         lastChatsMsg != undefined ? setLastMsg (i => lastChatsMsg.msg) : setLastMsg (i => '')
     }
 
@@ -22,13 +23,14 @@ function SmallChatCard({chat,  setNewMsg, newMsg}) {
     }
 
     async function activateChat() {
-        setActiveChat(i => chat)
-        getChatMsg(chat)
+        setActiveChat(chat)
+        // getChatMsg(chat)
         const msgs = await Backendless.Data.of ('messages').find ({
             relations: ['recieverId', 'senderId', 'chat'],
             where: "chat.name = '" + chat.name + "'",
             sortBy: 'created ASC',
           });
+          console.log('form small card',msgs)
         const activTalk =  msgs.map((el) => ({ msg: el.msg, senderId: el.senderId.objectId }));
         setNewMsg(activTalk)
     }
@@ -39,7 +41,6 @@ function SmallChatCard({chat,  setNewMsg, newMsg}) {
     },[])
 
     useEffect(() => {
-        getLastMsg()
     },[])
 
   return (

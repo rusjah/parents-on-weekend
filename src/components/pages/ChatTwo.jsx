@@ -6,30 +6,62 @@ import { useAppContext } from '../../context/AppContext'
 import Backendless from 'backendless'
 
 
- function Chat({notification, setNotification,currentUserId, isNewMsgs, setIsNewMsgs}) {
+ function Chat({notification, setNotification, currentUserId, isNewMsgs, setIsNewMsgs}) {
   const { chats, activeChat }  = useAppContext()
   const [newMsg, setNewMsg] = useState([])
+
+  const [recieverId, setRecieverId] = useState('none')
+  
+
+  const [chanelsList, setChanelsList] = useState([])
+
  
-  useEffect(()=>{
-    const subscription = Backendless.Data.of('messages').rt();
-    Backendless.Data.of('chanels').rt();
+  useEffect( ()=>{
+  
+      // setNewMsg(i=>[])
+      const subscription = activeChat &&  Backendless.Data.of('messages').rt({
+        where: `chat.name = '${activeChat.name}'`
+      });
 
-    subscription.addCreateListener((newMessage) => {
-      const addingMsg = {
-        msg: newMessage.msg,
-        senderId: newMessage.ownerId
+      // const subscription = Backendless.Data.of('messages').rt();
+      Backendless.Data.of('chanels').rt();
+  
+      const callback = (newMessage) => {
+        const addingMsg = {
+          msg: newMessage.msg,
+          senderId: newMessage.ownerId
+        }
+        
+      
+        console.log('recieve msg', newMessage);
+        setNewMsg(i => [...i, addingMsg])
+        // if (currentUserId !== newMessage.ownerId) {
+        //   setNotification(i => true)
+        // } 
       }
-      console.log('recieve msg', newMessage);
-      setNewMsg(i => [...i, addingMsg])
-      // if (currentUserId !== newMessage.ownerId) {
-      //   setNotification(i => true)
-      // } 
-    });
+      activeChat && subscription.addCreateListener(callback);
 
-      // return () => {
-      //   subscription.removeCreateListener();
-      // };
-  },[])
+      if (subscription) {
+        console.log('remover nananananan')
+          return () => {
+          subscription.removeCreateListener(callback)
+            // () => {
+            
+          //   setNewMsg([])
+            // if (currentUserId !== newMessage.ownerId) {
+            //   setNotification(i => true)
+            // } 
+          // }
+          // );
+        };
+      }
+    
+      return () => {}
+
+
+      
+  },[activeChat])
+  
 
   return (
     <div className='min-h-[66vh] bg-yellow-50 py-20 flex justify-center'>
@@ -48,7 +80,7 @@ import Backendless from 'backendless'
           <div className='w-full md:w-[75%] h-[80%] md:h-full bg-[#e4f0d0] p-2 relative'> 
               <AktiveChatTwo newMsg={newMsg}/> 
              <div className='absolute bottom-2 w-[98%]'>
-              <MsgForm />
+              <MsgForm  />
             </div>
           </div> 
 

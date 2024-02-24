@@ -10,13 +10,18 @@ function ActivChat(newMsg) {
   const containerRef = useRef(null);
   
   async function getUserId() {
-    const user = (await Backendless.UserService.getCurrentUser())
-    setUserId(i => user.objectId)
+    try {
+      const user = (await Backendless.UserService.getCurrentUser())
+      setUserId(i => user.objectId)
+    } catch(e) {
+      console.log('gerUserId', e)
+    }
+    
   }
 
   const scrollToBottom = () => {
     if (containerRef) {
-      containerRef.current.addEventListener('DOMNodeInserted', event => {
+        containerRef.current.addEventListener('DOMNodeInserted', event => {
         const { currentTarget: target } = event;
         target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
       });
