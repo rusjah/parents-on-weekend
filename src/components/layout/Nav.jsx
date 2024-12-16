@@ -40,6 +40,7 @@ function Nav({notification, setNotification}) {
         }
     }, [location]);
 
+   
 
   return (
     <div className='h-[7vh] lg:h-[10vh] bg-[#D4A373] text-lime-950 font-bold  sticky top-0 z-50 '>

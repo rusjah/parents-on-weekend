@@ -6,8 +6,11 @@ import { useAppContext } from '../../context/AppContext';
 function ProtectedRoute({user, children}) {
     const {userStatus, currentUser} = useAppContext()
     // const userStatus = true
+    user && console.log('user', user)
+    
 
     const notify = () => toast("You need to login !");
+    
     if (!currentUser) {
         // {notify()}
         return <Home />

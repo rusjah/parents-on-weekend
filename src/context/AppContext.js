@@ -12,7 +12,7 @@ const AppContext = createContext ();
 export const AppProvider = ({children}) => {
   const navigate = useNavigate ();
 
-  const [currentUser, setCurrentUser] = useState ({});
+  const [currentUser, setCurrentUser] = useState (null);
   const [userStatus, setUserStatus] = useState (false);
   const [editModalStatus, setEditModalStatus] = useState (false);
   const [editModalContent, setEditModalContent] = useState ('');
@@ -92,6 +92,7 @@ export const AppProvider = ({children}) => {
         userLogin.password,
         true
       );
+      localStorage.setItem('currentUser', JSON.stringify(res));
       setCurrentUser (res);
       setUserStatus (true);
       // toast('')
@@ -118,6 +119,9 @@ export const AppProvider = ({children}) => {
   }
 
   async function registration (registretedUser, userOptions) {
+    console.log(registretedUser)
+    console.log(userOptions)
+
     // validationCheck()
     try {
       const options = generateOptions (userOptions);
@@ -157,6 +161,7 @@ export const AppProvider = ({children}) => {
       }
       const user = new Backendless.User (newUser);
       const res = await Backendless.UserService.register (user);
+      localStorage.setItem('currentUser', JSON.stringify(res));
       setUserStatus (true);
       const opt = await Backendless.Data.of ('options').save (options);
       const userRel = {objectId: res.objectId};
@@ -167,7 +172,9 @@ export const AppProvider = ({children}) => {
       toast ('Welcome, to our platphorm. Please, login to your profile');
       navigate ('login');
     } catch (e) {
-      // console.log(e, 'regestration err', e.code);
+      console.log(e, 'regestration err', e.code);
+      console.log(e);
+      
     }
   }
 
@@ -461,6 +468,7 @@ export const AppProvider = ({children}) => {
         toLogout,
         registration,
         currentUser,
+        setCurrentUser,
         userStatus,
         getCurrentUser,
         updateUser,
