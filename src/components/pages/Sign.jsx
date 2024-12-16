@@ -13,7 +13,7 @@ import { useAppContext } from '../../context/AppContext'
 import Suggetions from '../components/signForm/Suggetions'
 
 
-function Sign() {
+function Sign({setIsUerLogedIn}) {
 
   const {registration} = useAppContext()
   
@@ -41,6 +41,8 @@ function Sign() {
       registration(newUser, {pets:pets, children:children})
   
       e.target.reset();
+      // setIsUerLogedIn(true);
+      
    }
 
   return (

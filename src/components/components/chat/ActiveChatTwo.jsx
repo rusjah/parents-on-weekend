@@ -20,13 +20,22 @@ function ActivChat(newMsg) {
   }
 
   const scrollToBottom = () => {
-    if (containerRef) {
-        containerRef.current.addEventListener('DOMNodeInserted', event => {
-        const { currentTarget: target } = event;
-        target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
+    if (containerRef?.current) {
+      const targetNode = containerRef.current;
+  
+      // Create a MutationObserver instance
+      const observer = new MutationObserver(() => {
+        targetNode.scroll({ top: targetNode.scrollHeight, behavior: 'smooth' });
       });
+  
+      // Start observing the target node for child node changes
+      observer.observe(targetNode, { childList: true });
+  
+      // Optional: Clean up the observer when it's no longer needed
+      return () => observer.disconnect();
     }
   };
+  
 
 
   useEffect( ()=> {

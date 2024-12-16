@@ -5,7 +5,7 @@ import Backendless from 'backendless'
 
 function AboutUserModal() {
     const navigate = useNavigate()
-    const {closeUserModal, usersModalContent, getAge, getOptions, toglePlay, videoRef, setRecieverID} = useAppContext()
+    const {closeUserModal, usersModalContent, getChatsList, getAge, getOptions, toglePlay, videoRef, setRecieverID} = useAppContext()
     const age = usersModalContent.birthday ? getAge(usersModalContent.birthday) : 1
     const pets = getOptions(usersModalContent.optionsId).pets
     const children = getOptions(usersModalContent.optionsId).children
@@ -38,6 +38,8 @@ function AboutUserModal() {
       console.log('from about users modal', e)
     }
     
+
+        getChatsList();
         closeUserModal()
         navigate('/chat')
     }

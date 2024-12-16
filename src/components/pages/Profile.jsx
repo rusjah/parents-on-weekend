@@ -14,6 +14,9 @@ function Profile({owner='me'}) {
 
   const { currentUser, getAge, getOptions, getCurrentUser, toglePlay, videoRef, changeEditModalStatus, editModalStatus, changeEditModalContent, } = useAppContext()
   
+  console.log('crur', currentUser);
+  
+  
   // const currentUser = getUser();
 
   // console.log(currentUser, 'prof');

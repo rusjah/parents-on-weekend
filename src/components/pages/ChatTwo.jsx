@@ -7,7 +7,7 @@ import Backendless from 'backendless'
 
 
  function Chat({notification, setNotification, currentUserId, isNewMsgs, setIsNewMsgs}) {
-  const { chats, activeChat }  = useAppContext()
+  const { chats, activeChat, getChatsList }  = useAppContext()
   const [newMsg, setNewMsg] = useState([])
 
   const [recieverId, setRecieverId] = useState('none')
@@ -15,7 +15,11 @@ import Backendless from 'backendless'
 
   const [chanelsList, setChanelsList] = useState([])
 
- 
+
+  useEffect(() => {
+    getChatsList()
+  },[])
+
   useEffect( ()=>{
   
       // setNewMsg(i=>[])
@@ -25,6 +29,11 @@ import Backendless from 'backendless'
 
       // const subscription = Backendless.Data.of('messages').rt();
       Backendless.Data.of('chanels').rt();
+      // const subscriptionChat = Backendless.Data.of('chanels').rt();///////
+
+      // const callbackChat = (newChat) => {
+      //   const 
+      // }
   
       const callback = (newMessage) => {
         const addingMsg = {
@@ -32,8 +41,6 @@ import Backendless from 'backendless'
           senderId: newMessage.ownerId
         }
         
-      
-        console.log('recieve msg', newMessage);
         setNewMsg(i => [...i, addingMsg])
         // if (currentUserId !== newMessage.ownerId) {
         //   setNotification(i => true)

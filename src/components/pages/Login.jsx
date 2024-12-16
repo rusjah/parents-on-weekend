@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppContext } from '../../context/AppContext';
 
-function Login() {
+function Login({setIsUerLogedIn}) {
 
   const {toLogin, userStatus, findUse, currenUser} = useAppContext()
+  const navigate = useNavigate();
 
   function loginHandler(e) {
     e.preventDefault()
@@ -20,6 +21,8 @@ function Login() {
       e.target.emailinp.value = ''
       
       toLogin(user)
+      setIsUerLogedIn(true);
+      
   }
 
   return (

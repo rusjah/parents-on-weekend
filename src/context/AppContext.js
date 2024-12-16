@@ -84,7 +84,11 @@ export const AppProvider = ({children}) => {
     }
   }
 
-  async function toLogin (userLogin) {
+   async function toLogin(userLogin) {
+
+    console.log('login', userLogin);
+    
+    
     // validationCheck()
     try {
       const res = await Backendless.UserService.login (
@@ -103,19 +107,25 @@ export const AppProvider = ({children}) => {
           'Your password or email is not correct...\n Please, try again...'
         );
       }
-      // console.log(e, 'login err');
+      console.log(e, 'login err');
     }
   }
 
-  async function toLogout (loginUser) {
+  async function toLogout () {
+   try {
+    
     const res = await Backendless.UserService.logout (
-      `${loginUser.email}`,
-      `${loginUser.password}`,
+      `${currentUser.email}`,
+      `${currentUser.password}`,
       true
     );
+    localStorage.removeItem('currentUser')
     setCurrentUser (null);
     setUserStatus (false);
     navigate ('home');
+   } catch (e) {
+     console.log(e)
+   }
   }
 
   async function registration (registretedUser, userOptions) {
@@ -161,7 +171,7 @@ export const AppProvider = ({children}) => {
       }
       const user = new Backendless.User (newUser);
       const res = await Backendless.UserService.register (user);
-      localStorage.setItem('currentUser', JSON.stringify(res));
+      // localStorage.setItem('currentUser', JSON.stringify(res));
       setUserStatus (true);
       const opt = await Backendless.Data.of ('options').save (options);
       const userRel = {objectId: res.objectId};
@@ -170,7 +180,7 @@ export const AppProvider = ({children}) => {
         .of ('Users')
         .addRelation (userRel, 'optionsId', [optRel]);
       toast ('Welcome, to our platphorm. Please, login to your profile');
-      navigate ('login');
+      navigate ('/login');
     } catch (e) {
       console.log(e, 'regestration err', e.code);
       console.log(e);

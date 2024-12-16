@@ -30,6 +30,7 @@ function App() {
   const [notification, setNotification] = useState(false)
   const [isNewMsgs, setIsNewMsgs] = useState(false)
   const [currentUserId, setCurrentUserId] = useState()
+  const [isUerLogedIn, setIsUerLogedIn] = useState(false);
 
   const context = useAppContext();
 
@@ -47,43 +48,60 @@ function App() {
     const user = JSON.parse(localStorage.getItem('currentUser'));
     if (user) {
       context.setCurrentUser(user)
+      setIsUerLogedIn(true);
+      getUserId()
+    } {
+      context.setCurrentUser(null)
+    }
+    return setCurrentUserId(null);
+  },[])
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    if (user) {
+      context.setCurrentUser(user)
     } {
       context.setCurrentUser(null)
     }
 
-  },[])
-
-  useEffect(() => {
-    getUserId()
-    return setCurrentUserId(null)
-  }, [])
+  }, [isUerLogedIn])
   
 
   return (
     <div className="App">
-      <Nav notification={notification} setNotification={setNotification}/>
+      <Nav notification={notification} setNotification={setNotification} setIsUerLogedIn={setIsUerLogedIn} isUerLogedIn={isUerLogedIn} />
       <div className='min-h-[66vh]'>
       <Routes>
             <Route index element={<Home />} />
             <Route path='home' element={<Home />} />
-            <Route path='login' element={<Login />} />
-            <Route path='sign' element={<Sign />} />
-            {/* <Route path='changeWorld' element={<ChangeWorld />} /> */}
-           
-            <Route path='reviews' element={<ProtectedRoute  >
+            {!isUerLogedIn ? <>
+              <Route path='login' element={<Login  setIsUerLogedIn={setIsUerLogedIn}/>} />
+              <Route path='sign' element={<Sign setIsUerLogedIn={setIsUerLogedIn}  />}/>
+            </> : 
+             <>
+              <Route path='reviews' element={<Reviews />} />
+              <Route path='chat' element= {<ChatTwo notification={notification} setNotification={setNotification} currentUserId={currentUserId} isNewMsgs={isNewMsgs} setIsNewMsgs={setIsNewMsgs}/>} />
+              <Route path='profile' element={<Profile  />} />
+              <Route path='mainList' element={<MainList  />} />
+             </>
+
+            }
+          
+{/*            
+            <Route path='reviews' element={<ProtectedRoute isUerLogedIn={isUerLogedIn} >
                                               <Reviews />
                                            </ProtectedRoute>} />
 
-            <Route path='chat' element={<ProtectedRoute  user={currentUserId}>
+            <Route path='chat' element={<ProtectedRoute isUerLogedIn={isUerLogedIn}>
                                               <ChatTwo notification={notification} setNotification={setNotification} currentUserId={currentUserId} isNewMsgs={isNewMsgs} setIsNewMsgs={setIsNewMsgs}/>
                                             </ProtectedRoute>} />
-            <Route path='profile' element={<ProtectedRoute  >
+            <Route path='profile' element={<ProtectedRoute isUerLogedIn={isUerLogedIn} >
                                               <Profile  />
                                            </ProtectedRoute>} />
 
-            <Route path='mainList' element={<ProtectedRoute  >
+            <Route path='mainList' element={<ProtectedRoute isUerLogedIn={isUerLogedIn} >
                                               <MainList  />
-                                            </ProtectedRoute>} />
+                                            </ProtectedRoute>} />  */}
             
             <Route path='*' element={<Home />} />
 
